@@ -8,10 +8,9 @@ public class PlayerController : MonoBehaviour
 
     public float landSpeed = 10.0f;
     public float airSpeed = 5.0f;
+    public float jumpAmount = 20;
 
-    Rigidbody2D rb;
-    float jumpAmount = 10;
-
+    private Rigidbody2D rb;
     private float horizontalInput;
     private bool jumpInput;
     private bool isJumping;
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
         {

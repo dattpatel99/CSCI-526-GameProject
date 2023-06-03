@@ -27,16 +27,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Get Inputs
-        horizontalInput = Input.GetAxis("Horizontal");
-        jumpInput = Input.GetButtonDown("Jump");
+        GunRotation();
+        HandleJump();
+    }
 
+    private void GunRotation()
+    {
         // Rotate Gun
         Vector3 mousePos = Input.mousePosition;
         Vector3 playerPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 gunRotation = mousePos - playerPos;
         float angle = Mathf.Atan2(gunRotation.y, gunRotation.x) * Mathf.Rad2Deg;
         gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    private void HandleJump()
+    {
+        // Get Inputs
+        horizontalInput = Input.GetAxis("Horizontal");
+        jumpInput = Input.GetButtonDown("Jump");
 
         // Move Player
         if (isJumping)
@@ -54,15 +63,12 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
             isJumping = true;
         }
-
-        // Detect 
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
         {
-            Debug.Log("hit the floor");
             isJumping = false;
         }
     }

@@ -23,6 +23,7 @@ public class TimeObject : MonoBehaviour
         int newValue = currentTimeValue + addedTime;
         currentTimeValue = Mathf.Clamp(newValue, 0, highestTimeValue);
         UpdateSprite();
+        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
     }
 
     public void SubtractTime(int subtractedTime)
@@ -30,6 +31,7 @@ public class TimeObject : MonoBehaviour
         int newValue = currentTimeValue - subtractedTime;
         currentTimeValue = Mathf.Clamp(newValue, 0, highestTimeValue);
         UpdateSprite();
+        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
     }
 
     void UpdateSprite()
@@ -48,7 +50,6 @@ public class TimeObject : MonoBehaviour
     }
     public bool checkSubtration()
     {
-        
         return currentTimeValue > 0;
     }
     

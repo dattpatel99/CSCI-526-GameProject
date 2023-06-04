@@ -28,7 +28,8 @@ public class ShootMechanic : MonoBehaviour
             {
                 // If Collider hits for subtraction
                 if (take && hit.collider.gameObject.CompareTag("TimeObject") &&
-                    hit.collider.gameObject.GetComponent<TimeObject>().checkSubtration())
+                    hit.collider.gameObject.GetComponent<TimeObject>().checkSubtration()
+                    && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)
                 {
                     hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
                     hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
@@ -38,7 +39,8 @@ public class ShootMechanic : MonoBehaviour
                 // If Collider hits for addition
                 else if (give && hit.collider.gameObject.CompareTag("TimeObject") &&
                          player.GetComponent<TimeBank>().checkSubtract() &&
-                         hit.collider.gameObject.GetComponent<TimeObject>().checkAddition())
+                         hit.collider.gameObject.GetComponent<TimeObject>().checkAddition()
+                         && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)
                 {
                     hit.collider.gameObject.GetComponent<TimeObject>().AddTime(1);
                     hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();

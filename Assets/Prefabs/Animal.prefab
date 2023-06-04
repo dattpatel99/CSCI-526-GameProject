@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2361078822279175124}
   - component: {fileID: 2361078822279175131}
   - component: {fileID: 2361078822279175130}
-  - component: {fileID: 2361078822279175125}
+  - component: {fileID: 121977113114949413}
   m_Layer: 0
   m_Name: Animal
   m_TagString: TimeObject
@@ -103,8 +103,8 @@ MonoBehaviour:
   phaseSprites:
   - {fileID: 21300000, guid: d3138a65bcdcd10439acb0c9fac7ba9c, type: 3}
   - {fileID: 21300000, guid: fe3f55df3bde36047a5da6721320195a, type: 3}
---- !u!61 &2361078822279175125
-BoxCollider2D:
+--- !u!60 &121977113114949413
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,6 +126,34 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.25, y: -0.21}
+      - {x: 0.26, y: -0.17}
+      - {x: 0.35999998, y: -0.11}
+      - {x: 0.44, y: 0}
+      - {x: 0.45, y: 0.06}
+      - {x: 0.42, y: 0.14}
+      - {x: 0.39999998, y: 0.35}
+      - {x: 0.34, y: 0.5}
+      - {x: 0.26, y: 0.5}
+      - {x: 0.22999999, y: 0.48999998}
+      - {x: 0.17999999, y: 0.45}
+      - {x: 0.12, y: 0.48999998}
+      - {x: 0.049999997, y: 0.5}
+      - {x: -0.099999994, y: 0.48999998}
+      - {x: -0.19999999, y: 0.42999998}
+      - {x: -0.32999998, y: 0.5}
+      - {x: -0.34, y: 0.5}
+      - {x: -0.38, y: 0.44}
+      - {x: -0.38, y: 0.22999999}
+      - {x: -0.35999998, y: 0.17999999}
+      - {x: -0.39, y: 0.089999996}
+      - {x: -0.39, y: -0.08}
+      - {x: -0.32, y: -0.14999999}
+      - {x: -0.35, y: -0.32}
+      - {x: -0.21, y: -0.48}
+      - {x: -0.17999999, y: -0.48999998}
+      - {x: 0.5, y: -0.48999998}
+      - {x: 0.5, y: -0.41}
+      - {x: 0.28, y: -0.34}

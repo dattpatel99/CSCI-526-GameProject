@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2361078822279175124}
   - component: {fileID: 2361078822279175131}
   - component: {fileID: 2361078822279175130}
-  - component: {fileID: 2361078822279175125}
+  - component: {fileID: 5121894773340275681}
   m_Layer: 0
   m_Name: Tree
   m_TagString: TimeObject
@@ -104,8 +104,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 26f390f8075b17d41b947686fca5e1a8, type: 3}
   - {fileID: 21300000, guid: 35651fbd23035a54e80a89ae85dbd60b, type: 3}
   - {fileID: 21300000, guid: bf2790fe50f1c56409ae3ee1fa65c562, type: 3}
---- !u!61 &2361078822279175125
-BoxCollider2D:
+--- !u!60 &5121894773340275681
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -127,6 +127,32 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.35, y: -0.31}
+      - {x: 0.06, y: -0.13}
+      - {x: 0.08, y: 0.14999999}
+      - {x: 0.26999998, y: 0.29999998}
+      - {x: 0.26, y: 0.32999998}
+      - {x: 0.22999999, y: 0.35}
+      - {x: 0.04, y: 0.26}
+      - {x: 0.02, y: 0.29999998}
+      - {x: -0.12, y: 0.32999998}
+      - {x: -0.29999998, y: 0.41}
+      - {x: -0.35999998, y: 0.41}
+      - {x: -0.38, y: 0.39999998}
+      - {x: -0.38, y: 0.37}
+      - {x: -0.31, y: 0.26}
+      - {x: -0.01, y: 0.06}
+      - {x: -0.03, y: -0.16}
+      - {x: -0.14999999, y: -0.16}
+      - {x: -0.38, y: -0.32999998}
+      - {x: -0.38, y: -0.34}
+      - {x: -0.35, y: -0.38}
+      - {x: -0.22999999, y: -0.42}
+      - {x: -0.06, y: -0.44}
+      - {x: 0.049999997, y: -0.44}
+      - {x: 0.25, y: -0.41}
+      - {x: 0.35, y: -0.39}
+      - {x: 0.37, y: -0.35}
+      - {x: 0.37, y: -0.32}

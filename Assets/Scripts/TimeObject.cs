@@ -40,4 +40,14 @@ public class TimeObject : MonoBehaviour
     {
         return currentTimeValue;
     }
+
+    public bool checkAddition()
+    {
+        return currentTimeValue < highestTimeValue;
+    }
+    public bool checkSubtration()
+    {
+        
+        return currentTimeValue > 0;
+    }
 }

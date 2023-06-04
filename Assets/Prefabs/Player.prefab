@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7153988882810511964}
   - component: {fileID: 4517804913993088850}
   - component: {fileID: 2391901670954576973}
+  - component: {fileID: 7270052881042940581}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -123,7 +124,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2391901670954576973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,3 +140,18 @@ MonoBehaviour:
   landSpeed: 10
   airSpeed: 7
   jumpAmount: 25
+  rotateSpeed: 20
+  gun: {fileID: 0}
+--- !u!114 &7270052881042940581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213270454467479952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f378eb26e2932f949b95775519698086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBankText: {fileID: 0}

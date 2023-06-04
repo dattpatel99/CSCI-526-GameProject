@@ -6,22 +6,26 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    // Player Movement
+    private float horizontalInput;
     public float landSpeed = 10.0f;
     public float airSpeed = 5.0f;
-    public float jumpAmount = 20;
     public float rotateSpeed = 20.0f;
-
+    
+    // Gun Object Position
     public Transform gun;
-
+    
+    // Player rigidbody
     private Rigidbody2D rb;
-    private float horizontalInput;
+
+    // Jump information
+    public float jumpAmount = 40;
     private bool jumpInput;
     private bool isJumping;
 
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-
         isJumping = false;
     }
 
@@ -47,7 +51,7 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         jumpInput = Input.GetButtonDown("Jump");
 
-        // Move Player
+        // Adjust player movement speed according to position
         if (isJumping)
         {
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * airSpeed);

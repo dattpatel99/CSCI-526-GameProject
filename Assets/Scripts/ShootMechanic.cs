@@ -17,8 +17,8 @@ public class ShootMechanic : MonoBehaviour
     void Update()
     {
         Vector3 nozzlePosition = nozzle.transform.position;
-        bool take = Input.GetButtonDown("Fire1");
-        bool give = Input.GetButtonDown("Fire2");
+        bool take = Input.GetButtonDown("Fire2");
+        bool give = Input.GetButtonDown("Fire1");
         if (take || give)
         {
             RaycastHit2D hit = Physics2D.Raycast(nozzle.transform.position, transform.TransformDirection(Vector2.right), laserLength);

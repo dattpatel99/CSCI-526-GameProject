@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     public GameObject player;
 
-    private float offset = 6; 
+    public float offset = 2; 
     // Update is called once per frame
     void Update()
     {

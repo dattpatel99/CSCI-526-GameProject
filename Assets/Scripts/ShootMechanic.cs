@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ShootMechanic : MonoBehaviour
@@ -27,21 +26,26 @@ public class ShootMechanic : MonoBehaviour
             AlterColor(laserLine, Color.yellow);
             if (hit.collider != null)
             {
+                // If Collider hits for subtraction
                 if (take && hit.collider.gameObject.CompareTag("TimeObject") &&
                     hit.collider.gameObject.GetComponent<TimeObject>().checkSubtration())
                 {
                     hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
+                    hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
                     player.GetComponent<TimeBank>().AddTime(1);
                     AlterColor(laserLine, Color.red);
                 }
+                // If Collider hits for addition
                 else if (give && hit.collider.gameObject.CompareTag("TimeObject") &&
                          player.GetComponent<TimeBank>().checkSubtract() &&
                          hit.collider.gameObject.GetComponent<TimeObject>().checkAddition())
                 {
                     hit.collider.gameObject.GetComponent<TimeObject>().AddTime(1);
+                    hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
                     player.GetComponent<TimeBank>().SubtractTime(1);
                     AlterColor(laserLine, Color.green);
                 }
+                // Show laser
                 laserLine.SetPosition(0, nozzlePosition);
                 laserLine.SetPosition(1, hit.point);
                 StartCoroutine(LaserShow());

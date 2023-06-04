@@ -5,10 +5,11 @@ using UnityEngine;
 public class ShootMechanic : MonoBehaviour
 {
     public GameObject nozzle;
+    public GameObject player;
 
     private bool shoot = false;
 
-    public float laserLength = 1f;
+    public float laserLength = 10f;
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +21,12 @@ public class ShootMechanic : MonoBehaviour
             if(hit.collider != null)
             {
                 // Alter the Object
+                if (hit.collider.gameObject.tag == "TimeObject" && hit.collider.gameObject.GetComponent<TimeObject>().getCurrentTimeValue() > 0)
+                {
+                    hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
+                    player.GetComponent<TimeBank>().AddTime(1);
+                }
+
                 Debug.Log ("Target Hit: " + hit.collider.gameObject.name);
             }
         }

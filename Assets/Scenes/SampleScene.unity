@@ -134,9 +134,10 @@ GameObject:
   - component: {fileID: 127287032}
   - component: {fileID: 127287031}
   - component: {fileID: 127287030}
+  - component: {fileID: 127287033}
   m_Layer: 0
   m_Name: Tree
-  m_TagString: Untagged
+  m_TagString: TimeObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +227,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &127287033
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127287029}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +264,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -310,6 +338,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa702d9c2670bb42bbd2c0d73caecf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1356959183}
+--- !u!1 &766935171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7507037441739667526, guid: 661f1cc43bd79f34797620e3ece28ce5, type: 3}
+  m_PrefabInstance: {fileID: 855199346}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &777613846 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7507037440122937588, guid: 661f1cc43bd79f34797620e3ece28ce5, type: 3}
+  m_PrefabInstance: {fileID: 855199346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &855199346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -614,6 +665,10 @@ PrefabInstance:
       propertyPath: gun
       value: 
       objectReference: {fileID: 1085369055}
+    - target: {fileID: 4517804913993088850, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6159897881955056177, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -669,6 +724,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7507037441739667525, guid: 661f1cc43bd79f34797620e3ece28ce5, type: 3}
   m_PrefabInstance: {fileID: 855199346}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1085369056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766935171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02018e5a7a8d7154689e82886b7a7c9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nozzle: {fileID: 777613846}
+  player: {fileID: 1356959183}
+  laserLength: 10
 --- !u!1 &1200431980
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,15 +17,27 @@ public class TimeObject : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = phaseSprites[currentTimeValue];
     }
 
-    void AddTime(int addedTime)
+    public void AddTime(int addedTime)
     {
         int newValue = currentTimeValue + addedTime;
         currentTimeValue = Mathf.Clamp(newValue, 0, highestTimeValue);
+        UpdateSprite();
     }
 
-    void SubtractTime(int subtractedTime)
+    public void SubtractTime(int subtractedTime)
     {
         int newValue = currentTimeValue - subtractedTime;
         currentTimeValue = Mathf.Clamp(newValue, 0, highestTimeValue);
+        UpdateSprite();
+    }
+
+    void UpdateSprite()
+    {
+        GetComponent<SpriteRenderer>().sprite = phaseSprites[currentTimeValue];
+    }
+
+    public int getCurrentTimeValue()
+    {
+        return currentTimeValue;
     }
 }

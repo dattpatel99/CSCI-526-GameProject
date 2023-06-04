@@ -10,13 +10,13 @@ public class TimeBank : MonoBehaviour
 
     int timeStored;
 
-    void AddTime(int addedTime)
+    public void AddTime(int addedTime)
     {
         timeStored += addedTime;
         UpdateTimeDisplay();
     }
 
-    void SubtractTime(int subtractedTime)
+    public void SubtractTime(int subtractedTime)
     {
         timeStored -= subtractedTime;
         UpdateTimeDisplay();

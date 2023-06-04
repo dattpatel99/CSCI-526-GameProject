@@ -9,7 +9,7 @@ public class ShootMechanic : MonoBehaviour
     public LineRenderer laserLine;
 
     public float laserLength = 10f;
-    public float laserDuration = 0.005f;
+    public float laserDuration = 0.05f;
     void Awake()
     {
         laserLine = GetComponent<LineRenderer>();

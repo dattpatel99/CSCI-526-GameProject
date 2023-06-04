@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     public float landSpeed = 10.0f;
     public float airSpeed = 5.0f;
-    public float rotateSpeed = 20.0f;
     
     // Gun Object Position
     public Transform gun;
@@ -19,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     // Jump information
-    public float jumpAmount = 40;
+    public float jumpAmount = 40.0f;
     private bool jumpInput;
     private bool isJumping;
 

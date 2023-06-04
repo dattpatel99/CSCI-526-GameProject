@@ -290,7 +290,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.01868991, g: 0.10314069, b: 0.23584908, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -669,6 +669,10 @@ PrefabInstance:
       propertyPath: gun
       value: 
       objectReference: {fileID: 1085369055}
+    - target: {fileID: 2391901670954576973, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
+      propertyPath: jumpAmount
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 6159897881955056177, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -933,6 +937,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1697018066517012088, guid: ff2702d2afbbf064f9a8531796ecb5a3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 59.83303
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697018066517012088, guid: ff2702d2afbbf064f9a8531796ecb5a3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5881852
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697018066517012088, guid: ff2702d2afbbf064f9a8531796ecb5a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.2735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697018066517012088, guid: ff2702d2afbbf064f9a8531796ecb5a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.1416
+      objectReference: {fileID: 0}
     - target: {fileID: 2339652262009902700, guid: ff2702d2afbbf064f9a8531796ecb5a3, type: 3}
       propertyPath: m_Name
       value: Floor

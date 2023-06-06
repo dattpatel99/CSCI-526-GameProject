@@ -82,16 +82,15 @@ public class AnimalController : MonoBehaviour
         // Handle Boulder Collision
         if (collision.gameObject.CompareTag("Boulder"))
         {
-            Debug.Log("Hit Boulder");
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
         }
         // Handle Tree Collision
         else if (collision.gameObject.name == "Tree")
         {
-            Debug.Log("Hit Tree");
             collision.transform.parent.Rotate(0f, 0f, -90f);
             collision.gameObject.GetComponent<TimeObject>().enabled = false;
+            collision.gameObject.tag = "Floor";
             Destroy(this.gameObject);
         }
     }

@@ -35,7 +35,6 @@ public class AnimalController : MonoBehaviour
         
         if (GetComponent<TimeObject>().getCurrentTimeValue() > 0 && !activated)
         {
-            GetComponent<LineRenderer>().enabled = true;
             RaycastHit2D hit = Physics2D.Raycast(eyes.position, transform.TransformDirection(Vector2.right), wolfSight);
             // Draw Wolf's vision
             
@@ -63,10 +62,6 @@ public class AnimalController : MonoBehaviour
                 line.SetPosition(0, eyes.position);
                 line.SetPosition(1, eyes.position + eyes.right * wolfSight);
             }
-        }
-
-        if (GetComponent<TimeObject>().getCurrentTimeValue() == 0) {
-            GetComponent<LineRenderer>().enabled = false;
         }
     }
 

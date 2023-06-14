@@ -1,82 +1,102 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Class: Object whose 'age' we can change
+ */
 public class TimeObject : MonoBehaviour
 {
-    public int startingTimeValue;
+    private int _minimumTimeValue = 0; // TODO: Make this global for all values 
+    // Tracks if the object can be reacted with (e. Tree falls to bridge)
+    public List<bool> reactable;
+    
+    // These are public so level designers can change easily
+    public int startingTimeValue; 
     public int highestTimeValue;
-
     public List<Sprite> phaseSprites;
-
-    int currentTimeValue;
-
+    public int currentTimeValue;
+    
+    /*
+     * Start does:
+     * Store entered time value. Get the sprite based on current time. Update Sprite after choosing
+     */
     void Start()
     {
-        currentTimeValue = Mathf.Clamp(startingTimeValue, 0, highestTimeValue);
-        GetComponent<SpriteRenderer>().sprite = phaseSprites[currentTimeValue];
+        this.currentTimeValue = Mathf.Clamp(this.startingTimeValue, this._minimumTimeValue, this.highestTimeValue);
+        GetComponent<SpriteRenderer>().sprite = this.GetSprite(this.currentTimeValue);
         TryUpdateShapeToAttachedSprite();
+    }
+
+    public void SetPhaseInteractability(List<bool> newInteractable)
+    {
+        if (newInteractable.Count == this.reactable.Count)
+        {
+            this.reactable = newInteractable;
+        }
+    }
+    
+    public List<bool> GetPhaseInteractability()
+    {
+        return this.reactable;
     }
 
     public void AddTime(int addedTime)
     {
-        int newValue = currentTimeValue + addedTime;
-        currentTimeValue = Mathf.Clamp(newValue, 0, highestTimeValue);
-        UpdateSprite();
-        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+        int newValue = this.currentTimeValue + addedTime;
+        this.currentTimeValue = Mathf.Clamp(newValue, this._minimumTimeValue, this.highestTimeValue);
+        GetComponent<SpriteRenderer>().sprite=this.GetSprite(this.currentTimeValue);
     }
 
     public void SubtractTime(int subtractedTime)
     {
-        int newValue = currentTimeValue - subtractedTime;
-        currentTimeValue = Mathf.Clamp(newValue, 0, highestTimeValue);
-        UpdateSprite();
-        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+        int newValue = this.currentTimeValue - subtractedTime;
+        this.currentTimeValue = Mathf.Clamp(newValue, this._minimumTimeValue, this.highestTimeValue);
+        GetComponent<SpriteRenderer>().sprite=this.GetSprite(this.currentTimeValue);
     }
 
-    void UpdateSprite()
+    public int GetCurrentTimeValue()
     {
-        GetComponent<SpriteRenderer>().sprite = phaseSprites[currentTimeValue];
+        return this.currentTimeValue;
     }
 
-    public int getCurrentTimeValue()
+    public bool CheckAddition()
     {
-        return currentTimeValue;
+        return this.currentTimeValue < this.highestTimeValue;
+    }
+    public bool CheckSubtraction()
+    {
+        return this.currentTimeValue > this._minimumTimeValue;
     }
 
-    public bool checkAddition()
+    private Sprite GetSprite(int currentTime)
     {
-        return currentTimeValue < highestTimeValue;
+        return this.phaseSprites[currentTime];
     }
-    public bool checkSubtration()
-    {
-        return currentTimeValue > 0;
-    }
-    
+
+    /*
+     * These two functions are used to update the collider based on png of sprite
+     */
     // Unity Reference: https://answers.unity.com/questions/722748/refreshing-the-polygon-collider-2d-upon-sprite-cha.html
     public void TryUpdateShapeToAttachedSprite ()
     {
-        PolygonCollider2D collider = this.GetComponent<PolygonCollider2D>();
-        UpdateShapeToSprite(collider, collider.GetComponent<SpriteRenderer>().sprite);
+        PolygonCollider2D thisObjectsCollider = this.GetComponent<PolygonCollider2D>();
+        this.UpdateShapeToSprite(thisObjectsCollider, thisObjectsCollider.GetComponent<SpriteRenderer>().sprite);
     }
- 
-    public void UpdateShapeToSprite (PolygonCollider2D collider, Sprite sprite) { 
+    private void UpdateShapeToSprite (PolygonCollider2D colliderObject, Sprite sprite) { 
         // ensure both valid
-        if (collider != null && sprite != null) {
+        if (colliderObject != null && sprite != null) {
             // update count
-            collider.pathCount = sprite.GetPhysicsShapeCount();
-                 
+            colliderObject.pathCount = sprite.GetPhysicsShapeCount();
             // new paths variable
             List<Vector2> path = new List<Vector2>();
- 
             // loop path count
-            for (int i = 0; i < collider.pathCount; i++) {
+            for (int i = 0; i < colliderObject.pathCount; i++) {
                 // clear
                 path.Clear();
                 // get shape
                 sprite.GetPhysicsShape(i, path);
                 // set path
-                collider.SetPath(i, path.ToArray());
+                colliderObject.SetPath(i, path.ToArray());
             }
         }
     }

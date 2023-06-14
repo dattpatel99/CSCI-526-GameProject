@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 351702934}
     m_Modifications:
-    - target: {fileID: 5615445829037207758, guid: 630a51aa59f00934ea074f90a35df6e7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5615445829037207759, guid: 630a51aa59f00934ea074f90a35df6e7, type: 3}
       propertyPath: startingTimeValue
       value: 2
@@ -188,11 +184,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 630a51aa59f00934ea074f90a35df6e7, type: 3}
---- !u!1 &232348161 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5615445829037207756, guid: 630a51aa59f00934ea074f90a35df6e7, type: 3}
-  m_PrefabInstance: {fileID: 232348160}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &319962208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,7 +563,6 @@ GameObject:
   - component: {fileID: 680989129}
   - component: {fileID: 680989128}
   - component: {fileID: 680989131}
-  - component: {fileID: 680989132}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -660,19 +650,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1284369941}
   offset: 2
---- !u!114 &680989132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680989127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da77ecce556d3c409e4f9271f74f49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tree: {fileID: 232348161}
 --- !u!4 &704396083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2024843070695078696, guid: 7acef5f60506949459e1bc89730d98d0, type: 3}

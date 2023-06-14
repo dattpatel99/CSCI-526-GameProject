@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
 
-    // Player Movement
+    // Player Movement: Public for testing but after that make private
     private float horizontalInput;
     public float landSpeed = 10.0f;
     public float airSpeed = 5.0f;
@@ -57,13 +54,14 @@ public class PlayerController : MonoBehaviour
         jumpInput = Input.GetButtonDown("Jump");
 
         // Adjust player movement speed according to position
+        Vector3 inputManipulation = Vector3.right * horizontalInput * Time.deltaTime;
         if (isJumping)
         {
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * airSpeed);
+            transform.Translate(inputManipulation * airSpeed);
         }
         else
         {
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * landSpeed);
+            transform.Translate(inputManipulation * landSpeed);
         }
         
         // Read Jump
@@ -73,23 +71,27 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
         }
 
+        // Check for death
+        // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
         if (transform.position.y < -7f)
         {
             transform.position = startPosition;
         }
     }
 
+    // For Jump reset 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.CompareTag("Floor"))
         {
             isJumping = false;
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    // For Finish line
+    void OnTriggerEnter2D(Collider2D colliderObject)
     {
-        if (collider.gameObject.tag == "Finish")
+        if (colliderObject.gameObject.CompareTag("Finish"))
         {
             FinishText.text = "Congratulations!";
             Time.timeScale = 0f;

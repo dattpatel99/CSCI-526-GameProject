@@ -1,43 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
+/*
+ * This class handles the players stored time and value updating
+ */
 public class TimeBank : MonoBehaviour
 {
     public TextMeshProUGUI timeBankText;
-
-    private static int timeStored;
+    private static int _timeStored;
+    private int _maximumTimeStored = 100000000; // TODO: In case we implement a maximum
+    private int _minimumTimeStored = 0;
 
     void Start()
     {
-        timeStored = 0;
+        _timeStored = this._minimumTimeStored;
     }
 
     // Ensure that there is enough time to subtract
-    public bool checkSubtract()
+    public bool CheckSubtract()
     {
-        return timeStored > 0;
+        return _timeStored > this._minimumTimeStored;
     }
-    
+
+    public bool CheckAddition()
+    {
+        return _timeStored < this._maximumTimeStored;
+    }
+
     // Add time to bank
     public void AddTime(int addedTime)
     {
-        timeStored += addedTime;
+        _timeStored += addedTime;
         UpdateTimeDisplay();
     }
 
     // Remove time from time bank
     public void SubtractTime(int subtractedTime)
     {
-        timeStored -= subtractedTime;
+        _timeStored -= subtractedTime;
         UpdateTimeDisplay();
+
     }
     
-    // Update thte time
+    // Update the time
     void UpdateTimeDisplay()
     {
-        timeBankText.text = "Time Stored: " + timeStored;
+        timeBankText.text = "Time Stored: " + _timeStored;
     }
 }

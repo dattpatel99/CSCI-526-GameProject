@@ -14,19 +14,20 @@ public class PlayerController : MonoBehaviour
     public Transform gun;
     
     // Player rigidbody
-    private Rigidbody2D rb;
+    private Rigidbody2D rb2d;
 
     // Jump information
-    public float jumpAmount = 40.0f;
-    private bool jumpInput;
-    private bool isJumping;
+    public float jumpforce = 500.0f;
+
+    public LayerMask groundLayer;
+    public Transform feet;
+    public bool grounded;
 
     private Vector3 startPosition;
 
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
-        isJumping = false;
+        rb2d = this.GetComponent<Rigidbody2D>();
         startPosition = transform.position;
         FinishText.text = "";
     }
@@ -49,34 +50,31 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        // Get Inputs
+        grounded = Physics2D.OverlapCircle(feet.position, .2f, groundLayer);
+        // horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
-        jumpInput = Input.GetButtonDown("Jump");
 
-        // Adjust player movement speed according to position
-        Vector3 inputManipulation = Vector3.right * horizontalInput * Time.deltaTime;
-        if (isJumping)
+        if (grounded)
         {
-            transform.Translate(inputManipulation * airSpeed);
+            transform.Translate(Vector2.right * Time.deltaTime * landSpeed * horizontalInput);
         }
         else
         {
-            transform.Translate(inputManipulation * landSpeed);
-        }
-        
-        // Read Jump
-        if (!isJumping && jumpInput)
-        {
-            rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-            isJumping = true;
+            transform.Translate(Vector2.right * Time.deltaTime * airSpeed * horizontalInput);
         }
 
+        // jump, multi-jump prevention
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
+        {
+            rb2d.AddForce(new Vector2(0, jumpforce));
+        }
+        
         // Check for death
         // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
-        if (transform.position.y < -7f)
+        /*if (transform.position.y < -7f)
         {
             transform.position = startPosition;
-        }
+        }*/
     }
 
     // For Jump reset 
@@ -84,7 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-            isJumping = false;
+            grounded = true;
         }
     }
 
@@ -96,5 +94,9 @@ public class PlayerController : MonoBehaviour
             FinishText.text = "Congratulations!";
             Time.timeScale = 0f;
         }
+    }
+    
+    void OnDrawGizmosSelected(){
+        Gizmos.DrawWireSphere(feet.position, .2f);
     }
 }

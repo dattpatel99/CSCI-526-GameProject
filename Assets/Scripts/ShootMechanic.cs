@@ -12,7 +12,8 @@ public class ShootMechanic : MonoBehaviour
     
     private bool _take;
     private bool _give;
-        void Awake()
+    
+    void Awake()
     {
         laserLine = GetComponent<LineRenderer>();
     }
@@ -24,13 +25,13 @@ public class ShootMechanic : MonoBehaviour
         this._take = Input.GetButtonDown("Fire2");
         this._give = Input.GetButtonDown("Fire1");
 
-        // If nay of the buttons clicked
+        // If any of the buttons clicked
         if (_take || _give)
         {
             // Shoot a raycast first
             RaycastHit2D hit = Physics2D.Raycast(nozzle.transform.position, transform.TransformDirection(Vector2.right), laserLength);
             // If no collider hit then show laser yellow till laser length
-            AlterColor(laserLine, Color.yellow);
+            AlterColor(laserLine, Color.gray);
             
             // If raycast hits a collider
             if (hit.collider != null)
@@ -87,7 +88,30 @@ public class ShootMechanic : MonoBehaviour
                             player.GetComponent<Transform>().localScale = player.GetComponent<PlayerController>().getPlayerSize();
                         }
                     }
-                    
+                }
+                else if (hit.collider.gameObject.CompareTag("RewindObject") && !PlayerStatus.isRewinding)
+                {
+                    if (hit.collider.gameObject.GetComponent<FallingRewindObject>() != null)
+                    {
+                        FallingRewindObject fro = hit.collider.gameObject.GetComponent<FallingRewindObject>();
+
+                        if (fro.isActiveAndEnabled)
+                        {
+                            fro.Rewind();
+                            AlterColor(laserLine, Color.yellow);
+                        }
+                    }
+
+                    else if (hit.collider.gameObject.GetComponent<RotatingRewindObject>() != null)
+                    {
+                        RotatingRewindObject rro = hit.collider.gameObject.GetComponent<RotatingRewindObject>();
+
+                        if (rro.isActiveAndEnabled)
+                        {
+                            rro.Rewind();
+                            AlterColor(laserLine, Color.yellow);
+                        }
+                    }
                 }
                 this._ShowLaser(nozzlePosition, hit.point);
             }

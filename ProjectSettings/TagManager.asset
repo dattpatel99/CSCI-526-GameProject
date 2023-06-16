@@ -8,6 +8,7 @@ TagManager:
   - TimeObject
   - Boulder
   - Mirror
+  - RewindObject
   layers:
   - Default
   - TransparentFX

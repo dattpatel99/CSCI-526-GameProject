@@ -1064,6 +1064,10 @@ PrefabInstance:
       propertyPath: startingTimeValue
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2024843070695078698, guid: 7acef5f60506949459e1bc89730d98d0, type: 3}
+      propertyPath: colliderOn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2024843070695078700, guid: 7acef5f60506949459e1bc89730d98d0, type: 3}
       propertyPath: m_Name
       value: Animal

@@ -6,7 +6,6 @@ using UnityEngine;
  */
 public class TimeObject : MonoBehaviour
 {
-    private int _minimumTimeValue = 0; // TODO: Make this global for all values 
     // Tracks if the object can be reacted with (e. Tree falls to bridge)
     public List<bool> reactable;
     
@@ -14,7 +13,10 @@ public class TimeObject : MonoBehaviour
     public int startingTimeValue; 
     public int highestTimeValue;
     public List<Sprite> phaseSprites;
-    public int currentTimeValue;
+    private int currentTimeValue;
+
+    [SerializeField]
+    private bool[] colliderOn;
     
     /*
      * Start does:
@@ -22,7 +24,7 @@ public class TimeObject : MonoBehaviour
      */
     void Start()
     {
-        this.currentTimeValue = Mathf.Clamp(this.startingTimeValue, this._minimumTimeValue, this.highestTimeValue);
+        this.currentTimeValue = Mathf.Clamp(this.startingTimeValue, 0, this.highestTimeValue);
         GetComponent<SpriteRenderer>().sprite = this.GetSprite(this.currentTimeValue);
         TryUpdateShapeToAttachedSprite();
     }
@@ -43,15 +45,17 @@ public class TimeObject : MonoBehaviour
     public void AddTime(int addedTime)
     {
         int newValue = this.currentTimeValue + addedTime;
-        this.currentTimeValue = Mathf.Clamp(newValue, this._minimumTimeValue, this.highestTimeValue);
+        this.currentTimeValue = Mathf.Clamp(newValue, 0, this.highestTimeValue);
         GetComponent<SpriteRenderer>().sprite=this.GetSprite(this.currentTimeValue);
+        TryUpdateShapeToAttachedSprite();
     }
 
     public void SubtractTime(int subtractedTime)
     {
         int newValue = this.currentTimeValue - subtractedTime;
-        this.currentTimeValue = Mathf.Clamp(newValue, this._minimumTimeValue, this.highestTimeValue);
+        this.currentTimeValue = Mathf.Clamp(newValue, 0, this.highestTimeValue);
         GetComponent<SpriteRenderer>().sprite=this.GetSprite(this.currentTimeValue);
+        TryUpdateShapeToAttachedSprite();
     }
 
     public int GetCurrentTimeValue()
@@ -65,7 +69,7 @@ public class TimeObject : MonoBehaviour
     }
     public bool CheckSubtraction()
     {
-        return this.currentTimeValue > this._minimumTimeValue;
+        return this.currentTimeValue > 0;
     }
 
     private Sprite GetSprite(int currentTime)
@@ -81,6 +85,9 @@ public class TimeObject : MonoBehaviour
     {
         PolygonCollider2D thisObjectsCollider = this.GetComponent<PolygonCollider2D>();
         this.UpdateShapeToSprite(thisObjectsCollider, thisObjectsCollider.GetComponent<SpriteRenderer>().sprite);
+
+        // The collider is set to be a trigger if we want the player to be able to walk past it
+        thisObjectsCollider.isTrigger = !colliderOn[currentTimeValue];
     }
     private void UpdateShapeToSprite (PolygonCollider2D colliderObject, Sprite sprite) { 
         // ensure both valid

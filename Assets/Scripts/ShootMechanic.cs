@@ -59,10 +59,7 @@ public class ShootMechanic : MonoBehaviour
 
                             // Shrink the player
                             player.GetComponent<Transform>().localScale = player.GetComponent<PlayerController>().getPlayerSize();
-                        } 
-                        
-                        // Show laser only if it is a time object
-                        //player.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
+                        }
                     }
                 }
                 // If Collider hits for addition

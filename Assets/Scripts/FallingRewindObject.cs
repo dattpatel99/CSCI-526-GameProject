@@ -6,13 +6,20 @@ public class FallingRewindObject : MonoBehaviour
 {
     private Vector3 startPosition;
     private bool objectRewinding;
+    private Rigidbody2D rb2d;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
         startPosition = this.transform.position;
-        GetComponent<Rigidbody2D>().gravityScale = 1f;
         objectRewinding = false;
+
+        rb2d = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        sr.color = Color.white;
+
+        rb2d.gravityScale = 1f;
     }
 
     // Update is called once per frame
@@ -20,8 +27,8 @@ public class FallingRewindObject : MonoBehaviour
     {
         if (transform.position.y >= startPosition.y && objectRewinding)
         {
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            GetComponent<Rigidbody2D>().gravityScale = 0f;
+            rb2d.velocity = Vector3.zero;
+            rb2d.gravityScale = 0f;
         }
     }
 
@@ -30,8 +37,9 @@ public class FallingRewindObject : MonoBehaviour
     {
         PlayerStatus.isRewinding = true;
 
-        GetComponent<Rigidbody2D>().gravityScale = -1f;
+        rb2d.gravityScale = -1f;
         objectRewinding = true;
+        sr.color = Color.yellow;
 
         StartCoroutine(RewindDuration());
     }
@@ -42,8 +50,11 @@ public class FallingRewindObject : MonoBehaviour
 
         PlayerStatus.isRewinding = false;
 
-        GetComponent<Rigidbody2D>().gravityScale = 1f;
+        rb2d.gravityScale = 1f;
+        sr.color = Color.white;
 
         objectRewinding = false;
+
+        
     }
 }

@@ -6,11 +6,14 @@ public class RotatingRewindObject : MonoBehaviour
 {
     public float rotationSpeed;
     private bool objectRewinding;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
         objectRewinding = false;
+        sr = GetComponent<SpriteRenderer>();
+        sr.color = Color.white;
     }
 
     // Update is called once per frame
@@ -31,6 +34,7 @@ public class RotatingRewindObject : MonoBehaviour
         PlayerStatus.isRewinding = true;
 
         objectRewinding = true;
+        sr.color = Color.yellow;
 
         StartCoroutine(RewindDuration());
     }
@@ -40,7 +44,7 @@ public class RotatingRewindObject : MonoBehaviour
         yield return new WaitForSeconds(5);
 
         PlayerStatus.isRewinding = false;
-
+        sr.color = Color.white;
         objectRewinding = false;
     }
 }

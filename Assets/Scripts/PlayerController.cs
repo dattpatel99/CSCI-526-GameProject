@@ -5,21 +5,20 @@ public class PlayerController : MonoBehaviour
 {
 
     // Player Movement: Public for testing but after that make private
+    public float speed = 10.0f;
     private float horizontalInput;
-    public float landSpeed = 10.0f;
-    public float airSpeed = 5.0f;
-    public TextMeshProUGUI FinishText;
+    public float jumpforce = 500.0f;
+    private Rigidbody2D rb2d;
+
+    public LayerMask groundLayer;
+    public Transform feet;
+    public bool grounded;
 
     // Gun Object Position
     public Transform gun;
-    
-    // Player rigidbody
-    private Rigidbody2D rb;
 
     // Jump information
-    public float jumpAmount = 40.0f;
     private bool jumpInput;
-    private bool isJumping;
 
     //Player body transformation
     // 0 = small, 1 = normal, 2 = old
@@ -29,10 +28,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
-        isJumping = false;
+        rb2d = this.GetComponent<Rigidbody2D>();
         startPosition = transform.position;
-        FinishText.text = "";
     }
 
     void Update()
@@ -53,26 +50,17 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        // Get Inputs
+        grounded = Physics2D.OverlapCircle(feet.position, .2f, groundLayer);
+        // horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
         jumpInput = Input.GetButtonDown("Jump");
 
-        // Adjust player movement speed according to position
-        Vector3 inputManipulation = Vector3.right * horizontalInput * Time.deltaTime;
-        if (isJumping)
+        transform.Translate(Vector2.right * Time.deltaTime * speed * horizontalInput);
+
+        // jump, multi-jump prevention
+        if (jumpInput && grounded)
         {
-            transform.Translate(inputManipulation * airSpeed);
-        }
-        else
-        {
-            transform.Translate(inputManipulation * landSpeed);
-        }
-        
-        // Read Jump
-        if (!isJumping && jumpInput)
-        {
-            rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-            isJumping = true;
+            rb2d.AddForce(new Vector2(0, jumpforce));
         }
 
         // Check for death
@@ -80,25 +68,6 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < -7f)
         {
             transform.position = startPosition;
-        }
-    }
-
-    // For Jump reset 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            isJumping = false;
-        }
-    }
-
-    // For Finish line
-    void OnTriggerEnter2D(Collider2D colliderObject)
-    {
-        if (colliderObject.gameObject.CompareTag("Finish"))
-        {
-            FinishText.text = "Congratulations!";
-            Time.timeScale = 0f;
         }
     }
 

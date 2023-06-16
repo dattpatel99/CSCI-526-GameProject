@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6841070542584686395}
   - component: {fileID: -3547403436056619582}
   - component: {fileID: 8168294875912417635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FallingRewindObject
-  m_TagString: Untagged
+  m_TagString: RewindObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

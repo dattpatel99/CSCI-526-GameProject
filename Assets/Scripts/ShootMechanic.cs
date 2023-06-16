@@ -6,7 +6,7 @@ public class ShootMechanic : MonoBehaviour
     public GameObject nozzle;
     public GameObject player;
 
-    public LineRenderer laserLine;
+    private LineRenderer laserLine;
     public float laserLength = 10f;
     public float laserDuration = 0.05f;
     
@@ -89,8 +89,10 @@ public class ShootMechanic : MonoBehaviour
                         }
                     }
                 }
-                else if (hit.collider.gameObject.CompareTag("RewindObject") && !PlayerStatus.isRewinding)
+                if (hit.collider.gameObject.CompareTag("RewindObject") && !PlayerStatus.isRewinding)
                 {
+                    Debug.Log("Hit");
+
                     if (hit.collider.gameObject.GetComponent<FallingRewindObject>() != null)
                     {
                         FallingRewindObject fro = hit.collider.gameObject.GetComponent<FallingRewindObject>();
@@ -113,11 +115,11 @@ public class ShootMechanic : MonoBehaviour
                         }
                     }
                 }
-                this._ShowLaser(nozzlePosition, hit.point);
+                _ShowLaser(nozzlePosition, hit.point);
             }
             else
             { 
-                this._ShowLaser(nozzlePosition, nozzlePosition + nozzle.transform.right * laserLength);
+                _ShowLaser(nozzlePosition, nozzlePosition + nozzle.transform.right * laserLength);
             }
         }
     }

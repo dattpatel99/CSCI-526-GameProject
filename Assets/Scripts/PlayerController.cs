@@ -116,4 +116,20 @@ public class PlayerController : MonoBehaviour
     {
         return playerAge;
     }
+
+    public Vector3 getPlayerSize()
+    {
+        switch (this.playerAge) {
+            case 0:
+                return new Vector3(0.95f, 0.6f, 1);
+            case 1:
+                return new Vector3(0.95f, 1, 1);
+            case 2:
+                return new Vector3(0.95f, 1, 1);
+            default:
+                // shouldn't be possible
+                return new Vector3(0, 0, 0);
+        }
+
+    }
 }

@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput;
     private bool isJumping;
 
+    //Player body transformation
+    // 0 = small, 1 = normal, 2 = old
+    private int playerAge = 1;
+
     private Vector3 startPosition;
 
     void Start()
@@ -96,5 +100,20 @@ public class PlayerController : MonoBehaviour
             FinishText.text = "Congratulations!";
             Time.timeScale = 0f;
         }
+    }
+
+    public void increaseAge()
+    {
+        playerAge += 1;
+    }
+
+    public void decreaseAge()
+    {
+        playerAge -= 1;
+    }
+
+    public int getAge()
+    {
+        return playerAge;
     }
 }

@@ -19,6 +19,7 @@ public class ShootMechanic : MonoBehaviour
 
     void Update()
     {
+
         Vector3 nozzlePosition = nozzle.transform.position;
         this._take = Input.GetButtonDown("Fire2");
         this._give = Input.GetButtonDown("Fire1");
@@ -35,14 +36,33 @@ public class ShootMechanic : MonoBehaviour
             if (hit.collider != null)
             {
                 // If Collider hits for subtraction
-                if (_take && hit.collider.gameObject.CompareTag("TimeObject") && hit.collider.gameObject.GetComponent<TimeObject>().CheckSubtraction() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)
+                if (_take)
                 {
-                    hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
-                    player.GetComponent<TimeBank>().AddTime(1);
-                    AlterColor(laserLine, Color.red);
-                    // Show laser only if it is a time object
-                    hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
+                    Debug.Log("Shooting");
+                    if (hit.collider.gameObject.CompareTag("TimeObject") && hit.collider.gameObject.GetComponent<TimeObject>().CheckSubtraction() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)
+                    {
+                        hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
+                        player.GetComponent<TimeBank>().AddTime(1);
+                        AlterColor(laserLine, Color.red);
+                        // Show laser only if it is a time object
+                        hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
+                    }
+                    else if (hit.collider.gameObject.CompareTag("Mirror"))
+                    {
+                        Debug.Log("Hitting the mirror");
+                        // Subtract time if player is not a baby
+                        if ( player.GetComponent<PlayerController>().getAge() > 0 )
+                        {
+                            player.GetComponent<PlayerController>().decreaseAge();
+                            player.GetComponent<TimeBank>().AddTime(1);
+                            AlterColor(laserLine, Color.red);
 
+                            // Load the new player model code here
+                        } 
+                        
+                        // Show laser only if it is a time object
+                        //player.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
+                    }
                 }
                 // If Collider hits for addition
                 else if (_give && hit.collider.gameObject.CompareTag("TimeObject") && player.GetComponent<TimeBank>().CheckSubtract() && hit.collider.gameObject.GetComponent<TimeObject>().CheckAddition() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)

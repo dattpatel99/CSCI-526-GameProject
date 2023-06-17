@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     public float jumpforce = 500.0f;
     private Rigidbody2D rb2d;
+    private float direction = 1.0f;
 
     // Attributes required for jump functionality
     public LayerMask groundLayer;
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     // Gun Object Position
     public Transform gun;
+    public float sensitivity = 1.0f;
 
     // Jump information
     private bool jumpInput;
@@ -46,11 +49,12 @@ public class PlayerController : MonoBehaviour
     private void GunRotation()
     {
         // Rotate Gun
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePos = (Input.mousePosition);
         Vector3 playerPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 gunRotation = mousePos - playerPos;
         float angle = Mathf.Atan2(gunRotation.y, gunRotation.x) * Mathf.Rad2Deg;
-        gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        /*angle = Mathf.Clamp(angle, -45f, 45f);*/ // Gun Rotation 
+        gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0,  angle));
     }
 
     private void HandleJump()
@@ -61,6 +65,7 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         jumpInput = Input.GetButtonDown("Jump");
 
+        // Difference between land and air speed
         if (!grounded)
         {
             transform.Translate(Vector2.right * Time.deltaTime * airSpeed * horizontalInput);
@@ -70,7 +75,20 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector2.right * Time.deltaTime * landSpeed * horizontalInput);
         }
 
-
+        /*
+        // Scale Player left or right based on horizontal input
+        if (horizontalInput < 0)
+        {
+            direction = -1.0f;
+        }
+        else if (horizontalInput > 0)
+        {
+            direction = 1.0f;
+        }  
+        this.transform.localScale = new Vector3(direction * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Flip the player horizontally
+        */
+        
+        
         // jump, multi-jump prevention
         if (jumpInput && grounded)
         {

@@ -6,8 +6,9 @@ using UnityEngine;
 // https://assetstore.unity.com/packages/vfx/shaders/2d-sprite-outline-109669
 public class HintViewController : MonoBehaviour
 {
-    private GameObject[] timeObjects;
+    private GameObject[] objects;
     private Material greenOutline;
+    private Material yellowOutline;
     private Material defaultMaterial;
     private bool held;
 
@@ -15,11 +16,12 @@ public class HintViewController : MonoBehaviour
     {
         // Grab green outline mat
         greenOutline = Resources.Load<Material>("Green Outline");
+        yellowOutline = Resources.Load<Material>("Yellow Outline");
         defaultMaterial = Resources.Load<Material>("unity_builtin_extra/Sprites-Default");
-        timeObjects = GameObject.FindGameObjectsWithTag("TimeObject");
+        objects = GameObject.FindGameObjectsWithTag("TimeObject");
 
         // Grab the sprite default
-        foreach (GameObject timeObject in timeObjects)
+        foreach (GameObject timeObject in objects)
         {
             if (timeObject.GetComponent<Renderer>() != null)
             {
@@ -48,14 +50,16 @@ public class HintViewController : MonoBehaviour
             held = true;
         }
 
-        addGreenOutlineToTimeObjects(held);
+        addOutlineToTimeObjects(greenOutline, "TimeObject", held);
+        addOutlineToTimeObjects(yellowOutline, "RewindObject", held);
+
     }
 
-    private void addGreenOutlineToTimeObjects(bool enabled)
+    private void addOutlineToTimeObjects(Material outline, string tagName, bool enabled)
     {
         //Do on update so we don't grab destroyed objects 
-        timeObjects = GameObject.FindGameObjectsWithTag("TimeObject");
-        foreach (GameObject timeObject in timeObjects)
+        objects = GameObject.FindGameObjectsWithTag(tagName);
+        foreach (GameObject timeObject in objects)
         {
             if (timeObject.GetComponent<Renderer>() != null)
             {
@@ -64,7 +68,7 @@ public class HintViewController : MonoBehaviour
                     if (renderer.GetType().Name == "SpriteRenderer")
                     {
                         //Switch between help enabled and not enabled
-                        renderer.material = enabled ? greenOutline : defaultMaterial;
+                        renderer.material = enabled ? outline : defaultMaterial;
                     }
                 }
             }

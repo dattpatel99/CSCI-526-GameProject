@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class RotatingRewindObject : MonoBehaviour
 {
-    private float rotationSpeed;
+    public float rotationSpeed;
     private bool objectRewinding;
     private SpriteRenderer sr;
 

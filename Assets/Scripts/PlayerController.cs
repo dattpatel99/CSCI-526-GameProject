@@ -28,12 +28,12 @@ public class PlayerController : MonoBehaviour
     // 0 = small, 1 = normal, 2 = old
     private int playerAge = 1;
 
-    private Vector3 startPosition;
+    private Vector3 _respawnPosition;
 
     void Start()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
-        startPosition = transform.position;
+        _respawnPosition = transform.position;
     }
 
     void Update()
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
         if (transform.position.y < -7f)
         {
-            transform.position = startPosition;
+            transform.position = _respawnPosition;
         }
     }
 
@@ -105,5 +105,10 @@ public class PlayerController : MonoBehaviour
                 return new Vector3(0, 0, 0);
         }
 
+    }
+
+    public void setRespwan(Vector3 location)
+    {
+        _respawnPosition = location;
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public GameObject player;
-    public float xLimit = 5f;
-    public float yLimit = 5f;
-    public float cameraSpeed = 4f;
+    public float xLimit = 3f;
+    public float yLimit = 2f;
+    public float cameraSpeed = 15f;
 
     public float zOffset = -10;
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
         if (xError > xLimit || yError > yLimit)
         {
             float step = cameraSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, 0, zOffset), step);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, zOffset), step);
         }
     }
 }

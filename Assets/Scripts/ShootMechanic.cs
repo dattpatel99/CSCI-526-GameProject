@@ -102,7 +102,15 @@ public class ShootMechanic : MonoBehaviour
                             AlterColor(laserLine, Color.yellow);
                         }
                     }
-
+                    else if (hit.collider.gameObject.GetComponent<SlidingRewindObject>() != null)
+                    {
+                        SlidingRewindObject sro = hit.collider.gameObject.GetComponent<SlidingRewindObject>();
+                        if (sro.isActiveAndEnabled)
+                        {
+                            sro.Rewind();
+                            AlterColor(laserLine, Color.yellow);
+                        }
+                    }
                     else if (hit.collider.gameObject.GetComponent<RotatingRewindObject>() != null)
                     {
                         RotatingRewindObject rro = hit.collider.gameObject.GetComponent<RotatingRewindObject>();

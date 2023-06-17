@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
 {
 
     // Player Movement: Public for testing but after that make private
-    public float speed = 10.0f;
+    public float landSpeed = 10.0f;
+    public float airSpeed = 5.0f;
     private float horizontalInput;
     public float jumpforce = 500.0f;
     private Rigidbody2D rb2d;
@@ -60,7 +61,15 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         jumpInput = Input.GetButtonDown("Jump");
 
-        transform.Translate(Vector2.right * Time.deltaTime * speed * horizontalInput);
+        if (!grounded)
+        {
+            transform.Translate(Vector2.right * Time.deltaTime * airSpeed * horizontalInput);
+        }
+        else
+        {
+            transform.Translate(Vector2.right * Time.deltaTime * landSpeed * horizontalInput);
+        }
+
 
         // jump, multi-jump prevention
         if (jumpInput && grounded)
@@ -70,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
         // Check for death
         // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
-        if (transform.position.y < -7f)
+        if (transform.position.y < -20f)
         {
             transform.position = _respawnPosition;
         }

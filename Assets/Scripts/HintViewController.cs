@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handle player hint view 
+/// </summary>
 // https://assetstore.unity.com/packages/vfx/shaders/2d-sprite-outline-109669
 public class HintViewController : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class HintViewController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // KEY CODE H for viewing the hint
         if (Input.GetKeyUp(KeyCode.H))
         {
             Debug.Log("Key not being pressed");

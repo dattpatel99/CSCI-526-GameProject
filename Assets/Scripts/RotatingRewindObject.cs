@@ -1,7 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class handles rewind objects that rotate on rewing
+/// </summary>
 public class RotatingRewindObject : MonoBehaviour
 {
     public float rotationSpeed;
@@ -28,7 +30,8 @@ public class RotatingRewindObject : MonoBehaviour
             transform.Rotate(new Vector3(0f, 0f, rotationSpeed * Time.deltaTime));
         }
     }
-
+    
+    // Implement rewind
     public void Rewind()
     {
         PlayerStatus.isRewinding = true;
@@ -39,6 +42,7 @@ public class RotatingRewindObject : MonoBehaviour
         StartCoroutine(RewindDuration());
     }
 
+    // Coroutine to handle rewind duration
     IEnumerator RewindDuration()
     {
         yield return new WaitForSeconds(5);

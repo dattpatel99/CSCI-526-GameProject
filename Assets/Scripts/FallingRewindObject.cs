@@ -1,7 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This handles how falling objects interact with rewind mechanic
+/// </summary>
 public class FallingRewindObject : MonoBehaviour
 {
     private Vector3 startPosition;
@@ -25,6 +27,7 @@ public class FallingRewindObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Make the object go up in position if rewinding
         if (transform.position.y >= startPosition.y && objectRewinding)
         {
             rb2d.velocity = Vector3.zero;
@@ -44,6 +47,7 @@ public class FallingRewindObject : MonoBehaviour
         StartCoroutine(RewindDuration());
     }
 
+    // How long should the rewind last
     IEnumerator RewindDuration()
     {
         yield return new WaitForSeconds(5);

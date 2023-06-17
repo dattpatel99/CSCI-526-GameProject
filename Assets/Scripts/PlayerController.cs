@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
 
     public LayerMask groundLayer;
+    public LayerMask objectLayer;
     public Transform feet;
     public bool grounded;
 
@@ -50,7 +51,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        grounded = Physics2D.OverlapCircle(feet.position, .2f, groundLayer);
+        grounded = Physics2D.OverlapCircle(feet.position, .2f, groundLayer) || Physics2D.OverlapCircle(feet.position, .2f, objectLayer);
+
         // horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
         jumpInput = Input.GetButtonDown("Jump");

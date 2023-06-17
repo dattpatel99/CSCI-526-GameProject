@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5615445829091215625}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Tree
   m_TagString: TimeObject
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6528877941884733107}
   - component: {fileID: 192427466633808348}
   - component: {fileID: 8967831665942363003}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Child
   m_TagString: TimeObject
   m_Icon: {fileID: 0}

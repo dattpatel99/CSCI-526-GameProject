@@ -175,9 +175,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 128
   feet: {fileID: 4485915037519610963}
   grounded: 0
-  FinishText: {fileID: 0}
   gun: {fileID: 2847372577066176175}
 --- !u!114 &2847372575785183050
 MonoBehaviour:
@@ -465,7 +467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nozzle: {fileID: 2847372576041430435}
   player: {fileID: 2847372575785183049}
-  laserLine: {fileID: 0}
   laserLength: 10
   laserDuration: 0.05
 --- !u!1 &2847372577564353450

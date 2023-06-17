@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 
 // This script should be attached to the heartContainer, which should be an Empty Object with Horizontal Layout Group
-
+// Spacing is -49 for now
 public class PlayerHealth : MonoBehaviour
 {
     private int health;
@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     public Button hpBtn_lose;
     public Button hpBtn_heal;
     public Button hpBtn_add;
+
+    public Transform heartPrefab;
     
 
     // Start is called before the first frame update
@@ -29,10 +31,11 @@ public class PlayerHealth : MonoBehaviour
         // hearts = new Image[healthMax];
         for (int i = 0; i < healthMax; i++)
         {
-            GameObject heartObj = new GameObject(string.Format("{0}", i));
-            heartObj.GetComponent<RectTransform>().SetParent(transform);
-            Image heartImg = heartObj.AddComponent<Image>();
-            heartImg.sprite = heartSprite_good;
+            Instantiate(heartPrefab, transform);
+            //GameObject heartObj = new GameObject(string.Format("{0}", i));
+            //heartObj.GetComponent<RectTransform>().SetParent(transform);
+            //Image heartImg = heartObj.AddComponent<Image>();
+            //heartImg.sprite = heartSprite_good;
         }
     }
 
@@ -65,11 +68,13 @@ public class PlayerHealth : MonoBehaviour
     // Paul: Do we want to health the player as well?
     public void AddHP()
     {
-        GameObject heartObj = new GameObject(string.Format("{0}", healthMax));
+        Transform newHeart = Instantiate(heartPrefab, transform);
+        newHeart.gameObject.GetComponent<Image>().sprite = heartSprite_bad;
+        // GameObject heartObj = new GameObject(string.Format("{0}", healthMax));
         healthMax++;
-        Image heartImg = heartObj.AddComponent<Image>();
-        heartImg.sprite = heartSprite_bad;
-        heartObj.GetComponent<RectTransform>().SetParent(transform);
+        // Image heartImg = heartObj.AddComponent<Image>();
+        // heartImg.sprite = heartSprite_bad;
+        // heartObj.GetComponent<RectTransform>().SetParent(transform);
         transform.GetChild(health).gameObject.GetComponent<Image>().sprite = heartSprite_good;
         health++;
     }

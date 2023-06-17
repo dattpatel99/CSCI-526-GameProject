@@ -133,11 +133,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b6b16b1ec2dc147ab942872601ad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reactable: 
   startingTimeValue: 1
   highestTimeValue: 1
   phaseSprites:
   - {fileID: 21300000, guid: d3138a65bcdcd10439acb0c9fac7ba9c, type: 3}
   - {fileID: 21300000, guid: fe3f55df3bde36047a5da6721320195a, type: 3}
+  currentTimeValue: 0
+  colliderOn: 0001
 --- !u!60 &2024843070695078697
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -226,8 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  animalSight: 10
   eyes: {fileID: 2024843069021365156}
-  wolfSight: 10
   line: {fileID: 8769565907156234646}
 --- !u!120 &8769565907156234646
 LineRenderer:

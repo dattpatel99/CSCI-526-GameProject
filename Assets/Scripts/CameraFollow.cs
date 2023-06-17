@@ -15,6 +15,7 @@ public class CameraFollow : MonoBehaviour
         float xError = Mathf.Abs(player.transform.position.x - transform.position.x);
         float yError = Mathf.Abs(player.transform.position.y - transform.position.y);
 
+        // If the object has moved more than 5f from camer's position move the camera
         if (xError > xLimit || yError > yLimit)
         {
             float step = cameraSpeed * Time.deltaTime;

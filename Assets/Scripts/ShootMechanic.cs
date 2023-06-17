@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class ShootMechanic : MonoBehaviour
 {
+    // Attributes for gun
     public GameObject nozzle;
     public GameObject player;
-
+    
+    // Attributes for line rendering
     private LineRenderer laserLine;
     public float laserLength = 10f;
     public float laserDuration = 0.05f;
     
+    // Attributes for handling shoot
     private bool _take;
     private bool _give;
     
@@ -39,7 +42,6 @@ public class ShootMechanic : MonoBehaviour
                 // If Collider hits for subtraction
                 if (_take)
                 {
-                    Debug.Log("Shooting");
                     if (hit.collider.gameObject.CompareTag("TimeObject") && hit.collider.gameObject.GetComponent<TimeObject>().CheckSubtraction() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)
                     {
                         hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
@@ -50,7 +52,6 @@ public class ShootMechanic : MonoBehaviour
                     }
                     else if (hit.collider.gameObject.CompareTag("Mirror"))
                     {
-                        Debug.Log("Hitting the mirror");
                         // Subtract time if player is not a baby
                         if ( player.GetComponent<PlayerController>().getAge() > 0 )
                         {
@@ -76,7 +77,6 @@ public class ShootMechanic : MonoBehaviour
                     }
                     else if (hit.collider.gameObject.CompareTag("Mirror") && player.GetComponent<TimeBank>().CheckSubtract())
                     {
-                        Debug.Log("Hitting the mirror");
                         // Subtract time if player is not a baby
                         if (player.GetComponent<PlayerController>().getAge() < 2)
                         {
@@ -89,10 +89,9 @@ public class ShootMechanic : MonoBehaviour
                         }
                     }
                 }
+                // If raycast hits rewind object
                 if (hit.collider.gameObject.CompareTag("RewindObject") && !PlayerStatus.isRewinding)
                 {
-                    Debug.Log("Hit");
-
                     if (hit.collider.gameObject.GetComponent<FallingRewindObject>() != null)
                     {
                         FallingRewindObject fro = hit.collider.gameObject.GetComponent<FallingRewindObject>();

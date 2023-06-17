@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/// <summary>
+/// To ensure player only rewinds 1 object
+/// </summary>
 public static class PlayerStatus
 {
     public static bool isRewinding = false;

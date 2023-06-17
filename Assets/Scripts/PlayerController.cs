@@ -1,6 +1,8 @@
 using UnityEngine;
-using TMPro;
 
+/// <summary>
+/// Handles the player movement methods
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
 
@@ -10,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float jumpforce = 500.0f;
     private Rigidbody2D rb2d;
 
+    // Attributes required for jump functionality
     public LayerMask groundLayer;
     public LayerMask objectLayer;
     public Transform feet;

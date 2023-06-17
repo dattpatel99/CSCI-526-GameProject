@@ -23,6 +23,8 @@ public class AnimalController : MonoBehaviour
 
     void Update()
     {
+        // If the animal is it should move in the right hand direction
+        // TODO: Make the animal move toward the object it needs to interact with not the right or left
         if (_activated)
         {
             transform.Translate(Vector3.right * Time.deltaTime * this.moveSpeed);
@@ -63,12 +65,14 @@ public class AnimalController : MonoBehaviour
         }
     }
 
+    // Set the color for the animal's vision
     void SetLineColor(LineRenderer lineRendererObject, Color color)
     {
         lineRendererObject.startColor = color;
         lineRendererObject.endColor = color;
     }
 
+    // Make the laser legnth change based on what it hits first
     IEnumerator UpdateLaserPosition()
     {
         yield return new WaitForSeconds(0.0f);
@@ -76,8 +80,7 @@ public class AnimalController : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {
-        // TODO: Maybe turn these reactions into json 
+    { 
         /*
          * obj1: rotation
          * obj2: shift

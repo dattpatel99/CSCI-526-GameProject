@@ -4,6 +4,7 @@ using UnityEngine;
 /*
  * This class handles the Animal behavior (AKA Wolf for now)
  */
+//Testing 
 public class AnimalController : MonoBehaviour
 {
     public float moveSpeed = 1f;

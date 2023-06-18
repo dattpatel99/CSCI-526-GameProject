@@ -34,9 +34,16 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 _respawnPosition;
 
+    // Move up and down the beanstalk
+    private float vertical;
+    private bool isBeanstalk;
+    private bool isClimbing;
+    private float initGravityScale;
+
     void Start()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
+        initGravityScale = rb2d.gravityScale;
         _respawnPosition = transform.position;
     }
 
@@ -44,6 +51,50 @@ public class PlayerController : MonoBehaviour
     {
         GunRotation();
         HandleJump();
+
+        // Beanstalk logic
+        vertical = Input.GetAxis("Vertical");
+        if (isBeanstalk && Mathf.Abs(vertical) > 0f)
+        {
+            isClimbing = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isClimbing)
+        {
+            rb2d.gravityScale = 0f;
+            rb2d.velocity = new Vector2(rb2d.velocity.x, vertical * 5.0f);
+        }
+        else
+        {
+            rb2d.gravityScale = initGravityScale;
+            //rb2d.velocity = Vector2.zero;
+        }
+    }
+
+    // Climb beanstalk logic
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject collidingObject = collision.gameObject;
+        if (collidingObject.name == "Bean")
+        {
+            if (collidingObject.GetComponent<TimeObject>().GetCurrentTimeValue() == 1)
+            {
+                isBeanstalk = true;
+                Debug.Log("Trigger Enter 2d: " + collision.gameObject.name);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if ( collision.gameObject.name == "Bean")
+        {
+            isBeanstalk = false;
+            isClimbing = false;
+        }
     }
 
     private void GunRotation()
@@ -56,6 +107,8 @@ public class PlayerController : MonoBehaviour
         /*angle = Mathf.Clamp(angle, -45f, 45f);*/ // Gun Rotation 
         gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0,  angle));
     }
+
+
 
     private void HandleJump()
     {

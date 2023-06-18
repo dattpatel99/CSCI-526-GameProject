@@ -13,8 +13,10 @@ public class PlayerHealth : MonoBehaviour
     // public GameObject heartsContainer;
 
     // change in unity, for test
+    /*
     public Button hpBtn_lose;
     public Button hpBtn_heal;
+    */
     public Button hpBtn_add;
 
     public Transform heartPrefab;
@@ -24,8 +26,8 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         hpBtn_add.onClick.AddListener(AddHP);
-        hpBtn_lose.onClick.AddListener(LoseHP);
-        hpBtn_heal.onClick.AddListener(HealHP);
+        /*hpBtn_lose.onClick.AddListener(LoseHP);
+        hpBtn_heal.onClick.AddListener(HealHP);*/
         
         health = healthMax;
         // hearts = new Image[healthMax];
@@ -39,24 +41,35 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        // if (health <= 0)
-    }
-
     public int GetHP()
     {
         return health;
     }
 
-    public void LoseHP()
+    public void DamagePlayer(int damageNum)
+    {
+        for (int i = 0; i < damageNum; i++)
+        {
+            removeHeart();
+        }
+    }
+
+    public void HealPlayer(int healPoints)
+    {
+        for (int i = 0; i < healPoints; i++)
+        {
+            addHeart();
+        }
+
+    }
+
+    private void removeHeart()
     {
         health--;
         transform.GetChild(health).gameObject.GetComponent<Image>().sprite = heartSprite_bad;
     }
 
-    public void HealHP()
+    private void addHeart()
     {
         health = healthMax;
         foreach (Transform childTransform in transform)

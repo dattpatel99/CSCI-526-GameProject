@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     public float jumpforce = 500.0f;
     private Rigidbody2D rb2d;
+    /*
     private float direction = 1.0f;
+    */
 
     // Attributes required for jump functionality
     public LayerMask groundLayer;
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         GunRotation();
         HandleJump();
-
+        
         // Beanstalk logic
         vertical = Input.GetAxis("Vertical");
         if (isBeanstalk && Mathf.Abs(vertical) > 0f)
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
             isClimbing = true;
         }
     }
-
+    
     private void FixedUpdate()
     {
         if (isClimbing)
@@ -107,9 +109,7 @@ public class PlayerController : MonoBehaviour
         /*angle = Mathf.Clamp(angle, -45f, 45f);*/ // Gun Rotation 
         gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0,  angle));
     }
-
-
-
+    
     private void HandleJump()
     {
         grounded = Physics2D.OverlapCircle(feet.position, .2f, groundLayer) || Physics2D.OverlapCircle(feet.position, .2f, objectLayer);
@@ -150,10 +150,6 @@ public class PlayerController : MonoBehaviour
 
         // Check for death
         // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
-        if (transform.position.y < -20f)
-        {
-            transform.position = _respawnPosition;
-        }
     }
 
     public void increaseAge()
@@ -190,5 +186,9 @@ public class PlayerController : MonoBehaviour
     public void setRespwan(Vector3 location)
     {
         _respawnPosition = location;
+    }
+    public Vector3 getRespwan()
+    {
+        return _respawnPosition;
     }
 }

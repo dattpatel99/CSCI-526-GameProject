@@ -300,7 +300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1127058157
 RectTransform:
   m_ObjectHideFlags: 0
@@ -631,8 +631,6 @@ MonoBehaviour:
   healthMax: 3
   heartSprite_good: {fileID: 21300000, guid: 64ccaba4d4be77f49960e58951f7d65a, type: 3}
   heartSprite_bad: {fileID: 21300000, guid: fd0555a24209a544a9e3e484e26e1aab, type: 3}
-  hpBtn_lose: {fileID: 1127058158}
-  hpBtn_heal: {fileID: 1807290499}
   hpBtn_add: {fileID: 649139526}
   heartPrefab: {fileID: 2752164121903996002, guid: 7896d77e6c3c2e84eb0218f167d7d244, type: 3}
 --- !u!1 &1807290497
@@ -653,7 +651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1807290498
 RectTransform:
   m_ObjectHideFlags: 0

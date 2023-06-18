@@ -10,6 +10,7 @@ TagManager:
   - Mirror
   - RewindObject
   - Mushroom
+  - Damaging
   layers:
   - Default
   - TransparentFX

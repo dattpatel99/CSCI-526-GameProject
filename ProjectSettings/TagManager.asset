@@ -9,6 +9,7 @@ TagManager:
   - Boulder
   - Mirror
   - RewindObject
+  - Mushroom
   layers:
   - Default
   - TransparentFX

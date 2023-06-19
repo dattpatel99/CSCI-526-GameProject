@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Handles the player movement methods
@@ -39,12 +40,16 @@ public class PlayerController : MonoBehaviour
     private bool isBeanstalk;
     private bool isClimbing;
     private float initGravityScale;
+    
+    // Finish Line
+    public TextMeshProUGUI FinishText;
 
     void Start()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
         initGravityScale = rb2d.gravityScale;
         _respawnPosition = transform.position;
+        FinishText.text = "";
     }
 
     void Update()
@@ -91,6 +96,11 @@ public class PlayerController : MonoBehaviour
             {
                 isBeanstalk = true;
             }
+        }
+        else if (collidingObject.name == "FinishLine")
+        {
+            FinishText.text = "Congratulations!";
+            Time.timeScale = 0f;
         }
     }
 

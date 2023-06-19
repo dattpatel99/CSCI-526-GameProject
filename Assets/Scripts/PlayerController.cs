@@ -58,6 +58,13 @@ public class PlayerController : MonoBehaviour
         {
             isClimbing = true;
         }
+        // Check for death
+        if (transform.position.y < -22)
+        {
+            transform.position = this._respawnPosition;
+        }
+        // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
+
     }
     
     private void FixedUpdate()
@@ -144,13 +151,6 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.AddForce(new Vector2(0, jumpforce));
         }
-
-        // Check for death
-        if (transform.position.y < -22)
-        {
-            transform.position = this._respawnPosition;
-        }
-        // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
     }
     
 
@@ -173,11 +173,11 @@ public class PlayerController : MonoBehaviour
     {
         switch (this.playerAge) {
             case 0:
-                return new Vector3(0.95f, 0.6f, 1);
+                return new Vector3(0.75f, 0.75f, 1);
             case 1:
-                return new Vector3(0.95f, 1, 1);
+                return new Vector3(0.9f, 0.9f, 1);
             case 2:
-                return new Vector3(0.95f, 1, 1);
+                return new Vector3(.95f, 0.95f, 1);
             default:
                 // shouldn't be possible
                 return new Vector3(0, 0, 0);

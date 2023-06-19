@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour
             if (collidingObject.GetComponent<TimeObject>().GetCurrentTimeValue() == 1)
             {
                 isBeanstalk = true;
-                Debug.Log("Trigger Enter 2d: " + collision.gameObject.name);
             }
         }
     }

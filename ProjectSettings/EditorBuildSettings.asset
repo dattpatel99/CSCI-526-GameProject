@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayTesting.unity
     guid: ae262f3ced23db844ba9dee60022413e
+  - enabled: 1
+    path: Assets/Scenes/MainMovementControlInstructions.unity
+    guid: a0c1235ce68146d45b68ae413240fbe9
+  - enabled: 1
+    path: Assets/Scenes/MainTimeGunInstructions.unity
+    guid: 86f81793e6c8e514cb31ec09efd33095
   m_configObjects: {}

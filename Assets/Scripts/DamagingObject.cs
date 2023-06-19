@@ -30,8 +30,10 @@ public class DamagingObject : MonoBehaviour
     IEnumerator RestartPlayer(GameObject player, GameObject hearts)
     {
         // Respawn at last checkpoint
-        yield return new WaitForSeconds(3);
+        Time.timeScale = 0; // Pause movement
+        yield return new WaitForSecondsRealtime(2); // Wait 2 seconds to restart  
         player.GetComponent<Transform>().position = player.GetComponent<PlayerController>().getRespwan();
         hearts.GetComponent<PlayerHealth>().HealPlayer(3);
+        Time.timeScale = 1; // Continue movement 
     }
 }

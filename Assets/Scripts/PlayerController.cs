@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -13,9 +14,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     public float jumpforce = 500.0f;
     private Rigidbody2D rb2d;
-    /*
-    private float direction = 1.0f;
-    */
+    // private float direction = 1.0f;
 
     // Attributes required for jump functionality
     public LayerMask groundLayer;
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour
     //Player body transformation
     // 0 = small, 1 = normal, 2 = old
     private int playerAge = 1;
-
     private Vector3 _respawnPosition;
 
     // Move up and down the beanstalk
@@ -141,7 +139,6 @@ public class PlayerController : MonoBehaviour
         this.transform.localScale = new Vector3(direction * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Flip the player horizontally
         */
         
-        
         // jump, multi-jump prevention
         if (jumpInput && grounded)
         {
@@ -149,8 +146,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // Check for death
+        if (transform.position.y < -22)
+        {
+            transform.position = this._respawnPosition;
+        }
         // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
     }
+    
 
     public void increaseAge()
     {

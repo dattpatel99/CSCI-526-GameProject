@@ -1,12 +1,12 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 /*
  * This class handles the players stored time and value updating
  */
 public class TimeBank : MonoBehaviour
 {
-    public TextMeshProUGUI timeBankText;
+    public Text timeBankText;
     private static int _timeStored;
     private int _maximumTimeStored = 100000000; // TODO: In case we implement a maximum
     private int _minimumTimeStored = 0;

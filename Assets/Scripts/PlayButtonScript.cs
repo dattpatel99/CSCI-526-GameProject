@@ -10,4 +10,12 @@ public class PlayButtonScript : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void QuitGame() //quits game when quit button pressed
+    {
+        Debug.Log("Quitting Game...");
+        Application.Quit();
+    }
 }
+
+

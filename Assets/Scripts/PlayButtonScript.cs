@@ -5,17 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class PlayButtonScript : MonoBehaviour
 {
-    // Loads Next Scene
-    public void PlayGame ()
+    
+    public void PlayGame () // Loads Next Scene
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void QuitGame() //quits game when quit button pressed
-    {
-        Debug.Log("Quitting Game...");
-        Application.Quit();
-    }
+{
+    Debug.Log("Quitting Game...");
+    Application.Quit();
+}
 }
 
 

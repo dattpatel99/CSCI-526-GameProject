@@ -13,13 +13,12 @@ public class DamagingObject : MonoBehaviour
         {
             if (this.gameObject.name == "Tilemap_Water")
             {
-                damageValue = 3;
+                heartContainer.GetComponent<PlayerHealth>().DamagePlayer(heartContainer.GetComponent<PlayerHealth>().GetHP());
             }
             else
             {
-                damageValue = 1;
+                heartContainer.GetComponent<PlayerHealth>().DamagePlayer(damageValue);
             }
-            heartContainer.GetComponent<PlayerHealth>().DamagePlayer(damageValue);
             if (heartContainer.GetComponent<PlayerHealth>().GetHP() == 0)
             {
                 StartCoroutine(RestartPlayer(other.gameObject, heartContainer));

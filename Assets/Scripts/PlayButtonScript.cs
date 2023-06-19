@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayButtonScript : MonoBehaviour
 {
-    // Loads Next Scene
-    public void PlayGame ()
+    
+    public void PlayGame () // Loads Next Scene
     {
         SceneManager.LoadScene(2);
     }

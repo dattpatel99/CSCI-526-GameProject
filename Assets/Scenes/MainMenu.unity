@@ -214,6 +214,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2401653769605281357, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2401653769605281359, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -221,24 +225,6 @@ PrefabInstance:
     - target: {fileID: 2401653770368837432, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
       propertyPath: m_margin.w
       value: 57.357452
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401653770368837433, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -918.2646
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401653770368837433, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -559.5078
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401653770368837433, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 136
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401653770368837433, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 113
-      propertyPath: m_fontSize
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2401653770368837432, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
       propertyPath: m_margin.z
@@ -255,6 +241,14 @@ PrefabInstance:
     - target: {fileID: 2401653770368837432, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401653770368837433, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -918.2646
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401653770368837433, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -559.5078
       objectReference: {fileID: 0}
     - target: {fileID: 2401653770368837433, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
       propertyPath: m_LocalScale.x

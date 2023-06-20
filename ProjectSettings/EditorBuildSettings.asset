@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayTesting.unity
     guid: ae262f3ced23db844ba9dee60022413e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AdamTileMap.unity
     guid: a813f486a75dbc24db2052b21908bfb2
   - enabled: 0

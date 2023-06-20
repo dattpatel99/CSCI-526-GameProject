@@ -8,7 +8,7 @@ public class PlayButtonScript : MonoBehaviour
     
     public void PlayGame () // Loads Next Scene
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame() //quits game when quit button pressed

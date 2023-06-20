@@ -49,4 +49,10 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Quitting Game...");
         Application.Quit();
     }
+
+    public void SkipTutorial() //if go to main menu button is pressed, redirects to main menu
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(2);
+    }
 }

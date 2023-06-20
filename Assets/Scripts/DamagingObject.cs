@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DamagingObject : MonoBehaviour
 {
+    /*
     public GameObject heartContainer;
     private int damageValue = 1;
     private void OnCollisionEnter2D(Collision2D other)
@@ -35,4 +36,5 @@ public class DamagingObject : MonoBehaviour
         hearts.GetComponent<PlayerHealth>().HealPlayer(3);
         Time.timeScale = 1; // Continue movement 
     }
+    */
 }

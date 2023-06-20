@@ -43,6 +43,14 @@ public class PlayerController : MonoBehaviour
     
     // Finish Line
     public TextMeshProUGUI FinishText;
+    
+    // Damage related
+    private string playerStatus; // normal, invincible
+    private bool canCtrl;
+    public float afterDmgForce;
+    public GameObject heartsObj;
+    private PlayerHealth HP;
+    private int damageValAll;
 
     void Start()
     {
@@ -50,11 +58,31 @@ public class PlayerController : MonoBehaviour
         initGravityScale = rb2d.gravityScale;
         _respawnPosition = transform.position;
         FinishText.text = "";
+
+        playerStatus = "normal";
+        canCtrl = true;
+        afterDmgForce = 300.0f;
+        HP = heartsObj.GetComponent<PlayerHealth>();
+        damageValAll = 1;
     }
 
     void Update()
     {
+        // Check for death
+        if (transform.position.y < -22 || HP.GetCurr() == 0)
+        {
+            // transform.position = this._respawnPosition;
+            // Time.timeScale = 0; // Pause movement
+            // yield return new WaitForSecondsRealtime(2); // Wait 2 seconds to restart  
+            transform.position = this._respawnPosition;
+            HP.Reset();
+            // Time.timeScale = 1; // Continue movement 
+        }
         GunRotation();
+        if (!canCtrl)
+        {
+            return;
+        }
         HandleJump();
         
         // Beanstalk logic
@@ -63,11 +91,7 @@ public class PlayerController : MonoBehaviour
         {
             isClimbing = true;
         }
-        // Check for death
-        if (transform.position.y < -22)
-        {
-            transform.position = this._respawnPosition;
-        }
+
         // TODO: For later stages we will to make it such that player is not visible on screen or touches a death collider incase the game has some death area that is not dependent on y-axis
 
     }
@@ -87,9 +111,14 @@ public class PlayerController : MonoBehaviour
     }
 
     // Climb beanstalk logic
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        GameObject collidingObject = collision.gameObject;
+        // takes 1 and ONLY 1 point of damage each time
+        if(other.CompareTag("Damaging") && (playerStatus == "normal")) // player not in after-damage protection
+        {
+            ReceiveDamage(other.gameObject);
+        }
+        GameObject collidingObject = other.gameObject;
         if (collidingObject.name == "Bean")
         {
             if (collidingObject.GetComponent<TimeObject>().GetCurrentTimeValue() == 1)
@@ -101,6 +130,14 @@ public class PlayerController : MonoBehaviour
         {
             FinishText.text = "Congratulations!";
             Time.timeScale = 0f;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Damaging") && (playerStatus == "normal")) // player not in after-damage protection
+        {
+            ReceiveDamage(other.gameObject);
         }
     }
 
@@ -191,9 +228,8 @@ public class PlayerController : MonoBehaviour
                 // shouldn't be possible
                 return new Vector3(0, 0, 0);
         }
-
     }
-
+    
     public void setRespwan(Vector3 location)
     {
         _respawnPosition = location;
@@ -202,4 +238,24 @@ public class PlayerController : MonoBehaviour
     {
         return _respawnPosition;
     }
+
+    private void ReceiveDamage(GameObject target)
+    {
+        playerStatus = "invincible";
+        canCtrl = false;
+        StartCoroutine(AfterDmgProcess()); // reset status to normal, re-enable control
+        HP.Damage(damageValAll);
+        rb2d.velocity = new Vector2(0, 0);
+        int bounceDir = (transform.position.x - target.transform.position.x < 0) ? -1 : 1;
+        // Debug.Log(bounceDir);
+        rb2d.AddForce(new Vector2(afterDmgForce * bounceDir, afterDmgForce));
+    }
+    private IEnumerator AfterDmgProcess()
+    {
+        yield return new WaitForSeconds(0.5f); // 0.5s to allow the bump-off to finish
+        canCtrl = true;
+        yield return new WaitForSeconds(1.5f); // 2s invincilble
+        playerStatus = "normal";
+    }
+    
 }

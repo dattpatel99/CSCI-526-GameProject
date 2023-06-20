@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 
 // This script should be attached to the heartContainer, which should be an Empty Object with Horizontal Layout Group
-// Spacing is -49 for now
+// Spacing between each heart Prefab is -49 for now
 public class PlayerHealth : MonoBehaviour
 {
     private int health;
     public int healthMax;
     public Sprite heartSprite_good; // change in Unity
     public Sprite heartSprite_bad;
-    // public GameObject heartsContainer;
+    public Transform heartPrefab;
 
     // change in unity, for test
     /*
@@ -18,78 +18,74 @@ public class PlayerHealth : MonoBehaviour
     public Button hpBtn_heal;
     */
     public Button hpBtn_add;
-
-    public Transform heartPrefab;
     
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        hpBtn_add.onClick.AddListener(AddHP);
+        hpBtn_add.onClick.AddListener(AddMax);
         /*hpBtn_lose.onClick.AddListener(LoseHP);
         hpBtn_heal.onClick.AddListener(HealHP);*/
         
         health = healthMax;
-        // hearts = new Image[healthMax];
         for (int i = 0; i < healthMax; i++)
         {
             Instantiate(heartPrefab, transform);
-            //GameObject heartObj = new GameObject(string.Format("{0}", i));
-            //heartObj.GetComponent<RectTransform>().SetParent(transform);
-            //Image heartImg = heartObj.AddComponent<Image>();
-            //heartImg.sprite = heartSprite_good;
         }
     }
 
-    public int GetHP()
+    public int GetCurr()
     {
         return health;
     }
 
-    public void DamagePlayer(int damageNum)
+    public void Damage(int damageVal)
     {
-        for (int i = 0; i < damageNum; i++)
+        int currHealth = health;
+        int newHealth = health - damageVal;
+        if (newHealth < 0)
         {
-            removeHeart();
+            newHealth = 0;
         }
-    }
-
-    public void HealPlayer(int healPoints)
-    {
-        for (int i = 0; i < healPoints; i++)
+        for (int i = currHealth-1; i > newHealth-1; i--)
         {
-            addHeart();
+            transform.GetChild(i).gameObject.GetComponent<Image>().sprite = heartSprite_bad;
         }
-
+        health = newHealth;
     }
 
-    private void removeHeart()
+    public void Heal(int healVal)
     {
-        health--;
-        transform.GetChild(health).gameObject.GetComponent<Image>().sprite = heartSprite_bad;
+        int currHealth = health;
+        int newHealth = health + healVal;
+        if (newHealth > healthMax)
+        {
+            newHealth = healthMax;
+        }
+        for (int i = currHealth; i < newHealth; i++)
+        {
+            transform.GetChild(i).gameObject.GetComponent<Image>().sprite = heartSprite_good;
+        }
+        health = newHealth;
     }
 
-    private void addHeart()
+    // Paul: Do we want to health the player as well?
+    public void AddMax()
+    {
+        Transform newHeart = Instantiate(heartPrefab, transform);
+        newHeart.gameObject.GetComponent<Image>().sprite = heartSprite_bad;
+        healthMax++;
+        transform.GetChild(health).gameObject.GetComponent<Image>().sprite = heartSprite_good;
+        health++;
+    }
+
+    public void Reset()
     {
         health = healthMax;
         foreach (Transform childTransform in transform)
         {
             childTransform.gameObject.GetComponent<Image>().sprite = heartSprite_good;
         }
-    }
-    
-    // Paul: Do we want to health the player as well?
-    public void AddHP()
-    {
-        Transform newHeart = Instantiate(heartPrefab, transform);
-        newHeart.gameObject.GetComponent<Image>().sprite = heartSprite_bad;
-        // GameObject heartObj = new GameObject(string.Format("{0}", healthMax));
-        healthMax++;
-        // Image heartImg = heartObj.AddComponent<Image>();
-        // heartImg.sprite = heartSprite_bad;
-        // heartObj.GetComponent<RectTransform>().SetParent(transform);
-        transform.GetChild(health).gameObject.GetComponent<Image>().sprite = heartSprite_good;
-        health++;
     }
     
 }

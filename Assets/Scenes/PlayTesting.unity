@@ -1450,6 +1450,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1705762123}
     - target: {fileID: 2847372575785183051, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
+      propertyPath: heartsObj
+      value: 
+      objectReference: {fileID: 1467677377}
+    - target: {fileID: 2847372575785183051, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: FinishText
       value: 
       objectReference: {fileID: 479815353}
@@ -4043,7 +4047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47be837d0d32c9e44bc48a2c57a4e638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartContainer: {fileID: 1467677377}
 --- !u!1001 &1583457088
 PrefabInstance:
   m_ObjectHideFlags: 0

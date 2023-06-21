@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handles the player movement methods
@@ -130,6 +131,13 @@ public class PlayerController : MonoBehaviour
         {
             FinishText.text = "Congratulations!";
             Time.timeScale = 0f;
+
+            // Load next scene logic
+            if (SceneManager.GetActiveScene().name == "TutorialScence")
+            {
+                StartCoroutine(WaitTwoSeconds());
+                SceneManager.LoadScene(2);
+            }
         }
     }
 
@@ -258,4 +266,8 @@ public class PlayerController : MonoBehaviour
         playerStatus = "normal";
     }
     
+    private IEnumerator WaitTwoSeconds()
+    {
+        yield return new WaitForSeconds(2.0f);
+    }
 }

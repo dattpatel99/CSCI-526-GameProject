@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
 
     public float zOffset = -10;
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         float xError = Mathf.Abs(player.transform.position.x - transform.position.x);
         float yError = Mathf.Abs(player.transform.position.y - transform.position.y);

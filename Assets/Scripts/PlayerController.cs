@@ -131,9 +131,12 @@ public class PlayerController : MonoBehaviour
         {
             FinishText.text = "Congratulations!";
             Time.timeScale = 0f;
+
+            // Load next scene logic
             if (SceneManager.GetActiveScene().name == "TutorialScence")
             {
-                StartCoroutine(LoadPlaytestScene());
+                StartCoroutine(WaitTwoSeconds());
+                SceneManager.LoadScene(2);
             }
         }
     }
@@ -263,9 +266,8 @@ public class PlayerController : MonoBehaviour
         playerStatus = "normal";
     }
     
-    private IEnumerator LoadPlaytestScene()
+    private IEnumerator WaitTwoSeconds()
     {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(2);
+        yield return new WaitForSeconds(2.0f);
     }
 }

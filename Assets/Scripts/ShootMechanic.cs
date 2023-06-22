@@ -19,10 +19,14 @@ public class ShootMechanic : MonoBehaviour
     // Storing GameComponents
     private PlayerController playerControllerComp;
     private TimeBank playerTimeBank;
-    private Transform playerTransform; 
+    private Transform playerTransform;
+
+    private LayerMask interactableMasks;
     
     void Awake()
     {
+        interactableMasks = LayerMask.GetMask("Ground", "Object");
+        
         laserLine = GetComponent<LineRenderer>();
         playerControllerComp = player.GetComponent<PlayerController>();
         playerTimeBank = player.GetComponent<TimeBank>();
@@ -40,7 +44,7 @@ public class ShootMechanic : MonoBehaviour
         if (_take || _give)
         {
             // Shoot a raycast first
-            RaycastHit2D hit = Physics2D.Raycast(nozzle.transform.position, transform.TransformDirection(Vector2.right), laserLength);
+            RaycastHit2D hit = Physics2D.Raycast(nozzle.transform.position, transform.TransformDirection(Vector2.right), laserLength, interactableMasks);
             // If no collider hit then show laser yellow till laser length
             AlterColor(laserLine, Color.gray);
             

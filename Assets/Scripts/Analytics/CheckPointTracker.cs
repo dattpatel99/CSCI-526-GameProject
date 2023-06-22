@@ -1,4 +1,5 @@
 using AnalyticsSection;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CheckPointTracker : MonoBehaviour
@@ -14,20 +15,19 @@ public class CheckPointTracker : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            Debug.Log(other.gameObject.GetComponent<PlayerHealth>().GetHP());
-            aSection = new Section(this.gameObject.name, System.DateTime.Now, other.gameObject.GetComponent<PlayerHealth>().GetHP(),other.gameObject.GetComponent<TimeBank>().GetTimeStore());
-            Debug.Log("Entering a section");
+            aSection = new Section();
+            aSection.sectionID = this.gameObject.name;
+            aSection.enterTime = System.DateTime.Now;
+            aSection.enterHearts = other.gameObject.GetComponent<PlayerController>().getHP().GetHP();
+            aSection.startTimeBank = other.gameObject.GetComponent<TimeBank>().GetTimeStore();
         }
     }
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player")
-        {
-            aSection.updateLeaveValues(System.DateTime.Now, other.gameObject.GetComponent<TimeBank>().GetTimeStore(),
-                other.gameObject.GetComponent<PlayerHealth>().GetHP());
-            parent.GetComponent<SectionManager>().addSection(aSection);
-            Debug.Log("Done Adding");
-        }
+        aSection.leaveTime = System.DateTime.Now;
+        aSection.leaveTimeBank =other.gameObject.GetComponent<TimeBank>().GetTimeStore();
+        aSection.leaveHearts =other.gameObject.GetComponent<PlayerController>().getHP().GetHP();
+        parent.GetComponent<SectionManager>().addSection(aSection);
     }
-}
+    }

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8573032593734937044}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Finish
-  m_TagString: Untagged
+  m_TagString: FinishLine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8007211554206491219}
   - component: {fileID: 8007211554206491220}
   - component: {fileID: 8007211554206491221}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4857,7 +4857,7 @@ GameObject:
   - component: {fileID: 8007211555242553050}
   - component: {fileID: 8007211555242553051}
   - component: {fileID: 626415007}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FinishLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4938,5 +4938,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1274c6c36836ee429db364fbf3a8b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FinishText: {fileID: 0}
-  SceneIndexToLoad: 0
+  finishText: {fileID: 0}
+  sceneToLoad_name: 

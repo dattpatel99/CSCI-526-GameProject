@@ -146,6 +146,11 @@ public class PlayerController : MonoBehaviour
         gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0,  angle));
     }
 
+    public PlayerHealth getHP()
+    {
+        return this.HP;
+    }
+
     private void DeathCheck()
     {
         if (transform.position.y < -22 || HP.GetCurr() == 0)

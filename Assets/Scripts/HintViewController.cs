@@ -82,7 +82,7 @@ public class HintViewController : MonoBehaviour
                         if (tagName == "RewindObject")
                         {
                             // Thicker outlines on platforms to make them visible
-                            if (timeObject.name.Contains("Platform"))
+                            if (timeObject.name.Contains("Platform") || timeObject.name.Contains("Sliding"))
                             {
                                 renderer.material = enabled ? thickYellowOutline : defaultMaterial;
                             } 

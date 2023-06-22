@@ -84787,6 +84787,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 479815353}
     - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: finishText
+      value: 
+      objectReference: {fileID: 479815353}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: SceneToLoad_name
       value: MainMenu
       objectReference: {fileID: 0}

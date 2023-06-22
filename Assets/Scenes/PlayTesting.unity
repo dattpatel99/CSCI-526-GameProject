@@ -2376,10 +2376,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1706255313796777631, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183047, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2428,10 +2424,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2847372575785183049, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183050, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: timeBankText
       value: 
@@ -2444,22 +2436,6 @@ PrefabInstance:
       propertyPath: FinishText
       value: 
       objectReference: {fileID: 479815353}
-    - target: {fileID: 2847372576041430435, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2847372576441888578, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2847372577066176174, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2847372577564353450, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
 --- !u!1001 &1149149327
@@ -87020,6 +86996,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 496897578}
     m_Modifications:
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: FinishText
+      value: 
+      objectReference: {fileID: 479815353}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: SceneToLoad_name
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 5398597343240996501, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: m_Name
       value: Finish

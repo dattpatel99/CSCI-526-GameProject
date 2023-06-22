@@ -180,6 +180,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2321ef990a4c8b84bbfab6d8e3dde9bf, type: 3}
+--- !u!114 &119557459 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1705762123, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
+  m_PrefabInstance: {fileID: 633354295}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &148342367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -254,11 +265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183047, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.41
+      value: -5.54
       objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183047, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.12
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183047, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_LocalPosition.z
@@ -299,7 +310,7 @@ PrefabInstance:
     - target: {fileID: 2847372575785183050, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: timeBankText
       value: 
-      objectReference: {fileID: 1548434882}
+      objectReference: {fileID: 119557459}
     - target: {fileID: 2847372575785183051, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: heartsObj
       value: 
@@ -3533,17 +3544,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
---- !u!114 &1548434882 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1705762123, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
-  m_PrefabInstance: {fileID: 633354295}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1554984502
 GameObject:
   m_ObjectHideFlags: 0
@@ -4414,6 +4414,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: FinishText
+      value: 
+      objectReference: {fileID: 1506177852}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: SceneIndexToLoad
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: SceneToLoad_name
+      value: PlayTesting
+      objectReference: {fileID: 0}
     - target: {fileID: 5398597343240996501, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: m_Name
       value: Finish

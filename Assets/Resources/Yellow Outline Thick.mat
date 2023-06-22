@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Yellow Outline
+  m_Name: Yellow Outline Thick
   m_Shader: {fileID: 4800000, guid: 62505ee61d20098489c6f861ed25cce1, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -88,7 +88,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Thickness: 5
+    - _Thickness: 20
     - _TileMode: 0
     - _UVSec: 0
     - _Weight: 0.5

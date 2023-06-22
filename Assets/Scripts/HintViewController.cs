@@ -41,12 +41,12 @@ public class HintViewController : MonoBehaviour
         // KEY CODE H for viewing the hint
         if (Input.GetKeyUp(KeyCode.H))
         {
-            Debug.Log("Key not being pressed");
+            //Debug.Log("Key not being pressed");
             held = false;
         } 
         else if (Input.GetKeyDown(KeyCode.H))
         {
-            Debug.Log("Key pressed");
+            //Debug.Log("Key pressed");
             held = true;
         }
 

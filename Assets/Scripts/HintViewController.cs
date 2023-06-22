@@ -68,7 +68,6 @@ public class HintViewController : MonoBehaviour
 
     private void addOutlineToTimeObjects(Material outline, string tagName, bool enabled)
     {
-        Debug.Log("Switching outlines");
         //Do on update so we don't grab destroyed objects 
         objects = GameObject.FindGameObjectsWithTag(tagName);
         foreach (GameObject timeObject in objects)

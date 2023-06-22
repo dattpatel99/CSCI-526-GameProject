@@ -199,7 +199,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-
     public void increaseAge()
     {
         playerAge += 1;
@@ -234,6 +233,7 @@ public class PlayerController : MonoBehaviour
     {
         _respawnPosition = location;
     }
+    
     public Vector3 getRespwan()
     {
         return _respawnPosition;
@@ -250,6 +250,7 @@ public class PlayerController : MonoBehaviour
         // Debug.Log(bounceDir);
         rb2d.AddForce(new Vector2(afterDmgForce * bounceDir, afterDmgForce));
     }
+    
     private IEnumerator AfterDmgProcess()
     {
         yield return new WaitForSeconds(0.5f); // 0.5s to allow the bump-off to finish

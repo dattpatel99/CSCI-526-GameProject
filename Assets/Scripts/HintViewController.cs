@@ -10,14 +10,17 @@ public class HintViewController : MonoBehaviour
     private Material greenOutline;
     private Material yellowOutline;
     private Material defaultMaterial;
+    private Material thickYellowOutline;
     private bool held;
+    
+    private bool switchOutlines = false;
 
     void Start()
     {
         // Grab green outline mat
         greenOutline = Resources.Load<Material>("Green Outline");
         yellowOutline = Resources.Load<Material>("Yellow Outline");
-        defaultMaterial = Resources.Load<Material>("unity_builtin_extra/Sprites-Default");
+        thickYellowOutline = Resources.Load<Material>("Yellow Outline Thick");
         objects = GameObject.FindGameObjectsWithTag("TimeObject");
 
         // Grab the sprite default
@@ -41,22 +44,31 @@ public class HintViewController : MonoBehaviour
         // KEY CODE H for viewing the hint
         if (Input.GetKeyUp(KeyCode.H))
         {
-            Debug.Log("Key not being pressed");
+            if ( held )
+            {
+                switchOutlines = true;
+            }
             held = false;
         } 
         else if (Input.GetKeyDown(KeyCode.H))
         {
-            Debug.Log("Key pressed");
+            if (!held)
+            {
+                switchOutlines = true;
+            }
             held = true;
         }
 
-        addOutlineToTimeObjects(greenOutline, "TimeObject", held);
-        addOutlineToTimeObjects(yellowOutline, "RewindObject", held);
-
+        if ( switchOutlines )
+        {
+            addOutlineToTimeObjects(greenOutline, "TimeObject", held);
+            addOutlineToTimeObjects(yellowOutline, "RewindObject", held);
+        } 
     }
 
     private void addOutlineToTimeObjects(Material outline, string tagName, bool enabled)
     {
+        Debug.Log("Switching outlines");
         //Do on update so we don't grab destroyed objects 
         objects = GameObject.FindGameObjectsWithTag(tagName);
         foreach (GameObject timeObject in objects)
@@ -67,11 +79,28 @@ public class HintViewController : MonoBehaviour
                 {
                     if (renderer.GetType().Name == "SpriteRenderer")
                     {
+                        if (tagName == "RewindObject")
+                        {
+                            // Thicker outlines on platforms to make them visible
+                            if (timeObject.name.Contains("Platform") || timeObject.name.Contains("Sliding"))
+                            {
+                                renderer.material = enabled ? thickYellowOutline : defaultMaterial;
+                            } 
+                            else
+                            {
+                                renderer.material = enabled ? outline : defaultMaterial;
+                            }
+                        } 
+                        else
+                        {
+                            renderer.material = enabled ? outline : defaultMaterial;
+                        }
                         //Switch between help enabled and not enabled
-                        renderer.material = enabled ? outline : defaultMaterial;
                     }
                 }
             }
         }
+
+        switchOutlines = false;
     }
 }

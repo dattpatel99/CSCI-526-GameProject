@@ -84750,6 +84750,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: FinishText
+      value: 
+      objectReference: {fileID: 479815353}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: SceneToLoad_name
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 5398597343240996501, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: m_Name
       value: Finish

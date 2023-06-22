@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handles the player movement methods
@@ -49,7 +47,6 @@ public class PlayerController : MonoBehaviour
 
     // 4. Others
     // =================================================================
-    public TextMeshProUGUI FinishText;  // Finish Text
     private int playerAge = 1;          // Age. {0: small, 1: normal, 2: old}
     private Vector3 _respawnPosition;   // Respawn Position
 
@@ -58,14 +55,12 @@ public class PlayerController : MonoBehaviour
         rb2d = this.GetComponent<Rigidbody2D>();
         initGravityScale = rb2d.gravityScale;
         _respawnPosition = transform.position;
-        FinishText.text = "";
 
         playerStatus = "normal";
         canCtrl = true;
         afterDmgForce = 300.0f;
         HP = heartsObj.GetComponent<PlayerHealth>();
         damageValAll = 1;
-        
     }
 
     void Update()
@@ -119,18 +114,6 @@ public class PlayerController : MonoBehaviour
             if (collidingObject.GetComponent<TimeObject>().GetCurrentTimeValue() == 1)
             {
                 isBeanstalk = true;
-            }
-        }
-        else if (collidingObject.name == "FinishLine")
-        {
-            FinishText.text = "Congratulations!";
-            Time.timeScale = 0f;
-
-            // Load next scene logic
-            if (SceneManager.GetActiveScene().name == "TutorialScence")
-            {
-                StartCoroutine(WaitTwoSeconds());
-                SceneManager.LoadScene(2);
             }
         }
     }
@@ -238,10 +221,5 @@ public class PlayerController : MonoBehaviour
         canCtrl = true;
         yield return new WaitForSeconds(1.5f); // 2s invincilble
         playerStatus = "normal";
-    }
-    
-    private IEnumerator WaitTwoSeconds()
-    {
-        yield return new WaitForSeconds(2.0f);
     }
 }

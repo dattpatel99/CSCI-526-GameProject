@@ -265,11 +265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183047, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.41
+      value: -5.54
       objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183047, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.12
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183047, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4414,6 +4414,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: FinishText
+      value: 
+      objectReference: {fileID: 1506177852}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: SceneIndexToLoad
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: SceneToLoad_name
+      value: PlayTesting
+      objectReference: {fileID: 0}
     - target: {fileID: 5398597343240996501, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: m_Name
       value: Finish

@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690676461}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11596a0508b175644bea2677c575963c, type: 3}
   m_Name: 
@@ -1967,7 +1967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &966337154
 Transform:
   m_ObjectHideFlags: 0
@@ -2955,7 +2955,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261580256}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28b352dcd3052aa44940c6dba22e2c25, type: 3}
   m_Name: 
@@ -86861,7 +86861,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101622432}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28b352dcd3052aa44940c6dba22e2c25, type: 3}
   m_Name: 
@@ -87001,7 +87001,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 479815353}
     - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: finishText
+      value: 
+      objectReference: {fileID: 479815353}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: SceneToLoad_name
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 626415007, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+      propertyPath: sceneToLoad_name
       value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5398597343240996501, guid: a8207e07e943b774fa44537f25c38181, type: 3}

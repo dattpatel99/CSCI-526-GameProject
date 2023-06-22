@@ -15,10 +15,18 @@ public class ShootMechanic : MonoBehaviour
     // Attributes for handling shoot
     private bool _take;
     private bool _give;
+
+    // Storing GameComponents
+    private PlayerController playerControllerComp;
+    private TimeBank playerTimeBank;
+    private Transform playerTransform; 
     
     void Awake()
     {
         laserLine = GetComponent<LineRenderer>();
+        playerControllerComp = player.GetComponent<PlayerController>();
+        playerTimeBank = player.GetComponent<TimeBank>();
+        playerTransform = player.GetComponent<Transform>();
     }
 
     void Update()
@@ -45,7 +53,7 @@ public class ShootMechanic : MonoBehaviour
                     if (hit.collider.gameObject.CompareTag("TimeObject") && hit.collider.gameObject.GetComponent<TimeObject>().CheckSubtraction() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)
                     {
                         hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
-                        player.GetComponent<TimeBank>().AddTime(1);
+                        playerTimeBank.AddTime(1);
                         AlterColor(laserLine, Color.red);
                         // Show laser only if it is a time object
                         hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
@@ -53,39 +61,39 @@ public class ShootMechanic : MonoBehaviour
                     else if (hit.collider.gameObject.CompareTag("Mirror"))
                     {
                         // Subtract time if player is not a baby
-                        if ( player.GetComponent<PlayerController>().getAge() > 0 )
+                        if (playerControllerComp.getAge() > 0 )
                         {
-                            player.GetComponent<PlayerController>().decreaseAge();
-                            player.GetComponent<TimeBank>().AddTime(1);
+                            playerControllerComp.decreaseAge();
+                            playerTimeBank.AddTime(1);
                             AlterColor(laserLine, Color.red);
 
                             // Shrink the player
-                            player.GetComponent<Transform>().localScale = player.GetComponent<PlayerController>().getPlayerSize();
+                            playerTransform.localScale = playerControllerComp.getPlayerSize();
                         }
                     }
                 }
                 // If Collider hits for addition
                 else if (_give)
                 {
-                    if (hit.collider.gameObject.CompareTag("TimeObject") && player.GetComponent<TimeBank>().CheckSubtract() && hit.collider.gameObject.GetComponent<TimeObject>().CheckAddition() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled )
+                    if (hit.collider.gameObject.CompareTag("TimeObject") && playerTimeBank.CheckSubtract() && hit.collider.gameObject.GetComponent<TimeObject>().CheckAddition() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled )
                     {
                         hit.collider.gameObject.GetComponent<TimeObject>().AddTime(1);
-                        player.GetComponent<TimeBank>().SubtractTime(1);
+                        playerTimeBank.SubtractTime(1);
                         AlterColor(laserLine, Color.green);
                         // Show laser only if it is a time object
                         hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
                     }
-                    else if (hit.collider.gameObject.CompareTag("Mirror") && player.GetComponent<TimeBank>().CheckSubtract())
+                    else if (hit.collider.gameObject.CompareTag("Mirror") && playerTimeBank.CheckSubtract())
                     {
                         // Subtract time if player is not a baby
-                        if (player.GetComponent<PlayerController>().getAge() < 2)
+                        if (playerControllerComp.getAge() < 2)
                         {
-                            player.GetComponent<PlayerController>().increaseAge();
-                            player.GetComponent<TimeBank>().SubtractTime(1);
+                            playerControllerComp.increaseAge();
+                            playerTimeBank.SubtractTime(1);
                             AlterColor(laserLine, Color.green);
 
                             // Grow the player
-                            player.GetComponent<Transform>().localScale = player.GetComponent<PlayerController>().getPlayerSize();
+                            playerTransform.localScale = playerControllerComp.getPlayerSize();
                         }
                     }
                 }

@@ -14,6 +14,7 @@ public class TimeObject : MonoBehaviour
     public int highestTimeValue;
     public List<Sprite> phaseSprites;
     private int currentTimeValue;
+    private SpriteRenderer timeObjectSpriteRenderer;
 
     [SerializeField]
     private bool[] colliderOn;
@@ -24,8 +25,9 @@ public class TimeObject : MonoBehaviour
      */
     void Start()
     {
+        timeObjectSpriteRenderer = GetComponent<SpriteRenderer>();
         this.currentTimeValue = Mathf.Clamp(this.startingTimeValue, 0, this.highestTimeValue);
-        GetComponent<SpriteRenderer>().sprite = this.GetSprite(this.currentTimeValue);
+        timeObjectSpriteRenderer.sprite = this.GetSprite(this.currentTimeValue);
         TryUpdateShapeToAttachedSprite();
     }
 
@@ -46,7 +48,7 @@ public class TimeObject : MonoBehaviour
     {
         int newValue = this.currentTimeValue + addedTime;
         this.currentTimeValue = Mathf.Clamp(newValue, 0, this.highestTimeValue);
-        GetComponent<SpriteRenderer>().sprite=this.GetSprite(this.currentTimeValue);
+        timeObjectSpriteRenderer.sprite=this.GetSprite(this.currentTimeValue);
         TryUpdateShapeToAttachedSprite();
     }
 
@@ -54,7 +56,7 @@ public class TimeObject : MonoBehaviour
     {
         int newValue = this.currentTimeValue - subtractedTime;
         this.currentTimeValue = Mathf.Clamp(newValue, 0, this.highestTimeValue);
-        GetComponent<SpriteRenderer>().sprite=this.GetSprite(this.currentTimeValue);
+        timeObjectSpriteRenderer.sprite=this.GetSprite(this.currentTimeValue);
         TryUpdateShapeToAttachedSprite();
     }
 

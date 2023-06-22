@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4485915037519610963}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Feet
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2847372575785183044}
   - component: {fileID: 2847372575785183051}
   - component: {fileID: 2847372575785183050}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 2847372575785183049}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a4873f0d480cb0946b78076f96ed26f9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -180,9 +180,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   feet: {fileID: 4485915037519610963}
-  grounded: 0
+  heartsObj: {fileID: 0}
+  afterDmgForce: 0
   gun: {fileID: 2847372577066176175}
   sensitivity: 1
+  FinishText: {fileID: 0}
 --- !u!114 &2847372575785183050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2847372576041430108}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2847372576441888579}
   - component: {fileID: 2847372576441888636}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Body
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -323,7 +325,7 @@ GameObject:
   - component: {fileID: 2847372577066176175}
   - component: {fileID: 2847372577066176169}
   - component: {fileID: 2847372577066176168}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gun
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -481,7 +483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2847372577564353451}
   - component: {fileID: 2847372577564353444}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Handle
   m_TagString: Player
   m_Icon: {fileID: 0}

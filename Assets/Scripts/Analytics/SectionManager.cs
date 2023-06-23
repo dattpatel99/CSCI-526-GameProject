@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Proyecto26;
+using UnityEditor;
 
 [ Serializable ]
 public class SectionsManager
@@ -27,11 +28,14 @@ public class SectionManager : MonoBehaviour
         manager.sections.Add(section);
  
         string json = JsonUtility.ToJson(manager);
+        
+        // Implements sending data when on WebGL Build
+        if (!Application.isEditor)
+        {
+            RestClient.Post(baseURL + "/.json", json);
+            Debug.Log("Should have sent data");
+        }
+
        
     }
 }
-
-/*
- *  RestClient.Post(baseURL + "/.json", json);
-        Debug.Log("Should have sent data");
- */

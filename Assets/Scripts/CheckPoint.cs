@@ -21,7 +21,6 @@ public class CheckPoint : MonoBehaviour
             // Add checkpoint analytics
             var info = new CheckPointAnalytics(gameObject.name, other.GameObject().GetComponent<PlayerController>(), other.GameObject().GetComponent<TimeBank>());
             manager.AddCheckPoint(info);
-            Debug.Log("Added new checkpoint. Curr Data: " + manager.getCurrentData());
         }
     }
     

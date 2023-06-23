@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public GameObject analytic;
+    private AnalyticManager manager;
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+
+    private void Start()
+    {
+        manager = analytic.GetComponent<AnalyticManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -42,11 +50,13 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+        manager.SendSessionInfo(false);
     }
 
     public void QuitGame() //quits game when quit button pressed
     {
         Debug.Log("Quitting Game...");
+        manager.SendSessionInfo(false);
         Application.Quit();
     }
 

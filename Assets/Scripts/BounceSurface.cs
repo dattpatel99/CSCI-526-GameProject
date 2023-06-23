@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BounceSurface : MonoBehaviour
 {
-    private float bounce = 500f;
+    public float bounce = 5000f;
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))

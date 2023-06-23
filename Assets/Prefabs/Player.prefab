@@ -149,11 +149,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a4873f0d480cb0946b78076f96ed26f9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -170,9 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d317b031299ff4d95d2d893d5009ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landSpeed: 10
-  airSpeed: 5
-  jumpforce: 350
+  normalSpeed: 8
+  fastSpeed: 10
+  mediumJumpForce: 3500
+  bigJumpForce: 4500
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -181,10 +182,12 @@ MonoBehaviour:
     m_Bits: 128
   feet: {fileID: 4485915037519610963}
   heartsObj: {fileID: 0}
-  afterDmgForce: 0
+  afterDmgForce: 2000
   gun: {fileID: 2847372577066176175}
   sensitivity: 1
-  FinishText: {fileID: 0}
+  normalSprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  smallSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  bigSprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
 --- !u!114 &2847372575785183050
 MonoBehaviour:
   m_ObjectHideFlags: 0

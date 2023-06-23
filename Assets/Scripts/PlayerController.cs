@@ -12,13 +12,16 @@ public class PlayerController : MonoBehaviour
     // 1. Player Control: Public for testing but after that make private
     // =================================================================
     // Horizontal Movement
-    public float landSpeed = 10.0f;
-    public float airSpeed = 5.0f;
+    public float normalSpeed = 9.0f;
+    public float fastSpeed = 12.0f;
+    private float currentSpeed;
     private float horizontalInput;
     private float xSpeed;
     // private float direction = 1.0f;
     // Vertical Movement
-    public float jumpforce = 500.0f;
+    public float mediumJumpForce = 350.0f;
+    public float bigJumpForce = 400.0f;
+    private float jumpForce;
     public LayerMask groundLayer;
     public LayerMask objectLayer;
     public Transform feet;
@@ -51,6 +54,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 _respawnPosition;   // Respawn Position
     private Vector3 _b4DrownedPosition; // Drown prevntion
     private bool lastGroundedPosRecorded;
+    public Sprite normalSprite;
+    public Sprite smallSprite;
+    public Sprite bigSprite;
+    private SpriteRenderer sr;
+    private CapsuleCollider2D capCollider;
 
     void Start()
     {
@@ -64,6 +72,14 @@ public class PlayerController : MonoBehaviour
         HP = heartsObj.GetComponent<PlayerHealth>();
         damageValAll = 1;
         lastGroundedPosRecorded = false;
+
+        playerAge = 1;
+
+        sr = GetComponent<SpriteRenderer>();
+        capCollider = GetComponent<CapsuleCollider2D>();
+
+        AdjustSpeedAndJump();
+        SetSprite();
     }
 
     void Update()
@@ -71,7 +87,7 @@ public class PlayerController : MonoBehaviour
         DeathCheck();
         ClimbCheck(); //beanstalk logic
         GunRotation();
-        xSpeed = Input.GetAxis("Horizontal") * landSpeed;
+        xSpeed = Input.GetAxis("Horizontal") * currentSpeed;
         jumpInput = Input.GetButtonDown("Jump");
         feetPos = feet.position;
         grounded = Physics2D.OverlapCircle(feetPos, .2f, groundLayer) || Physics2D.OverlapCircle(feetPos, .2f, objectLayer);
@@ -99,7 +115,7 @@ public class PlayerController : MonoBehaviour
         {
             shouldJump = false;
             rb2d.velocity = new Vector2(rb2d.velocity.x, 0); // allows mid-air jump
-            rb2d.AddForce(new Vector2(0, jumpforce));
+            rb2d.AddForce(new Vector2(0, jumpForce));
         }
         if (isClimbing) // climb
         {
@@ -196,11 +212,58 @@ public class PlayerController : MonoBehaviour
     public void increaseAge()
     {
         playerAge += 1;
+        AdjustSpeedAndJump();
+        SetSprite();
     }
 
     public void decreaseAge()
     {
         playerAge -= 1;
+        AdjustSpeedAndJump();
+        SetSprite();
+    }
+
+    void AdjustSpeedAndJump()
+    {
+        if (playerAge >= 2)
+        {
+            jumpForce = bigJumpForce;
+        }
+        else
+        {
+            jumpForce = mediumJumpForce;
+        }
+
+        if (playerAge <= 0)
+        {
+            currentSpeed = fastSpeed;
+        }
+        else
+        {
+            currentSpeed = normalSpeed;
+        }
+    }
+
+    void SetSprite()
+    {
+        if (playerAge >= 2)
+        {
+            sr.sprite = bigSprite;
+            capCollider.size = new Vector2(1f, 2f);
+            feet.position = transform.position + new Vector3(0f, -1f, 0f);
+        }
+        else if (playerAge == 1)
+        {
+            sr.sprite = normalSprite;
+            capCollider.size = new Vector2(1f, 2f);
+            feet.position = transform.position + new Vector3(0f, -1f, 0f);
+        }
+        else
+        {
+            sr.sprite = smallSprite;
+            capCollider.size = new Vector2(1f, 1f);
+            feet.position = transform.position + new Vector3(0f, -0.5f, 0f);
+        }
     }
 
     public int getAge()
@@ -212,11 +275,11 @@ public class PlayerController : MonoBehaviour
     {
         switch (this.playerAge) {
             case 0:
-                return new Vector3(0.75f, 0.75f, 1);
+                return new Vector3(0.95f, 0.95f, 1);
             case 1:
                 return new Vector3(0.9f, 0.9f, 1);
             case 2:
-                return new Vector3(.95f, 0.95f, 1);
+                return new Vector3(1.1f, 1.1f, 1);
             default:
                 // shouldn't be possible
                 return new Vector3(0, 0, 0);

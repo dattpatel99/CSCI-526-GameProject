@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     // =================================================================
     private int playerAge = 1;          // Age. {0: small, 1: normal, 2: old}
     private Vector3 _respawnPosition;   // Respawn Position
+    private Vector3 _b4DrownedPosition; // Drown prevntion
+    private bool lastGroundedPosRecorded;
 
     void Start()
     {
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour
         afterDmgForce = 300.0f;
         HP = heartsObj.GetComponent<PlayerHealth>();
         damageValAll = 1;
+        lastGroundedPosRecorded = false;
     }
 
     void Update()
@@ -72,6 +75,15 @@ public class PlayerController : MonoBehaviour
         jumpInput = Input.GetButtonDown("Jump");
         feetPos = feet.position;
         grounded = Physics2D.OverlapCircle(feetPos, .2f, groundLayer) || Physics2D.OverlapCircle(feetPos, .2f, objectLayer);
+        if (!grounded && !lastGroundedPosRecorded)
+        {
+            _b4DrownedPosition = transform.position;
+            lastGroundedPosRecorded = true;
+        }
+        else if (grounded && lastGroundedPosRecorded)
+        {
+            lastGroundedPosRecorded = false;
+        }
         if (!shouldJump && jumpInput && grounded)
         {
             shouldJump = true;
@@ -116,6 +128,15 @@ public class PlayerController : MonoBehaviour
                 isBeanstalk = true;
             }
         }
+        // Debug.Log(string.Format("contact layer {0}, water layer {1}", other.gameObject.layer, LayerMask.GetMask("Water")));
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            HP.Damage(damageValAll);
+            if (!DeathCheck())
+            {
+                StartCoroutine(DrownedProcess()); // reset status to normal, re-enable control
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -151,13 +172,15 @@ public class PlayerController : MonoBehaviour
         return this.HP;
     }
 
-    private void DeathCheck()
+    private bool DeathCheck()
     {
         if (transform.position.y < -22 || HP.GetCurr() == 0)
         {
             transform.position = this._respawnPosition;
             HP.Reset();
+            return true;
         }
+        return false;
     }
 
     private void ClimbCheck()
@@ -220,6 +243,7 @@ public class PlayerController : MonoBehaviour
         // Debug.Log(bounceDir);
         rb2d.AddForce(new Vector2(afterDmgForce * bounceDir, afterDmgForce));
     }
+    
     private IEnumerator AfterDmgProcess()
     {
         yield return new WaitForSeconds(0.5f); // 0.5s to allow the bump-off to finish
@@ -227,4 +251,16 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1.5f); // 2s invincilble
         playerStatus = "normal";
     }
+
+    private IEnumerator DrownedProcess()
+    {
+        playerStatus = "drowned";
+        canCtrl = false;
+        yield return new WaitForSeconds(1.0f);
+        canCtrl = true;
+        playerStatus = "normal";
+        transform.position = _b4DrownedPosition;
+    }
+    
+    
 }

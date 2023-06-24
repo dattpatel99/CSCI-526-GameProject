@@ -12,6 +12,7 @@ namespace Analytics{
     public class AnalyticGameSession
     {
         public long sessionId;
+        public string level;
         public string userId;
         public bool finished;
         public float timeToFinish;
@@ -32,9 +33,10 @@ namespace Analytics{
         /**
          * This updates any remaining data that depends on the user reach  status to post the data
          */
-        public void DataUpdate(bool fini, float runTime, int livesRemain, int timeStored)
+        public void DataUpdate(bool fini, string level, float runTime, int livesRemain, int timeStored)
         {
             this.finished = fini;
+            this.level = level;
             this.timeToFinish = runTime;
             this.endLives = livesRemain;
             this.endingTimeStored = timeStored;

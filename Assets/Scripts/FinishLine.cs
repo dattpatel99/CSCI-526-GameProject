@@ -24,7 +24,7 @@ public class FinishLine : MonoBehaviour
         {
             finishText.text = "Congratulations!";
             Time.timeScale = 0f;
-            manager.SendSessionInfo(true);
+            manager.SendSessionInfo(true, SceneManager.GetActiveScene().name);
             StartCoroutine(WaitNLoad(2));
         }
     }

@@ -48,9 +48,9 @@ public class AnalyticManager : MonoBehaviour
         return this.session.ToString();
     }
 
-    public void SendSessionInfo(bool finished)
+    public void SendSessionInfo(bool finished, string curLevel)
     {
-        session.DataUpdate(finished, this.rt, controller.getHP().GetHP(), bank.GetTimeStore());
+        session.DataUpdate(finished, curLevel, this.rt, controller.getHP().GetHP(), bank.GetTimeStore());
         StoreData(session.ToString());
     }
     
@@ -63,7 +63,7 @@ public class AnalyticManager : MonoBehaviour
         }
         else
         {
-            RestClient.Post(baseURL + "/testing" + "/.json", json);
+            RestClient.Post(baseURL + "/testingSceneChange" + "/.json", json);
         }
     }
 }

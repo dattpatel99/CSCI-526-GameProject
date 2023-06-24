@@ -16,6 +16,11 @@ public class TimeBank : MonoBehaviour
         _timeStored = this._minimumTimeStored;
     }
 
+    public int GetTimeStore()
+    {
+        return _timeStored;
+    }
+
     // Ensure that there is enough time to subtract
     public bool CheckSubtract()
     {

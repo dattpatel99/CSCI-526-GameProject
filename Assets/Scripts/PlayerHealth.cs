@@ -87,5 +87,10 @@ public class PlayerHealth : MonoBehaviour
             childTransform.gameObject.GetComponent<Image>().sprite = heartSprite_good;
         }
     }
-    
+
+    public int GetHP()
+    {
+        return this.health;
+    }
+
 }

@@ -15,11 +15,15 @@ public class AnimalController : MonoBehaviour
     // Tracks whether an object is ready to interact with 
     private bool _activated;
 
+    private TimeObject animalTimeObject;
+
+    
     // Start is called before the first frame update
     void Start()
     {
         _activated = false;
         this.line = GetComponent<LineRenderer>();
+        animalTimeObject = GetComponent<TimeObject>();
     }
 
     void Update()
@@ -32,7 +36,7 @@ public class AnimalController : MonoBehaviour
             StartCoroutine(UpdateLaserPosition());
         }
         
-        if (GetComponent<TimeObject>().GetCurrentTimeValue() > 0 && !this._activated)
+        if (animalTimeObject.GetCurrentTimeValue() > 0 && !this._activated)
         {
             Vector3 eyePostition = eyes.position;
             
@@ -45,12 +49,12 @@ public class AnimalController : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Boulder"))
                 {
                     this._activated = true;
-                    GetComponent<TimeObject>().enabled = false;
+                    animalTimeObject.enabled = false;
                 }
                 else if (hit.collider.gameObject.name == "Tree" && hit.collider.gameObject.GetComponent<TimeObject>().GetCurrentTimeValue() > 1)
                 {
                     this._activated = true;
-                    GetComponent<TimeObject>().enabled = false;
+                    animalTimeObject.enabled = false;
                 }
 
                 SetLineColor(this.line, Color.green);

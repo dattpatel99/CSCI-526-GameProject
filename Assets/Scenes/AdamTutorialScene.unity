@@ -2530,6 +2530,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8875297613183054397, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8880555994032965914, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -2628,6 +2632,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
+--- !u!1 &633354296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9095420811279355502, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
+  m_PrefabInstance: {fileID: 633354295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!223 &633354298 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 8880555994032965919, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
@@ -2962,6 +2971,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &968703367 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2847372577066176168, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
+  m_PrefabInstance: {fileID: 195732384}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02018e5a7a8d7154689e82886b7a7c9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &969857736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3276,6 +3296,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 195732385}
+    - target: {fileID: 4073591044961138328, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
+      propertyPath: reminderHintText
+      value: 
+      objectReference: {fileID: 633354296}
+    - target: {fileID: 4073591044961138328, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
+      propertyPath: timeToTriggerHint
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073591044961138328, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
+      propertyPath: shootMechanicScript
+      value: 
+      objectReference: {fileID: 968703367}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
 --- !u!1001 &1174766213

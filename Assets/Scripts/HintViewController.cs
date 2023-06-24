@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Collections;
 
 /// <summary>
 /// Handle player hint view 
@@ -15,6 +17,11 @@ public class HintViewController : MonoBehaviour
     
     private bool switchOutlines = false;
 
+    public ShootMechanic shootMechanicScript;
+    public GameObject reminderHintText;
+    public long timeToTriggerHint;
+    private long timestampOfLastGunHit;
+
     void Start()
     {
         // Grab green outline mat
@@ -22,6 +29,7 @@ public class HintViewController : MonoBehaviour
         yellowOutline = Resources.Load<Material>("Yellow Outline");
         thickYellowOutline = Resources.Load<Material>("Yellow Outline Thick");
         objects = GameObject.FindGameObjectsWithTag("TimeObject");
+        reminderHintText.SetActive(false);
 
         // Grab the sprite default
         foreach (GameObject timeObject in objects)
@@ -41,6 +49,7 @@ public class HintViewController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timestampOfLastGunHit  = shootMechanicScript.getLastTimePlayerHitObjectWithGun();
         // KEY CODE H for viewing the hint
         if (Input.GetKeyUp(KeyCode.H))
         {
@@ -63,7 +72,16 @@ public class HintViewController : MonoBehaviour
         {
             addOutlineToTimeObjects(greenOutline, "TimeObject", held);
             addOutlineToTimeObjects(yellowOutline, "RewindObject", held);
-        } 
+        }
+
+
+        long currentTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+        // If 
+        if (currentTime - timestampOfLastGunHit > timeToTriggerHint)
+        {
+            StartCoroutine(displayReminderText());
+            shootMechanicScript.setLastTimePlayerHitObjectWithGun(currentTime);
+        }
     }
 
     private void addOutlineToTimeObjects(Material outline, string tagName, bool enabled)
@@ -102,5 +120,12 @@ public class HintViewController : MonoBehaviour
         }
 
         switchOutlines = false;
+    }
+
+    IEnumerator displayReminderText()
+    {
+        reminderHintText.SetActive(true);
+        yield return new WaitForSeconds(2.0f); 
+        reminderHintText.SetActive(false);
     }
 }

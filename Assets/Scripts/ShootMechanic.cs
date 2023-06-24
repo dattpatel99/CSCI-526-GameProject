@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,10 +16,13 @@ public class ShootMechanic : MonoBehaviour
     // Attributes for handling shoot
     private bool _take;
     private bool _give;
+
+    private long timestampOfLastGunHit;
     
     void Awake()
     {
         laserLine = GetComponent<LineRenderer>();
+        timestampOfLastGunHit = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
     }
 
     void Update()
@@ -39,6 +43,9 @@ public class ShootMechanic : MonoBehaviour
             // If raycast hits a collider
             if (hit.collider != null)
             {
+                // Track last time player hit a collider 
+                timestampOfLastGunHit = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+
                 // If Collider hits for subtraction
                 if (_take)
                 {
@@ -142,6 +149,16 @@ public class ShootMechanic : MonoBehaviour
     {
         line.startColor = color;
         line.endColor = color;
+    }
+
+    public long getLastTimePlayerHitObjectWithGun()
+    {
+        return timestampOfLastGunHit;
+    }
+
+    public void setLastTimePlayerHitObjectWithGun(long time)
+    {
+        this.timestampOfLastGunHit = time;
     }
 
     IEnumerator LaserShow()

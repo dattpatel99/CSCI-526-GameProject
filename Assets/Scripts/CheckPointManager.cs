@@ -4,19 +4,19 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using Proyecto26;
 using Newtonsoft.Json;
-using UnityEngine.Analytics;
 
 public class CheckPointManager : MonoBehaviour
 {
     private static int crossedCheckPoints = 0;
-    private long sessionID;
+    public GameObject analytics;
+    private AnalyticManager _analyticManager;
     private static List<Transform> _checkpoints = new List<Transform>();
     private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
     private string levelName;
 
     void Start()
     {
-        sessionID = AnalyticsSessionInfo.sessionId;
+        _analyticManager = analytics.GetComponent<AnalyticManager>();
         Transform parentTransform = gameObject.transform;
         for (int i = 0; i < parentTransform.childCount; i++)
         {
@@ -43,11 +43,11 @@ public class CheckPointManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Post(baseURL + "/alpha/checkpointGraph/" + sessionID.ToString() + '/' + levelName + '/' + crossedCheckPoints.ToString() + "/.json", json);
+            RestClient.Post(baseURL + "/alpha/checkpointGraph/" + _analyticManager.GetSessionID().ToString() + '/' + levelName + '/' + _analyticManager.GetPlayID() + '/'+ crossedCheckPoints.ToString() + "/.json", json);
         }
         else
         {
-            RestClient.Post(baseURL + "/testing/checkpointGraph/" + sessionID.ToString() + '/' + levelName + '/' + crossedCheckPoints.ToString() + "/.json", json);
+            RestClient.Post(baseURL + "/testing/checkpointGraph/" + _analyticManager.GetSessionID().ToString() + '/' + levelName + '/' +  _analyticManager.GetPlayID() + '/' + crossedCheckPoints.ToString() + "/.json", json);
         }
     }
     

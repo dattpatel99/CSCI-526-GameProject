@@ -13,6 +13,7 @@ public class AnalyticManager : MonoBehaviour
     private AnalyticGameSession session;
     public GameObject player;
     private PlayerController controller;
+    private string playID;
     private TimeBank bank;
     private float rt = 0.0f;
     private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
@@ -30,8 +31,19 @@ public class AnalyticManager : MonoBehaviour
     void Start()
     {
         session = new AnalyticGameSession(sessionId, userId);
+        playID = System.Guid.NewGuid().ToString();
         controller = player.GetComponent<PlayerController>();
         bank = player.GetComponent<TimeBank>();
+    }
+
+    public string GetPlayID()
+    {
+        return playID;
+    }
+
+    public long GetSessionID()
+    {
+        return this.sessionId;
     }
 
     // Update is called once per frame

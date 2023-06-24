@@ -436,6 +436,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 662660131}
+    - target: {fileID: 5642047458643622638, guid: f2a6f810b811fb04eaf12a69f24ed636, type: 3}
+      propertyPath: analytics
+      value: 
+      objectReference: {fileID: 544404772}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2a6f810b811fb04eaf12a69f24ed636, type: 3}
 --- !u!4 &70070302 stripped
@@ -88236,6 +88240,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 662660131}
+    - target: {fileID: 8887552479601858715, guid: 5ffb44ffc1a66434b822d6ea7df70edb, type: 3}
+      propertyPath: analytics
+      value: 
+      objectReference: {fileID: 544404772}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ffb44ffc1a66434b822d6ea7df70edb, type: 3}
 --- !u!1 &8887552479311741766 stripped

@@ -9,15 +9,16 @@ using UnityEngine.Analytics;
 
 public class SectionManager : MonoBehaviour
 {
-    private long sessionID;
     private static int crossSections = 0;
+    public GameObject analytics;
+    private AnalyticManager _analyticManager;
     private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
     private string levelName;
     private List<Transform> _sections = new List<Transform>();
 
     void Start()
     {
-        sessionID = AnalyticsSessionInfo.sessionId;
+        _analyticManager = analytics.GetComponent<AnalyticManager>();
         Transform parentTransform = gameObject.transform;
         for (int i = 0; i < parentTransform.childCount; i++)
         {
@@ -43,11 +44,11 @@ public class SectionManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Post(baseURL + "/alpha/sectionGraph/" + sessionID.ToString() + '/' + levelName + '/' + crossSections.ToString() + "/.json", json);
+            RestClient.Post(baseURL + "/alpha/sectionGraph/" + _analyticManager.GetSessionID().ToString() + '/' + levelName + '/' + _analyticManager.GetPlayID() + '/'+ crossSections.ToString() + "/.json", json);
         }
         else
         {
-            RestClient.Post(baseURL + "/testing/sectionGraph/" + sessionID.ToString() + '/' + levelName + '/' + crossSections.ToString() + "/.json", json);
+            RestClient.Post(baseURL + "/testing/sectionGraph/" + _analyticManager.GetSessionID().ToString() + '/' + levelName + '/' +  _analyticManager.GetPlayID() + '/' + crossSections.ToString() + "/.json", json);
         }
     }
 }

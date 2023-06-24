@@ -50,13 +50,13 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
-        manager.SendSessionInfo(false, SceneManager.GetActiveScene().name);
+        manager.SendSessionInfo(false);
     }
 
     public void QuitGame() //quits game when quit button pressed
     {
         Debug.Log("Quitting Game...");
-        manager.SendSessionInfo(false, SceneManager.GetActiveScene().name);
+        manager.SendSessionInfo(false);
         Application.Quit();
     }
 

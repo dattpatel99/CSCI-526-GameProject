@@ -8,7 +8,6 @@ namespace Analytics {
     public class CheckPointAnalytics
     {
         public string checkpointID;
-        public bool crossed;
         public DateTime crossTime;
         public int curHeart;
         public int curTimeBank;
@@ -16,7 +15,6 @@ namespace Analytics {
         public CheckPointAnalytics(string checkPointName, PlayerController playerController, TimeBank bank)
         {
             this.checkpointID = checkPointName;
-            this.crossed = true;
             this.crossTime = DateTime.Now;
             this.curHeart = playerController.getHP().GetHP();
             this.curPlayerAge = playerController.getAge();

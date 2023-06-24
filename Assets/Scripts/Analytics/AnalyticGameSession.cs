@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
 using Newtonsoft.Json;
 
 /*
@@ -19,13 +17,11 @@ namespace Analytics{
         public int endLives;
         public int startingTimeStored;
         public int endingTimeStored;
-        public Dictionary<string, CheckPointAnalytics> checkPointGraph;
 
         public AnalyticGameSession(long sesID, string uID)
         { 
             this.userId = uID;
             this.sessionId = sesID;
-            this.checkPointGraph = new Dictionary<string, CheckPointAnalytics>();
             this.finished = false;
             this.startingTimeStored = 0;
         }
@@ -42,14 +38,6 @@ namespace Analytics{
             this.endingTimeStored = timeStored;
         }
         
-        /**
-         * This is used to add a new checpointObject
-         */
-        public void AddCheckPoint(CheckPointAnalytics checkPoint)
-        {
-            this.checkPointGraph.Add("CrossedCheckPoint" + (this.checkPointGraph.Count + 1), checkPoint);
-        }
-
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);

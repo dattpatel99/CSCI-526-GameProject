@@ -1,27 +1,32 @@
+using System.Resources;
 using Unity.VisualScripting;
 using UnityEngine;
 using Analytics;
 public class CheckPoint : MonoBehaviour
 {
-    public GameObject AnalyticObject;
-    private AnalyticManager manager;
+    public GameObject Sign;
+    private SpriteRenderer signRender;
     private CheckPointAnalytics checkpointData;
+    private CheckPointManager manager;
 
     void Start()
     {
-        manager = AnalyticObject.GetComponent<AnalyticManager>();
+        signRender = Sign.GetComponent<SpriteRenderer>();
+        manager = gameObject.transform.parent.gameObject.GetComponent<CheckPointManager>();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GameObject().name == "Player")
         {
-            Vector3 respawnPost = new Vector3(this.GameObject().transform.position.x, other.GameObject().transform.position.y, this.GameObject().transform.position.z);
-            other.GameObject().GetComponent<PlayerController>().setRespwan(respawnPost);
-            
-            // Add checkpoint analytics
+            other.GameObject().GetComponent<PlayerController>().setRespwan(this);
             var info = new CheckPointAnalytics(gameObject.name, other.GameObject().GetComponent<PlayerController>(), other.GameObject().GetComponent<TimeBank>());
-            manager.AddCheckPoint(info);
+            manager.SendData(info);
         }
+    }
+
+    public void AlterSignColor(Color newColor)
+    {
+        signRender.color = newColor;
     }
     
     

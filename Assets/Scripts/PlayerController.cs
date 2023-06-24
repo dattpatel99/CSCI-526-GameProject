@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -52,6 +51,7 @@ public class PlayerController : MonoBehaviour
     // =================================================================
     private int playerAge = 1;          // Age. {0: small, 1: normal, 2: old}
     private Vector3 _respawnPosition;   // Respawn Position
+    private CheckPoint respawnCheckPoint;
     private Vector3 _b4DrownedPosition; // Drown prevntion
     private bool lastGroundedPosRecorded;
     public Sprite normalSprite;
@@ -286,9 +286,15 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void setRespwan(Vector3 location)
+    public void setRespwan(CheckPoint checkPoint)
     {
-        _respawnPosition = location;
+        if (respawnCheckPoint != null)
+        {
+            respawnCheckPoint.AlterSignColor(Color.white);
+        }
+        respawnCheckPoint = checkPoint;
+        respawnCheckPoint.AlterSignColor(Color.green);
+        _respawnPosition = checkPoint.transform.position;
     }
     public Vector3 getRespwan()
     {

@@ -8,14 +8,21 @@ public class FinishLine : MonoBehaviour
     public TextMeshProUGUI finishText;  // Finish Text
     public string sceneToLoad_name;
     public GameObject analytics;
-    private AnalyticManager manager;
+    public GameObject checkParent;
+    public GameObject sectionParent;
+    private AnalyticManager analyticManager;
+    private CheckPointManager checkpointManager;
+    private SectionManager sectionManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1.0f;
         finishText.text = "";
-        manager = analytics.GetComponent<AnalyticManager>();
+        analyticManager = analytics.GetComponent<AnalyticManager>();
+        checkpointManager = checkParent.GetComponent<CheckPointManager>();
+        sectionManager = sectionParent.GetComponent<SectionManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -24,7 +31,9 @@ public class FinishLine : MonoBehaviour
         {
             finishText.text = "Congratulations!";
             Time.timeScale = 0f;
-            manager.SendSessionInfo(true, SceneManager.GetActiveScene().name);
+            checkpointManager.resetCrossedCheckPoints();
+            sectionManager.resetCrossedSections();
+            analyticManager.SendSessionInfo(true);
             StartCoroutine(WaitNLoad(2));
         }
     }

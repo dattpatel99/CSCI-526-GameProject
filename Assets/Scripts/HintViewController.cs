@@ -12,7 +12,6 @@ public class HintViewController : MonoBehaviour
     private Material greenOutline;
     private Material yellowOutline;
     private Material defaultMaterial;
-    private Material thickYellowOutline;
     private bool held;
     
     private bool switchOutlines = false;
@@ -27,7 +26,6 @@ public class HintViewController : MonoBehaviour
         // Grab green outline mat
         greenOutline = Resources.Load<Material>("Green Outline");
         yellowOutline = Resources.Load<Material>("Yellow Outline");
-        thickYellowOutline = Resources.Load<Material>("Yellow Outline Thick");
         objects = GameObject.FindGameObjectsWithTag("TimeObject");
         reminderHintText.SetActive(false);
 
@@ -95,23 +93,8 @@ public class HintViewController : MonoBehaviour
                 foreach (var renderer in timeObject.GetComponents<Renderer>())
                 {
                     if (renderer.GetType().Name == "SpriteRenderer")
-                    {
-                        if (tagName == "RewindObject")
-                        {
-                            // Thicker outlines on platforms to make them visible
-                            if (timeObject.name.Contains("Platform") || timeObject.name.Contains("Sliding"))
-                            {
-                                renderer.material = enabled ? thickYellowOutline : defaultMaterial;
-                            } 
-                            else
-                            {
-                                renderer.material = enabled ? outline : defaultMaterial;
-                            }
-                        } 
-                        else
-                        {
-                            renderer.material = enabled ? outline : defaultMaterial;
-                        }
+                    { 
+                        renderer.material = enabled ? outline : defaultMaterial;
                         //Switch between help enabled and not enabled
                     }
                 }

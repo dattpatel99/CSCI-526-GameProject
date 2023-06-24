@@ -9753,6 +9753,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1705762124, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
+      propertyPath: analytic
+      value: 
+      objectReference: {fileID: 966337153}
     - target: {fileID: 4252405651018514242, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
       propertyPath: m_IsActive
       value: 1

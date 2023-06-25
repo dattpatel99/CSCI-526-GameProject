@@ -59,9 +59,13 @@ public class PlayerController : MonoBehaviour
     public Sprite bigSprite;
     private SpriteRenderer sr;
     private CapsuleCollider2D capCollider;
+    private SpriteRenderer objectSpriteRenderer;
+    private Color playerColor;
 
     void Start()
     {
+        objectSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        playerColor = objectSpriteRenderer.color;
         rb2d = this.GetComponent<Rigidbody2D>();
         initGravityScale = rb2d.gravityScale;
         _respawnPosition = transform.position;
@@ -309,14 +313,15 @@ public class PlayerController : MonoBehaviour
         HP.Damage(damageValAll);
         rb2d.velocity = new Vector2(0, 0);
         int bounceDir = (transform.position.x - target.transform.position.x < 0) ? -1 : 1;
-        // Debug.Log(bounceDir);
         rb2d.AddForce(new Vector2(afterDmgForce * bounceDir, afterDmgForce));
     }
     
     private IEnumerator AfterDmgProcess()
     {
+        objectSpriteRenderer .color = Color.red;
         yield return new WaitForSeconds(0.5f); // 0.5s to allow the bump-off to finish
         canCtrl = true;
+        objectSpriteRenderer .color = playerColor;
         yield return new WaitForSeconds(1.5f); // 2s invincilble
         playerStatus = "normal";
     }
@@ -325,7 +330,9 @@ public class PlayerController : MonoBehaviour
     {
         playerStatus = "drowned";
         canCtrl = false;
+        objectSpriteRenderer .color = Color.red;
         yield return new WaitForSeconds(1.0f);
+        objectSpriteRenderer .color = playerColor;
         canCtrl = true;
         playerStatus = "normal";
         transform.position = _b4DrownedPosition;

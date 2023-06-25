@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float mediumJumpForce = 350.0f;
     public float bigJumpForce = 400.0f;
     private float jumpForce;
+    public float bounceForce;
     public LayerMask groundLayer;
     public LayerMask objectLayer;
     public Transform feet;
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
     public Sprite smallSprite;
     public Sprite bigSprite;
     private SpriteRenderer sr;
-    private CapsuleCollider2D capCollider;
+    private BoxCollider2D boxCollider;
     private SpriteRenderer objectSpriteRenderer;
     private Color playerColor;
 
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
         playerAge = 1;
 
         sr = GetComponent<SpriteRenderer>();
-        capCollider = GetComponent<CapsuleCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
 
         AdjustSpeedAndJump();
         SetSprite();
@@ -166,6 +167,12 @@ public class PlayerController : MonoBehaviour
         {
             ReceiveDamage(other.gameObject);
         }
+        if (other.gameObject.CompareTag("Mushroom"))
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
+            rb2d.AddForce(new Vector2(0f, bounceForce));
+        }
+        
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -254,19 +261,19 @@ public class PlayerController : MonoBehaviour
         if (playerAge >= 2)
         {
             sr.sprite = bigSprite;
-            capCollider.size = new Vector2(1f, 2f);
+            boxCollider.size = new Vector2(1f, 2f);
             feet.position = transform.position + new Vector3(0f, -1f, 0f);
         }
         else if (playerAge == 1)
         {
             sr.sprite = normalSprite;
-            capCollider.size = new Vector2(1f, 2f);
+            boxCollider.size = new Vector2(1f, 2f);
             feet.position = transform.position + new Vector3(0f, -1f, 0f);
         }
         else
         {
             sr.sprite = smallSprite;
-            capCollider.size = new Vector2(1f, 1f);
+            boxCollider.size = new Vector2(1f, 1f);
             feet.position = transform.position + new Vector3(0f, -0.5f, 0f);
         }
     }

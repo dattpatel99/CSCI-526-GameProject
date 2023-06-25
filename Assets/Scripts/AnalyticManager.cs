@@ -69,11 +69,11 @@ public class AnalyticManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Post(baseURL + "/alpha/GameAnalytic/" + sessionId.ToString() + '/' + levelName + "/.json", json);
+            RestClient.Put(baseURL + "/alpha/GameAnalytic/" + sessionId.ToString() + '_' + playID + '_' + levelName + "/.json", json);
         }
         else
         {
-            RestClient.Post(baseURL + "/testing/GameAnalytic/" + sessionId.ToString() + '/' + levelName + "/.json", json);
+            RestClient.Put(baseURL + "/testing/GameAnalytic/" +  sessionId.ToString() + '_' + playID + '_' + levelName + "/.json", json);
         }
     }
 }

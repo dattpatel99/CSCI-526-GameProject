@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2847372575785183044, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183045, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1223,6 +1227,10 @@ PrefabInstance:
     - target: {fileID: 6652334453562570332, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}
       propertyPath: m_ColliderPaths.Array.data[1].m_ColliderPaths.Array.data[0].Array.data[24].Y
       value: 1499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959522983347860291, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}
+      propertyPath: bounce
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}

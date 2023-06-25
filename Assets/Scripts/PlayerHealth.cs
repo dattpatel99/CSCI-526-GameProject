@@ -16,15 +16,14 @@ public class PlayerHealth : MonoBehaviour
     /*
     public Button hpBtn_lose;
     public Button hpBtn_heal;
-    */
-    public Button hpBtn_add;
+    public Button hpBtn_add;*/
     
     
     // Start is called before the first frame update
     void Start()
     {
-        hpBtn_add.onClick.AddListener(AddMax);
-        /*hpBtn_lose.onClick.AddListener(LoseHP);
+        /*hpBtn_add.onClick.AddListener(AddMax);
+        hpBtn_lose.onClick.AddListener(LoseHP);
         hpBtn_heal.onClick.AddListener(HealHP);*/
         
         health = healthMax;

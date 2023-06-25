@@ -2134,6 +2134,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 496897578}
     m_Modifications:
+    - target: {fileID: -3547403436056619582, guid: b2d9e5db469a33c479364d277c4ffd6b, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 814061633915484288, guid: b2d9e5db469a33c479364d277c4ffd6b, type: 3}
       propertyPath: m_Name
       value: Platform_Falling
@@ -5867,8 +5871,8 @@ BuoyancyEffector2D:
     serializedVersion: 2
     m_Bits: 4
   m_SurfaceLevel: 0
-  m_Density: 1
-  m_LinearDrag: 5
+  m_Density: 6
+  m_LinearDrag: 30
   m_AngularDrag: 5
   m_FlowAngle: 0
   m_FlowMagnitude: 0

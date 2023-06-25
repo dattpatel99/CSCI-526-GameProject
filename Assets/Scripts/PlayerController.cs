@@ -151,12 +151,13 @@ public class PlayerController : MonoBehaviour
             }
         }
         // Debug.Log(string.Format("contact layer {0}, water layer {1}", other.gameObject.layer, LayerMask.GetMask("Water")));
-        if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water") && playerStatus == "normal")
         {
             HP.Damage(damageValAll);
             if (!DeathCheck())
             {
                 StartCoroutine(DrownedProcess()); // reset status to normal, re-enable control
+                StartCoroutine(AfterDmgVisual());
             }
         }
     }
@@ -318,6 +319,7 @@ public class PlayerController : MonoBehaviour
         playerStatus = "invincible";
         canCtrl = false;
         StartCoroutine(AfterDmgProcess()); // reset status to normal, re-enable control
+        StartCoroutine(AfterDmgVisual());
         HP.Damage(damageValAll);
         rb2d.velocity = new Vector2(0, 0);
         int bounceDir = (transform.position.x - target.transform.position.x < 0) ? -1 : 1;
@@ -326,10 +328,8 @@ public class PlayerController : MonoBehaviour
     
     private IEnumerator AfterDmgProcess()
     {
-        objectSpriteRenderer .color = Color.red;
         yield return new WaitForSeconds(0.5f); // 0.5s to allow the bump-off to finish
         canCtrl = true;
-        objectSpriteRenderer .color = playerColor;
         yield return new WaitForSeconds(1.5f); // 2s invincilble
         playerStatus = "normal";
     }
@@ -338,12 +338,26 @@ public class PlayerController : MonoBehaviour
     {
         playerStatus = "drowned";
         canCtrl = false;
-        objectSpriteRenderer .color = Color.red;
         yield return new WaitForSeconds(1.0f);
-        objectSpriteRenderer .color = playerColor;
         canCtrl = true;
         playerStatus = "normal";
         transform.position = _b4DrownedPosition;
+    }
+
+    private IEnumerator AfterDmgVisual()
+    {
+        objectSpriteRenderer.color = Color.red;
+        heartsObj.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        objectSpriteRenderer.color = playerColor;
+        heartsObj.SetActive(true);
+        for (int i = 0; i < 4; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            heartsObj.SetActive(false);
+            yield return new WaitForSeconds(0.1f);
+            heartsObj.SetActive(true);
+        }
     }
     
     

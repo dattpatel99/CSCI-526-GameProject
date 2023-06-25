@@ -339,6 +339,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2847372575785183044, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847372575785183045, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2847372575785183046, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -971,11 +979,11 @@ PrefabInstance:
     - target: {fileID: 6652334453562570332, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_Collider
       value: 
-      objectReference: {fileID: 503914566}
+      objectReference: {fileID: 0}
     - target: {fileID: 6652334453562570332, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}
       propertyPath: m_ColliderPaths.Array.data[1].m_Collider
       value: 
-      objectReference: {fileID: 503914565}
+      objectReference: {fileID: 0}
     - target: {fileID: 6652334453562570332, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.size
       value: 4
@@ -1221,16 +1229,6 @@ PrefabInstance:
 --- !u!4 &503914564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2542165815770287079, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}
-  m_PrefabInstance: {fileID: 503914563}
-  m_PrefabAsset: {fileID: 0}
---- !u!60 &503914565 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4870159997666159943, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}
-  m_PrefabInstance: {fileID: 503914563}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &503914566 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7661133080209262393, guid: 3964b82f81d349743b70983e6d0ec615, type: 3}
   m_PrefabInstance: {fileID: 503914563}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &543742576

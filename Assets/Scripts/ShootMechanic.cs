@@ -64,9 +64,8 @@ public class ShootMechanic : MonoBehaviour
                     {
                         hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
                         playerTimeBank.AddTime(1);
-                        AlterColor(laserLine, Color.red);
-                        // Show laser only if it is a time object
-                        hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
+                        AlterColor(laserLine, Color.red); // Show laser only if it is a time object
+                        // hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite(); // Paul: This method is being called already in SubtractTime
                     }
                     else if (hit.collider.gameObject.CompareTag("Mirror"))
                     {
@@ -89,9 +88,8 @@ public class ShootMechanic : MonoBehaviour
                     {
                         hit.collider.gameObject.GetComponent<TimeObject>().AddTime(1);
                         playerTimeBank.SubtractTime(1);
-                        AlterColor(laserLine, Color.green);
-                        // Show laser only if it is a time object
-                        hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite();
+                        AlterColor(laserLine, Color.green); // Show laser only if it is a time object
+                        // hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite(); // Paul: This method is being called already in AddTime
                     }
                     else if (hit.collider.gameObject.CompareTag("Mirror") && playerTimeBank.CheckSubtract())
                     {

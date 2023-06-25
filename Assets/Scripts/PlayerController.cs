@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!canCtrl) { return; } // after-damage protection
         rb2d.velocity = new Vector2(xSpeed, rb2d.velocity.y); // horizontal movement
+        // rb2d.AddForce(new Vector2(xSpeed, 0f), ForceMode2D.Impulse);
         if (shouldJump) // jump
         {
             shouldJump = false;

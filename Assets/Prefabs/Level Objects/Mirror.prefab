@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5001032703469706101}
   - component: {fileID: 5237852124301308101}
-  - component: {fileID: 1087971303}
+  - component: {fileID: 564380988711336671}
   m_Layer: 7
   m_Name: Mirror
   m_TagString: Mirror
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &1087971303
-PolygonCollider2D:
+--- !u!61 &564380988711336671
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,10 +95,10 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.012898281, y: -0.06309807}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -108,12 +108,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.125, y: 0.9375}
-      - {x: -0.3125, y: 0.59375}
-      - {x: -0.5, y: -0.65625}
-      - {x: -0.5, y: -1}
-      - {x: 0.40625, y: -1}
-      - {x: 0.40625, y: 0.5625}
-      - {x: 0.21875, y: 0.9375}
+  serializedVersion: 2
+  m_Size: {x: 0.6440064, y: 1.8738039}
+  m_EdgeRadius: 0

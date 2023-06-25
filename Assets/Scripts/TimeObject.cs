@@ -10,14 +10,15 @@ public class TimeObject : MonoBehaviour
     public List<bool> reactable;
     
     // These are public so level designers can change easily
-    public int startingTimeValue; 
-    public int highestTimeValue;
-    public List<Sprite> phaseSprites;
-    private int currentTimeValue;
+    public int initTimePhase_i; // Paul: strictly greater than 0
+    public int maxTimePhase_i; // Paul: length of Sprites and Colliders array
+    public Sprite[] phaseSprites;
+    private int currentPhase_i;
+    private Collider2D[] phaseColliders;
     private SpriteRenderer timeObjectSpriteRenderer;
 
-    [SerializeField]
-    private bool[] colliderOn;
+    // [SerializeField]
+    // private bool[] colliderOn;
     
     /*
      * Start does:
@@ -25,10 +26,18 @@ public class TimeObject : MonoBehaviour
      */
     void Start()
     {
+        phaseColliders = GetComponents<Collider2D>();
+        if (phaseColliders.Length != maxTimePhase_i + 1 || phaseSprites.Length != maxTimePhase_i + 1) {
+            Debug.Log("WARNING: OUT OF INDEX POSSIBLE. Check totalTimephases, phaseSprites and number of attached colliders. They should all match");
+        }
         timeObjectSpriteRenderer = GetComponent<SpriteRenderer>();
-        this.currentTimeValue = Mathf.Clamp(this.startingTimeValue, 0, this.highestTimeValue);
-        timeObjectSpriteRenderer.sprite = this.GetSprite(this.currentTimeValue);
-        TryUpdateShapeToAttachedSprite();
+        timeObjectSpriteRenderer.sprite = phaseSprites[initTimePhase_i];
+        for (int i = 0; i <= maxTimePhase_i; i++)
+        {
+            phaseColliders[i].enabled = (i==initTimePhase_i) ? true : false;
+        }
+        currentPhase_i = initTimePhase_i;
+        // TryUpdateShapeToAttachedSprite();
     }
 
     public void SetPhaseInteractability(List<bool> newInteractable)
@@ -46,32 +55,43 @@ public class TimeObject : MonoBehaviour
 
     public void AddTime(int addedTime)
     {
-        int newValue = this.currentTimeValue + addedTime;
-        this.currentTimeValue = Mathf.Clamp(newValue, 0, this.highestTimeValue);
-        timeObjectSpriteRenderer.sprite=this.GetSprite(this.currentTimeValue);
-        TryUpdateShapeToAttachedSprite();
+        int newPhase = Mathf.Clamp(currentPhase_i + addedTime, 0, maxTimePhase_i);
+        Update_SpriteNCollider(currentPhase_i, newPhase);
+        currentPhase_i = newPhase;
+        // currentPhase = Mathf.Clamp(newValue, 0, totalTimePhases);
+        // timeObjectSpriteRenderer.sprite=this.GetSprite(currentPhase);
+        // TryUpdateShapeToAttachedSprite();
     }
 
     public void SubtractTime(int subtractedTime)
     {
-        int newValue = this.currentTimeValue - subtractedTime;
-        this.currentTimeValue = Mathf.Clamp(newValue, 0, this.highestTimeValue);
-        timeObjectSpriteRenderer.sprite=this.GetSprite(this.currentTimeValue);
-        TryUpdateShapeToAttachedSprite();
+        int newPhase = Mathf.Clamp(currentPhase_i - subtractedTime, 0, maxTimePhase_i);
+        Update_SpriteNCollider(currentPhase_i, newPhase);
+        currentPhase_i = newPhase;
+        // currentPhase = Mathf.Clamp(newValue, 0, totalTimePhases);
+        // timeObjectSpriteRenderer.sprite=this.GetSprite(currentPhase);
+        // TryUpdateShapeToAttachedSprite();
+    }
+
+    private void Update_SpriteNCollider(int currentPhase, int newPhase)
+    {
+        timeObjectSpriteRenderer.sprite = phaseSprites[newPhase];
+        phaseColliders[currentPhase].enabled = false;
+        phaseColliders[newPhase].enabled = true;
     }
 
     public int GetCurrentTimeValue()
     {
-        return this.currentTimeValue;
+        return currentPhase_i;
     }
 
     public bool CheckAddition()
     {
-        return this.currentTimeValue < this.highestTimeValue;
+        return currentPhase_i < maxTimePhase_i;
     }
     public bool CheckSubtraction()
     {
-        return this.currentTimeValue > 0;
+        return currentPhase_i > 0;
     }
 
     private Sprite GetSprite(int currentTime)
@@ -80,8 +100,9 @@ public class TimeObject : MonoBehaviour
     }
 
     /*
-     * These two functions are used to update the collider based on png of sprite
-     */
+
+    // These two functions are used to update the collider based on png of sprite
+    
     // Unity Reference: https://answers.unity.com/questions/722748/refreshing-the-polygon-collider-2d-upon-sprite-cha.html
     public void TryUpdateShapeToAttachedSprite ()
     {
@@ -89,7 +110,7 @@ public class TimeObject : MonoBehaviour
         this.UpdateShapeToSprite(thisObjectsCollider, thisObjectsCollider.GetComponent<SpriteRenderer>().sprite);
 
         // The collider is set to be a trigger if we want the player to be able to walk past it
-        thisObjectsCollider.isTrigger = !colliderOn[currentTimeValue];
+        thisObjectsCollider.isTrigger = !colliderOn[currentPhase];
     }
     private void UpdateShapeToSprite (PolygonCollider2D colliderObject, Sprite sprite) { 
         // ensure both valid
@@ -109,4 +130,5 @@ public class TimeObject : MonoBehaviour
             }
         }
     }
+    */
 }

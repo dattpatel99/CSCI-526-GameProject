@@ -326,7 +326,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: textOutput
-      value: Use W/S to move up and down certain objects
+      value: Use W/S to move Up/Down on certain objects
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: targetCanvas
@@ -522,11 +522,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8573032593734937044, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 112.4
+      value: 112.52
       objectReference: {fileID: 0}
     - target: {fileID: 8573032593734937044, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.76
+      value: -7.76
       objectReference: {fileID: 0}
     - target: {fileID: 8573032593734937044, guid: a8207e07e943b774fa44537f25c38181, type: 3}
       propertyPath: m_LocalPosition.z
@@ -861,11 +861,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 53.19
+      value: 55.05
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.14
+      value: 7.38
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: m_LocalPosition.z
@@ -923,7 +923,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: textOutput
-      value: Watch out for enemies! Make them too old to move!
+      value: Creful! Enemies! Make them too old to move!
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: targetCanvas
@@ -2502,6 +2502,7 @@ Transform:
   - {fileID: 205564066}
   - {fileID: 548096528}
   - {fileID: 2114532049}
+  - {fileID: 2081050237}
   m_Father: {fileID: 1307564337}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3004,7 +3005,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: textOutput
-      value: Use A/D to move left/right and Space to jump
+      value: Use A/D  to move Left/Right & Space to Jump
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: targetCanvas
@@ -7168,8 +7169,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: textOutput
-      value: Use the right mouse button to reduce the age of an object and store
-        time
+      value: Use Right Mouse click to Decrease age of an object and store time
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: targetCanvas
@@ -7239,7 +7239,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: textOutput
-      value: Use the left mouse button to increase object age using your stored time
+      value: Use Left Mouse click to Increase object age using your stored time
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: targetCanvas
@@ -7446,6 +7446,100 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 877ef092e44190f40b23f25d64cc880b, type: 3}
+--- !u!1001 &2081050236
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1119777927}
+    m_Modifications:
+    - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: textOutput
+      value: Confused? Use 'H' for Hint
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: targetCanvas
+      value: 
+      objectReference: {fileID: 1428937614}
+    - target: {fileID: 153542797873655721, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_Size.x
+      value: 3.6654863
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655721, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_Offset.x
+      value: 1.3327432
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.4528549
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.98232
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.98232
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 132.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655734, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_Name
+      value: TutorialText (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 153542797873655734, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+--- !u!4 &2081050237 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 153542797873655723, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
+  m_PrefabInstance: {fileID: 2081050236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2089175478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7512,7 +7606,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: textOutput
-      value: The goal is just up ahead!
+      value: Keep going, the goal is just up ahead!
       objectReference: {fileID: 0}
     - target: {fileID: 153542797873655720, guid: b655ad00f1aa6b74d935c381fcbc5785, type: 3}
       propertyPath: targetCanvas

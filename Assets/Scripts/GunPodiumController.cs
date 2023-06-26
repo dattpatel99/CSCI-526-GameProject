@@ -26,7 +26,6 @@ public class GunPodiumController : MonoBehaviour
     {
         if ( collision.gameObject.name == "Player")
         {
-            Debug.Log("Player picks up gun");
             podiumGun.SetActive(false);
             playerGun.SetActive(true);
         }

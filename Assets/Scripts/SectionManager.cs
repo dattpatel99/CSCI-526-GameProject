@@ -48,7 +48,7 @@ public class SectionManager : MonoBehaviour
         }
         else
         {
-            RestClient.Put(baseURL + "/testing/v2.0/sectionGraph/" + _analyticManager.GetSessionID().ToString() + '_' + _analyticManager.GetPlayID() + '_' + levelName + '/' + crossSections + "/.json", json);
+            RestClient.Put(baseURL + "/testPartTwo/sectionGraph/" + _analyticManager.GetSessionID().ToString() + '_' + _analyticManager.GetPlayID() + '_' + levelName + '/' + crossSections + "/.json", json);
         }
     }
 }

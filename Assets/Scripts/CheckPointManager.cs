@@ -47,7 +47,7 @@ public class CheckPointManager : MonoBehaviour
         }
         else
         {
-            RestClient.Put(baseURL + "/testing/v2.0/checkpointGraph/" + _analyticManager.GetSessionID().ToString() + '_' + _analyticManager.GetPlayID() + '_' + levelName + '/' + crossedCheckPoints + "/.json", json);
+            RestClient.Put(baseURL + "/testPartTwo/checkpointGraph/" + _analyticManager.GetSessionID().ToString() + '_' + _analyticManager.GetPlayID() + '_' + levelName + '/' + crossedCheckPoints + "/.json", json);
         }
     }
     

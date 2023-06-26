@@ -709,7 +709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1380595817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -926,7 +926,6 @@ MonoBehaviour:
   heartSprite_good: {fileID: 21300000, guid: 64ccaba4d4be77f49960e58951f7d65a, type: 3}
   heartSprite_bad: {fileID: 21300000, guid: fd0555a24209a544a9e3e484e26e1aab, type: 3}
   heartPrefab: {fileID: 2752164121903996002, guid: 7896d77e6c3c2e84eb0218f167d7d244, type: 3}
-  hpBtn_add: {fileID: 0}
 --- !u!1 &1808126580
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1808126581
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1396,7 +1395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &277104847108024357
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1749,7 +1748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8875297613183054397
 RectTransform:
   m_ObjectHideFlags: 0

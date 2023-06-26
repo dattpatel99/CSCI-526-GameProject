@@ -87946,26 +87946,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 331742156, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 331742156, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 331742156, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 331742157, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 662660137}
-    - target: {fileID: 331742157, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 877969386355208583, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -88013,10 +87997,6 @@ PrefabInstance:
     - target: {fileID: 877969386355208584, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 877969386355208585, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: orthographic size
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4073591044961138328, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
       propertyPath: reminderHintText

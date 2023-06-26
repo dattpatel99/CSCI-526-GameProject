@@ -73,7 +73,7 @@ public class AnalyticManager : MonoBehaviour
         }
         else
         {
-            RestClient.Put(baseURL + "/testing/GameAnalytic/" +  sessionId.ToString() + '_' + playID + '_' + levelName + "/.json", json);
+            RestClient.Put(baseURL + "/testing/v2.0/GameAnalytic/" +  sessionId.ToString() + '_' + playID + '_' + levelName + "/.json", json);
         }
     }
 }

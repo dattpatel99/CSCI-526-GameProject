@@ -10,6 +10,7 @@ using UnityEngine;
 namespace Analytics{
     public class SectionAnalytics
     {
+        public string sectionID;
         public float enterTime;
         public float leaveTime;
         public int enterHearts;
@@ -19,8 +20,9 @@ namespace Analytics{
         public int numberPuzzles;
         public float timeSpent;
         
-        public SectionAnalytics(float timeEnter, PlayerController control, TimeBank bank, int puzzleNum)
+        public SectionAnalytics(string sectionName, float timeEnter, PlayerController control, TimeBank bank, int puzzleNum)
         {
+            this.sectionID = sectionName;
             this.enterHearts = control.getHP().GetHP();
             this.enterTime = timeEnter;
             this.startTimeBank = bank.GetTimeStore();

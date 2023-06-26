@@ -29,7 +29,7 @@ public class Section : MonoBehaviour
         // Set the player controller and bank
         if (other.GameObject().name == "Player")
         {
-            sectionData = new SectionAnalytics(runtime, other.gameObject.GetComponent<PlayerController>(), other.gameObject.GetComponent<TimeBank>(), puzzleNum);
+            sectionData = new SectionAnalytics(gameObject.name, runtime, other.gameObject.GetComponent<PlayerController>(), other.gameObject.GetComponent<TimeBank>(), puzzleNum);
         }
     }
 

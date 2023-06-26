@@ -1007,6 +1007,10 @@ PrefabInstance:
       propertyPath: analytic
       value: 
       objectReference: {fileID: 1389054187}
+    - target: {fileID: 4252405651018514242, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8880555994032965914, guid: bfef1f8bdf523d445a1f22af3f2c7870, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -3302,26 +3306,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 331742156, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 331742156, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 331742156, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 331742157, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1432233111}
-    - target: {fileID: 331742157, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 7.76
-      objectReference: {fileID: 0}
+    - target: {fileID: 2092050395, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 2076650019}
     - target: {fileID: 877969386355208583, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -3369,10 +3361,6 @@ PrefabInstance:
     - target: {fileID: 877969386355208584, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 877969386355208585, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
-      propertyPath: orthographic size
-      value: 7.76
       objectReference: {fileID: 0}
     - target: {fileID: 4073591044961138328, guid: 8e164571c50156046b48fbaf6b9bbc86, type: 3}
       propertyPath: reminderHintText
@@ -7446,6 +7434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 877ef092e44190f40b23f25d64cc880b, type: 3}
+--- !u!4 &2076650019 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8573032593734937044, guid: a8207e07e943b774fa44537f25c38181, type: 3}
+  m_PrefabInstance: {fileID: 334284472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2081050236
 PrefabInstance:
   m_ObjectHideFlags: 0

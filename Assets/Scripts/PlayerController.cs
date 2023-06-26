@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput;
     private Vector2 feetPos;
     private bool grounded;
+    private bool onObject;
     private bool shouldJump;
     private float verticalInput;
     private bool isBeanstalk;
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth HP;
     private int damageValAll;
     private string playerStatus; // normal, invincible
-    private bool canCtrl;
+    public static bool canCtrl; // will be set to true by CameraController
 
     // 3. Gun
     // =================================================================
@@ -72,8 +74,8 @@ public class PlayerController : MonoBehaviour
         _respawnPosition = transform.position;
 
         playerStatus = "normal";
-        canCtrl = true;
-        afterDmgForce = 300.0f;
+        canCtrl = false;
+        afterDmgForce = 3000.0f;
         HP = heartsObj.GetComponent<PlayerHealth>();
         damageValAll = 1;
         lastGroundedPosRecorded = false;
@@ -95,7 +97,9 @@ public class PlayerController : MonoBehaviour
         xSpeed = Input.GetAxis("Horizontal") * currentSpeed;
         jumpInput = Input.GetButtonDown("Jump");
         feetPos = feet.position;
-        grounded = Physics2D.OverlapCircle(feetPos, .2f, groundLayer) || Physics2D.OverlapCircle(feetPos, .2f, objectLayer);
+        grounded = Physics2D.OverlapCircle(feetPos, .2f, groundLayer);
+        onObject = Physics2D.OverlapCircle(feetPos, .2f, objectLayer);
+        
         if (!grounded && !lastGroundedPosRecorded)
         {
             _b4DrownedPosition = transform.position;
@@ -105,7 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             lastGroundedPosRecorded = false;
         }
-        if (!shouldJump && jumpInput && grounded)
+        if (!shouldJump && jumpInput && (grounded || onObject))
         {
             shouldJump = true;
         }
@@ -168,11 +172,11 @@ public class PlayerController : MonoBehaviour
         {
             ReceiveDamage(other.gameObject);
         }
-        if (other.gameObject.CompareTag("Enemy") && (playerStatus == "normal")) // player not in after-damage protection
+        else if (other.gameObject.CompareTag("Enemy") && (playerStatus == "normal")) // player not in after-damage protection
         {
             ReceiveDamage(other.gameObject);
         }
-        if (other.gameObject.transform.parent.CompareTag("Mushroom"))
+        else if (other.gameObject.transform.parent.CompareTag("Mushroom"))
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
             rb2d.AddForce(new Vector2(0f, bounceForce));
@@ -211,6 +215,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = this._respawnPosition;
             HP.Reset();
+            rb2d.velocity = new Vector2(0f, 0f);
             return true;
         }
         return false;

@@ -47,6 +47,14 @@ public class FallingRewindObject : MonoBehaviour
         StartCoroutine(RewindDuration());
     }
 
+    /*private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            rb2d.gravityScale = 1f;
+        }
+    }*/
+
     // How long should the rewind last
     IEnumerator RewindDuration()
     {

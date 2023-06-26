@@ -4,4 +4,5 @@
 public static class PlayerStatus
 {
     public static bool isRewinding = false;
+    public static bool rewindUnlocked = false;
 }

@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class FinishLine : MonoBehaviour
 {
-    public TextMeshProUGUI finishText;  // Finish Text
+    public Text finishText;  // Finish Text
     public string sceneToLoad_name;
     public GameObject analytics;
     public GameObject checkParent;
@@ -29,7 +29,7 @@ public class FinishLine : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            finishText.text = "Congratulations!";
+            finishText.text = "Level Complete!";
             Time.timeScale = 0f;
             checkpointManager.resetCrossedCheckPoints();
             sectionManager.resetCrossedSections();

@@ -12,6 +12,7 @@ TagManager:
   - Mushroom
   - Damaging
   - FinishLine
+  - Enemy
   layers:
   - Default
   - TransparentFX

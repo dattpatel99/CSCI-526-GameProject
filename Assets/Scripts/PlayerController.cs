@@ -168,7 +168,11 @@ public class PlayerController : MonoBehaviour
         {
             ReceiveDamage(other.gameObject);
         }
-        if (other.gameObject.CompareTag("Mushroom"))
+        if (other.gameObject.CompareTag("Enemy") && (playerStatus == "normal")) // player not in after-damage protection
+        {
+            ReceiveDamage(other.gameObject);
+        }
+        if (other.gameObject.transform.parent.CompareTag("Mushroom"))
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
             rb2d.AddForce(new Vector2(0f, bounceForce));
@@ -203,7 +207,7 @@ public class PlayerController : MonoBehaviour
 
     private bool DeathCheck()
     {
-        if (transform.position.y < -22 || HP.GetCurr() == 0)
+        if (transform.position.y < -1000 || HP.GetCurr() == 0)
         {
             transform.position = this._respawnPosition;
             HP.Reset();

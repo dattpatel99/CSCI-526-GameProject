@@ -104,37 +104,47 @@ public class ShootMechanic : MonoBehaviour
                             playerTransform.localScale = playerControllerComp.getPlayerSize();
                         }
                     }
+                    else if (hit.collider.gameObject.CompareTag("Enemy") && playerTimeBank.CheckSubtract())
+                    {
+                        hit.collider.gameObject.GetComponent<EnemyController>().Die();
+                        playerTimeBank.SubtractTime(1);
+                        AlterColor(laserLine, Color.green);
+                    }
                 }
-                // If raycast hits rewind object
-                if (hit.collider.gameObject.CompareTag("RewindObject") && !PlayerStatus.isRewinding)
+
+                if (PlayerStatus.rewindUnlocked)
                 {
-                    if (hit.collider.gameObject.GetComponent<FallingRewindObject>() != null)
+                    // If raycast hits rewind object
+                    if (hit.collider.gameObject.CompareTag("RewindObject") && !PlayerStatus.isRewinding)
                     {
-                        FallingRewindObject fro = hit.collider.gameObject.GetComponent<FallingRewindObject>();
+                        if (hit.collider.gameObject.GetComponent<FallingRewindObject>() != null)
+                        {
+                            FallingRewindObject fro = hit.collider.gameObject.GetComponent<FallingRewindObject>();
 
-                        if (fro.isActiveAndEnabled)
-                        {
-                            fro.Rewind();
-                            AlterColor(laserLine, Color.yellow);
+                            if (fro.isActiveAndEnabled)
+                            {
+                                fro.Rewind();
+                                AlterColor(laserLine, Color.yellow);
+                            }
                         }
-                    }
-                    else if (hit.collider.gameObject.GetComponent<SlidingRewindObject>() != null)
-                    {
-                        SlidingRewindObject sro = hit.collider.gameObject.GetComponent<SlidingRewindObject>();
-                        if (sro.isActiveAndEnabled)
+                        else if (hit.collider.gameObject.GetComponent<SlidingRewindObject>() != null)
                         {
-                            sro.Rewind();
-                            AlterColor(laserLine, Color.yellow);
+                            SlidingRewindObject sro = hit.collider.gameObject.GetComponent<SlidingRewindObject>();
+                            if (sro.isActiveAndEnabled)
+                            {
+                                sro.Rewind();
+                                AlterColor(laserLine, Color.yellow);
+                            }
                         }
-                    }
-                    else if (hit.collider.gameObject.GetComponent<RotatingRewindObject>() != null)
-                    {
-                        RotatingRewindObject rro = hit.collider.gameObject.GetComponent<RotatingRewindObject>();
+                        else if (hit.collider.gameObject.GetComponent<RotatingRewindObject>() != null)
+                        {
+                            RotatingRewindObject rro = hit.collider.gameObject.GetComponent<RotatingRewindObject>();
 
-                        if (rro.isActiveAndEnabled)
-                        {
-                            rro.Rewind();
-                            AlterColor(laserLine, Color.yellow);
+                            if (rro.isActiveAndEnabled)
+                            {
+                                rro.Rewind();
+                                AlterColor(laserLine, Color.yellow);
+                            }
                         }
                     }
                 }

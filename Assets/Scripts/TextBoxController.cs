@@ -15,6 +15,7 @@ public class TextBoxController : MonoBehaviour
     private Image assistantArrow;
 
     private bool textDisplaying;
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -30,16 +31,25 @@ public class TextBoxController : MonoBehaviour
 
         basicArrow.enabled = false;
         assistantArrow.enabled = false;
+        timer = 0f;
     }
 
     void Update()
     {
         if (textDisplaying)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (timer >= 3.0f)
             {
-                StopText();
+                basicArrow.enabled = true;
+                assistantArrow.enabled = true;
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    StopText();
+                }
             }
+
+            timer += Time.deltaTime;
         }
     }
 
@@ -57,7 +67,10 @@ public class TextBoxController : MonoBehaviour
             basicTextBox.SetActive(true);
         }
 
-        StartCoroutine(WaitForRead());
+        textDisplaying = true;
+        timer = 0f;
+        basicArrow.enabled = false;
+        assistantArrow.enabled = false;
     }
 
     private void StopText()
@@ -69,15 +82,5 @@ public class TextBoxController : MonoBehaviour
 
         basicArrow.enabled = false;
         assistantArrow.enabled = false;
-    }
-
-    IEnumerator WaitForRead()
-    {
-        yield return new WaitForSeconds(3);
-
-        basicArrow.enabled = true;
-        assistantArrow.enabled = true;
-
-        textDisplaying = true;
     }
 }

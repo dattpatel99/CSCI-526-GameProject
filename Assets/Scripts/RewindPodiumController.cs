@@ -50,7 +50,7 @@ public class RewindPodiumController : MonoBehaviour
             Debug.Log("Player picks up rewind ability");
             rewindIcon.SetActive(false);
             PlayerStatus.rewindUnlocked = true;
-            targetCanvas.GetComponent<TextBoxController>().ShowText("You can now rewind non-living objects for 5 seconds with your time gun.", true);
+            targetCanvas.GetComponent<TextBoxController>().ShowText("You can now rewind non- living objects for 5 sec with your time gun.", true);
         }
     }
 }

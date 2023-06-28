@@ -8,6 +8,8 @@ public class TimeCaseController : TimeObject
     public GameObject timeCasePivotPoint;
     public GameObject timeCaseParent;
 
+    public bool openLeft;
+
     private float rotationSpeed = 50.0f;
 
     // Start is called before the first frame update
@@ -22,12 +24,25 @@ public class TimeCaseController : TimeObject
         timeCaseParent.GetComponent<TMP_Text>().text = "Time Needed: " + currentPhase_i + "/" + maxTimePhase_i;
         if ( base.currentPhase_i == base.maxTimePhase_i )
         {
-            float rotateZ = rotationSpeed * Time.deltaTime;
-            timeCasePivotPoint.transform.Rotate(new Vector3(0f, 0f, rotateZ));
-            //Debug.Log(timeCasePivotPoint.transform.localEulerAngles.z);
-            if (timeCasePivotPoint.transform.localEulerAngles.z > 90.0f )
+            if (openLeft)
             {
-                timeCasePivotPoint.SetActive(false);
+                float rotateZ = rotationSpeed * Time.deltaTime;
+                timeCasePivotPoint.transform.Rotate(new Vector3(0f, 0f, rotateZ));
+                //Debug.Log(timeCasePivotPoint.transform.localEulerAngles.z);
+                if (timeCasePivotPoint.transform.localEulerAngles.z > 90.0f)
+                {
+                    timeCasePivotPoint.SetActive(false);
+                }
+            }
+            else
+            {
+                float rotateZ = rotationSpeed * Time.deltaTime;
+                timeCasePivotPoint.transform.Rotate(new Vector3(0f, 0f, -rotateZ));
+                //Debug.Log(timeCasePivotPoint.transform.localEulerAngles.z);
+                if (timeCasePivotPoint.transform.localEulerAngles.z < 270 && timeCasePivotPoint.transform.localEulerAngles.z > 0)
+                {
+                    timeCasePivotPoint.SetActive(false);
+                }
             }
         }
     }

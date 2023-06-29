@@ -62,6 +62,14 @@ public class ShootMechanic : MonoBehaviour
                 {
                     if (hit.collider.gameObject.CompareTag("TimeObject") && hit.collider.gameObject.GetComponent<TimeObject>().CheckSubtraction() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)
                     {
+                        if (hit.collider.gameObject.GetComponent<TimeCaseController>() != null)
+                        {
+                            if (hit.collider.gameObject.GetComponent<TimeCaseController>().isOpening())
+                            {
+                                // Don't allow player to shoot case that is opening
+                                return;
+                            } 
+                        }
                         hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
                         playerTimeBank.AddTime(1);
                         AlterColor(laserLine, Color.red); // Show laser only if it is a time object
@@ -86,6 +94,14 @@ public class ShootMechanic : MonoBehaviour
                 {
                     if (hit.collider.gameObject.CompareTag("TimeObject") && playerTimeBank.CheckSubtract() && hit.collider.gameObject.GetComponent<TimeObject>().CheckAddition() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled )
                     {
+                        if ( hit.collider.gameObject.GetComponent<TimeCaseController>() != null )
+                        {
+                            if ( hit.collider.gameObject.GetComponent<TimeCaseController>().isOpening() )
+                            {
+                                // Don't allow player to shoot case that is opening
+                                return;
+                            }
+                        } 
                         hit.collider.gameObject.GetComponent<TimeObject>().AddTime(1);
                         playerTimeBank.SubtractTime(1);
                         AlterColor(laserLine, Color.green); // Show laser only if it is a time object

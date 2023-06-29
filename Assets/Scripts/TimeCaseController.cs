@@ -9,8 +9,8 @@ public class TimeCaseController : TimeObject
     public GameObject timeCaseParent;
 
     public bool openLeft;
-
     private float rotationSpeed = 50.0f;
+    bool opening;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,7 @@ public class TimeCaseController : TimeObject
         timeCaseParent.GetComponent<TMP_Text>().text = "Time Needed: " + currentPhase_i + "/" + maxTimePhase_i;
         if ( base.currentPhase_i == base.maxTimePhase_i )
         {
+            opening = true;
             if (openLeft)
             {
                 float rotateZ = rotationSpeed * Time.deltaTime;
@@ -52,6 +53,7 @@ public class TimeCaseController : TimeObject
     {
         int newPhase = Mathf.Clamp(base.currentPhase_i + addedTime, 0, base.maxTimePhase_i);
         currentPhase_i = newPhase;
+        StartCoroutine(flashGreenText());
         // currentPhase = Mathf.Clamp(newValue, 0, totalTimePhases);
         // timeObjectSpriteRenderer.sprite=this.GetSprite(currentPhase);
         // TryUpdateShapeToAttachedSprite();
@@ -61,8 +63,31 @@ public class TimeCaseController : TimeObject
     {
         int newPhase = Mathf.Clamp(base.currentPhase_i - subtractedTime, 0, base.maxTimePhase_i);
         currentPhase_i = newPhase;
+        StartCoroutine(flashRedText());
         // currentPhase = Mathf.Clamp(newValue, 0, totalTimePhases);
         // timeObjectSpriteRenderer.sprite=this.GetSprite(currentPhase);
         // TryUpdateShapeToAttachedSprite();
+    }
+
+
+    IEnumerator flashGreenText()
+    {
+        timeCaseParent.GetComponent<TMP_Text>().color = Color.white;
+        timeCaseParent.GetComponent<TMP_Text>().color = Color.green;
+        yield return new WaitForSeconds(0.5f);
+        timeCaseParent.GetComponent<TMP_Text>().color = Color.white;
+    }
+
+    IEnumerator flashRedText()
+    {
+        timeCaseParent.GetComponent<TMP_Text>().color = Color.white;
+        timeCaseParent.GetComponent<TMP_Text>().color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        timeCaseParent.GetComponent<TMP_Text>().color = Color.white;
+    }
+
+    public bool isOpening()
+    {
+        return opening;
     }
 }

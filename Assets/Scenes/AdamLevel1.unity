@@ -14156,6 +14156,7 @@ MonoBehaviour:
   phaseSprites: []
   timeCasePivotPoint: {fileID: 1598358432}
   timeCaseParent: {fileID: 1774480717}
+  openLeft: 0
 --- !u!61 &1774480720
 BoxCollider2D:
   m_ObjectHideFlags: 0

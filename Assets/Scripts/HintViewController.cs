@@ -17,9 +17,12 @@ public class HintViewController : MonoBehaviour
     private bool switchOutlines = false;
 
     public ShootMechanic shootMechanicScript;
-    public GameObject reminderHintText;
     public long timeToTriggerHint;
     private long timestampOfLastGunHit;
+    
+    // Target to canvas
+    public GameObject canvas;
+    private TextBoxController canvasTextController;
 
     void Start()
     {
@@ -27,7 +30,6 @@ public class HintViewController : MonoBehaviour
         greenOutline = Resources.Load<Material>("Green Outline");
         yellowOutline = Resources.Load<Material>("Yellow Outline");
         objects = GameObject.FindGameObjectsWithTag("TimeObject");
-        reminderHintText.SetActive(false);
 
         // Grab the sprite default
         foreach (GameObject timeObject in objects)
@@ -43,6 +45,9 @@ public class HintViewController : MonoBehaviour
                 }
             }
         }
+        
+        // Grab the text controller
+        this.canvasTextController = canvas.GetComponent<TextBoxController>();
     }
     // Update is called once per frame
     void Update()
@@ -106,8 +111,9 @@ public class HintViewController : MonoBehaviour
 
     IEnumerator displayReminderText()
     {
-        reminderHintText.SetActive(true);
-        yield return new WaitForSeconds(2.0f); 
-        reminderHintText.SetActive(false);
+        string textOutput = "Hold 'H' for Hint";
+        canvasTextController.ShowText(textOutput, false);
+        yield return new WaitForSeconds(5.0f);
+        canvasTextController.StopText(true);
     }
 }

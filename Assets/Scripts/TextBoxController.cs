@@ -21,21 +21,21 @@ public class TextBoxController : MonoBehaviour
     private string assistantText;
     private string basicText;
     private int index;
+    private float textSpeed = 25f;
 
     // Start is called before the first frame update
     void Start()
     {
-        basicTextBox.SetActive(false);
         assistantTextBox.SetActive(false);
-
-        basicTextComponent = basicTextBox.transform.GetChild(0).GetComponent<Text>();
         assistantTextComponent = assistantTextBox.transform.GetChild(0).GetComponent<Text>();
-
-        basicArrow = basicTextBox.transform.GetChild(1).GetComponent<Image>();
         assistantArrow = assistantTextBox.transform.GetChild(1).GetComponent<Image>();
-
-        basicArrow.enabled = false;
         assistantArrow.enabled = false;
+
+        basicTextBox.SetActive(false);
+        basicTextComponent = basicTextBox.transform.GetChild(0).GetComponent<Text>();
+        basicArrow = basicTextBox.transform.GetChild(1).GetComponent<Image>();
+        basicArrow.enabled = false;
+        
         timer = 0f;
         index = 0;
     }
@@ -49,7 +49,7 @@ public class TextBoxController : MonoBehaviour
 
         if (assistantPrinting)
         {
-            if (timer >= Time.deltaTime)
+            if ((timer)/textSpeed >= (Time.deltaTime))
             {
                 assistantTextComponent.text += assistantText[index];
 
@@ -69,7 +69,7 @@ public class TextBoxController : MonoBehaviour
         }
         else if (basicPrinting)
         {
-            if (timer >= Time.deltaTime)
+            if ((timer)/textSpeed >= Time.deltaTime)
             {
                 basicTextComponent.text += basicText[index];
 
@@ -91,7 +91,7 @@ public class TextBoxController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                StopText();
+                StopText(false);
             }
         }
     }
@@ -117,19 +117,20 @@ public class TextBoxController : MonoBehaviour
         }
 
         timer = 0f;
-        
-        
     }
 
-    private void StopText()
+    public void StopText(bool basicOnly)
     {
-        assistantTextComponent.text = "";
-        basicTextComponent.text = "";
-
+        
         basicTextBox.SetActive(false);
-        assistantTextBox.SetActive(false);
-
+        basicTextComponent.text = "";
         basicArrow.enabled = false;
-        assistantArrow.enabled = false;
+
+        if (!basicOnly)
+        {
+            assistantTextComponent.text = "";
+            assistantTextBox.SetActive(false);
+            assistantArrow.enabled = false;
+        }
     }
 }

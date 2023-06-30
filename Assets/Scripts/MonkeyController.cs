@@ -47,7 +47,6 @@ public class MonkeyController : MonoBehaviour
         {
             collision.transform.Rotate(0f, 0f, -90f);
             //collision.gameObject.tag = "Floor"; // Make it tag floor so we can jump after standing on it
-            Destroy(this.gameObject);
         }
     }
 }

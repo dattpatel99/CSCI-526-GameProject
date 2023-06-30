@@ -180,10 +180,14 @@ public class PlayerController : MonoBehaviour
         {
             //Prevent error for below if case when player runs into TimeCase
         }
-        else if (other.gameObject.transform.parent.CompareTag("Mushroom"))
+        
+        if (other.gameObject.transform.parent != null)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
-            rb2d.AddForce(new Vector2(0f, bounceForce));
+            if (other.gameObject.transform.parent.CompareTag("Mushroom"))
+            {
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
+                rb2d.AddForce(new Vector2(0f, bounceForce));
+            }
         }
         
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 
 public class SlidingRewindObject : MonoBehaviour
@@ -10,19 +11,40 @@ public class SlidingRewindObject : MonoBehaviour
     public float numberUnitMove;
     public float movementDirection;
     public float slideSpeed;
+    public Text counterText;
     private Vector3 startingPoint;
     private Vector3 endPoint;
-    private Rigidbody2D rb2d;
     private SpriteRenderer sr;
+
+    private bool objectRewinding;
+
     // Start is called before the first frame update
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        
         startingPoint = this.transform.position;
         endPoint = new Vector3(startingPoint.x + movementDirection * numberUnitMove, startingPoint.y, startingPoint.z);
         sr = GetComponent<SpriteRenderer>();
         sr.color = Color.white;
+
+        counterText.enabled = false;
+    }
+
+    void Update()
+    {
+        if (objectRewinding)
+        {
+            if (Vector3.Distance(transform.position, endPoint) > 0)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, endPoint, slideSpeed * Time.deltaTime);
+            }
+        }
+        else
+        {
+            if (Vector3.Distance(transform.position, startingPoint) > 0)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, startingPoint, slideSpeed * Time.deltaTime);
+            }
+        }
     }
 
     /// <summary>
@@ -31,35 +53,28 @@ public class SlidingRewindObject : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SlideRewind()
     {
-        float elapsedTime = 0f;
+        counterText.enabled = true;
+        counterText.text = "5";
+        yield return new WaitForSeconds(1);
+        counterText.text = "4";
+        yield return new WaitForSeconds(1);
+        counterText.text = "3";
+        yield return new WaitForSeconds(1);
+        counterText.text = "2";
+        yield return new WaitForSeconds(1);
+        counterText.text = "1";
+        yield return new WaitForSeconds(1);
 
-        while (elapsedTime < slideSpeed)
-        {
-            transform.position = Vector3.Lerp(startingPoint, endPoint, elapsedTime / slideSpeed);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        transform.position = endPoint;
-        elapsedTime = slideSpeed + 1;
-
-        yield return new WaitForSeconds(2);
-        elapsedTime = 0;
-        while (elapsedTime  < slideSpeed)
-        {
-            transform.position = Vector3.Lerp(endPoint, startingPoint, elapsedTime/ slideSpeed);
-            elapsedTime  += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = startingPoint;
-        elapsedTime = slideSpeed + 1;
         PlayerStatus.isRewinding = false;
         sr.color = Color.white;
+        objectRewinding = false;
+        counterText.enabled = false;
     }
     
     public void Rewind()
     {
         PlayerStatus.isRewinding = true;
+        objectRewinding = true;
         sr.color= Color.yellow;
         StartCoroutine(SlideRewind());
     }

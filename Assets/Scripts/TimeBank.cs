@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class TimeBank : MonoBehaviour
     void Start()
     {
         _timeStored = this._minimumTimeStored;
+        timeBankText.color = Color.white;
     }
 
     public int GetTimeStore()
@@ -24,7 +26,16 @@ public class TimeBank : MonoBehaviour
     // Ensure that there is enough time to subtract
     public bool CheckSubtract()
     {
-        return _timeStored > this._minimumTimeStored;
+        bool eval = _timeStored > this._minimumTimeStored;
+
+        Debug.Log(eval);
+
+        if (!eval)
+        {
+            StartCoroutine(DisfunctionalFlash());
+        }
+
+        return eval;
     }
 
     public bool CheckAddition()
@@ -51,5 +62,16 @@ public class TimeBank : MonoBehaviour
     void UpdateTimeDisplay()
     {
         timeBankText.text = "Time Stored: " + _timeStored;
+    }
+
+    IEnumerator DisfunctionalFlash ()
+    {
+        timeBankText.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        timeBankText.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        timeBankText.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        timeBankText.color = Color.white;
     }
 }

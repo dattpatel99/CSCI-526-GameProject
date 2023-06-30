@@ -13,9 +13,9 @@ public class TimeObject : MonoBehaviour
     public int initTimePhase_i; // Paul: strictly greater than 0
     public int maxTimePhase_i; // Paul: length of Sprites and Colliders array
     public Sprite[] phaseSprites;
-    private int currentPhase_i;
-    private Collider2D[] phaseColliders;
-    private SpriteRenderer timeObjectSpriteRenderer;
+    protected int currentPhase_i;
+    protected Collider2D[] phaseColliders;
+    protected SpriteRenderer timeObjectSpriteRenderer;
 
     // [SerializeField]
     // private bool[] colliderOn;
@@ -53,7 +53,7 @@ public class TimeObject : MonoBehaviour
         return this.reactable;
     }
 
-    public void AddTime(int addedTime)
+    public virtual void AddTime(int addedTime)
     {
         int newPhase = Mathf.Clamp(currentPhase_i + addedTime, 0, maxTimePhase_i);
         Update_SpriteNCollider(currentPhase_i, newPhase);
@@ -63,7 +63,7 @@ public class TimeObject : MonoBehaviour
         // TryUpdateShapeToAttachedSprite();
     }
 
-    public void SubtractTime(int subtractedTime)
+    public virtual void SubtractTime(int subtractedTime)
     {
         int newPhase = Mathf.Clamp(currentPhase_i - subtractedTime, 0, maxTimePhase_i);
         Update_SpriteNCollider(currentPhase_i, newPhase);

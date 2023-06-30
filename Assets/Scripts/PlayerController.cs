@@ -176,6 +176,10 @@ public class PlayerController : MonoBehaviour
         {
             ReceiveDamage(other.gameObject);
         }
+        else if (other.gameObject.name.Contains("TimeCaseParent"))
+        {
+            //Prevent error for below if case when player runs into TimeCase
+        }
         else if (other.gameObject.transform.parent.CompareTag("Mushroom"))
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);

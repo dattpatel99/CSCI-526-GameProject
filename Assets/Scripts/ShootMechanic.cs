@@ -22,6 +22,8 @@ public class ShootMechanic : MonoBehaviour
     private PlayerController playerControllerComp;
     private TimeBank playerTimeBank;
     private Transform playerTransform;
+    public GameObject analytics;
+    private AnalyticManager analyticManager;
 
     private LayerMask interactableMasks;
     
@@ -34,6 +36,7 @@ public class ShootMechanic : MonoBehaviour
         playerControllerComp = player.GetComponent<PlayerController>();
         playerTimeBank = player.GetComponent<TimeBank>();
         playerTransform = player.GetComponent<Transform>();
+        analyticManager = analytics.GetComponent<AnalyticManager>();
     }
 
     void Update()
@@ -46,11 +49,27 @@ public class ShootMechanic : MonoBehaviour
         // If any of the buttons clicked
         if (_take || _give)
         {
+            string clickType;
+            if (_give)
+            {
+                clickType = "Give";
+            }
+            else
+            {
+                clickType = "Take";
+            }
             // Shoot a raycast first
             RaycastHit2D hit = Physics2D.Raycast(nozzle.transform.position, transform.TransformDirection(Vector2.right), laserLength, interactableMasks);
             // If no collider hit then show laser yellow till laser length
             AlterColor(laserLine, Color.gray);
             
+            // Shot analysis
+            var x = Mathf.RoundToInt(transform.position.x);
+            var y = Mathf.RoundToInt(transform.position.y);
+            var timeStored = playerTimeBank.GetTimeStore();
+            var playerAge = playerControllerComp.getAge();
+            var currentHealth = playerControllerComp.getHP().GetHP();
+
             // If raycast hits a collider
             if (hit.collider != null)
             {
@@ -65,20 +84,19 @@ public class ShootMechanic : MonoBehaviour
                         hit.collider.gameObject.GetComponent<TimeObject>().SubtractTime(1);
                         playerTimeBank.AddTime(1);
                         AlterColor(laserLine, Color.red); // Show laser only if it is a time object
-                        // hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite(); // Paul: This method is being called already in SubtractTime
+                        analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Take", hit.collider.gameObject.name);
                     }
-                    else if (hit.collider.gameObject.CompareTag("Mirror"))
+                    else if (hit.collider.gameObject.CompareTag("Mirror") && playerControllerComp.getAge() > 0 )
                     {
-                        // Subtract time if player is not a baby
-                        if (playerControllerComp.getAge() > 0 )
-                        {
-                            playerControllerComp.decreaseAge();
+                        playerControllerComp.decreaseAge();
                             playerTimeBank.AddTime(1);
                             AlterColor(laserLine, Color.red);
 
                             // Shrink the player
                             playerTransform.localScale = playerControllerComp.getPlayerSize();
-                        }
+                            
+                            // Shoot Analysis
+                            analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "AgeSelf", hit.collider.gameObject.name);
                     }
                 }
                 // If Collider hits for addition
@@ -89,31 +107,30 @@ public class ShootMechanic : MonoBehaviour
                         hit.collider.gameObject.GetComponent<TimeObject>().AddTime(1);
                         playerTimeBank.SubtractTime(1);
                         AlterColor(laserLine, Color.green); // Show laser only if it is a time object
-                        // hit.collider.gameObject.GetComponent<TimeObject>().TryUpdateShapeToAttachedSprite(); // Paul: This method is being called already in AddTime
+                        analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Give", hit.collider.gameObject.name);
                     }
-                    else if (hit.collider.gameObject.CompareTag("Mirror") && playerTimeBank.CheckSubtract())
+                    else if (hit.collider.gameObject.CompareTag("Mirror") && playerTimeBank.CheckSubtract() && playerControllerComp.getAge() < 2)
                     {
-                        // Subtract time if player is not a baby
-                        if (playerControllerComp.getAge() < 2)
-                        {
                             playerControllerComp.increaseAge();
                             playerTimeBank.SubtractTime(1);
                             AlterColor(laserLine, Color.green);
 
                             // Grow the player
                             playerTransform.localScale = playerControllerComp.getPlayerSize();
-                        }
+                            analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "AgeSelf", hit.collider.gameObject.name);
                     }
                     else if (hit.collider.gameObject.CompareTag("Enemy") && playerTimeBank.CheckSubtract())
                     {
                         hit.collider.gameObject.GetComponent<EnemyController>().Die();
                         playerTimeBank.SubtractTime(1);
                         AlterColor(laserLine, Color.green);
+                        analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "AgeEnemy", hit.collider.gameObject.name);
                     }
                 }
 
                 if (PlayerStatus.rewindUnlocked)
                 {
+                    
                     // If raycast hits rewind object
                     if (hit.collider.gameObject.CompareTag("RewindObject") && !PlayerStatus.isRewinding)
                     {
@@ -125,6 +142,7 @@ public class ShootMechanic : MonoBehaviour
                             {
                                 fro.Rewind();
                                 AlterColor(laserLine, Color.yellow);
+                                analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
                             }
                         }
                         else if (hit.collider.gameObject.GetComponent<SlidingRewindObject>() != null)
@@ -134,6 +152,7 @@ public class ShootMechanic : MonoBehaviour
                             {
                                 sro.Rewind();
                                 AlterColor(laserLine, Color.yellow);
+                                analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
                             }
                         }
                         else if (hit.collider.gameObject.GetComponent<RotatingRewindObject>() != null)
@@ -144,6 +163,7 @@ public class ShootMechanic : MonoBehaviour
                             {
                                 rro.Rewind();
                                 AlterColor(laserLine, Color.yellow);
+                                analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType,"Rewind", hit.collider.gameObject.name);
                             }
                         }
                     }
@@ -153,6 +173,7 @@ public class ShootMechanic : MonoBehaviour
             else
             { 
                 _ShowLaser(nozzlePosition, nozzlePosition + nozzle.transform.right * laserLength);
+                analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType,"Missed", "Nothing");
             }
         }
     }

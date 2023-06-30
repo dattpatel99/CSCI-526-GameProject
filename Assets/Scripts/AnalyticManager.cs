@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Analytics;
+using Newtonsoft.Json;
 using Proyecto26;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
@@ -10,16 +12,22 @@ using UnityEngine.SceneManagement;
  */
 public class AnalyticManager : MonoBehaviour
 {
-    private AnalyticGameSession session;
+    // Objects
     public GameObject player;
     private PlayerController controller;
-    private string playID;
     private TimeBank bank;
+    
+    // Session objects
+    private AnalyticGameSession session;
+    private string playID;
     private float rt = 0.0f;
-    private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
     private long sessionId;
     private string levelName;
     private string userId;
+    
+    // Analytics
+    private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
+    private static int shotID;
 
     private void Awake()
     {
@@ -30,12 +38,18 @@ public class AnalyticManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        session = new AnalyticGameSession(sessionId, userId);
-        playID = System.Guid.NewGuid().ToString();
+        levelName = SceneManager.GetActiveScene().name;
+        
+        // avoid too many get Components
         controller = player.GetComponent<PlayerController>();
         bank = player.GetComponent<TimeBank>();
-    }
 
+        // For session Analytics
+        session = new AnalyticGameSession(sessionId, userId);
+        playID = System.Guid.NewGuid().ToString();
+        shotID = 0;
+    }
+ 
     public string GetPlayID()
     {
         return playID;
@@ -51,29 +65,42 @@ public class AnalyticManager : MonoBehaviour
     {
         rt += Time.deltaTime;
     }
-
-    public string getCurrentData()
+    public void SendShootInfo(int x, int y, int z, int timeStored, int age, int health, string clickType, string interactionType, string objectInteracted)
     {
-        return this.session.ToString();
+        shotID++;
+        var info = new ShootMapping(x, y, z,timeStored, age, health, clickType, interactionType, objectInteracted, rt);
+        StoreData(JsonConvert.SerializeObject(info), "GunDetail", shotID);
     }
 
     public void SendSessionInfo(bool finished)
     {
-        levelName = SceneManager.GetActiveScene().name;
         session.DataUpdate(finished, levelName, this.rt, controller.getHP().GetHP(), bank.GetTimeStore());
-        StoreData(session.ToString());
+        StoreData(session.ToString(), "GameAnalytic");
     }
     
-    private void StoreData(string json)
+    private void StoreData(string json, string location)
     {
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put(baseURL + "/alpha/GameAnalytic/" + sessionId.ToString() + '_' + playID + '_' + levelName + "/.json", json);
+            RestClient.Put($"{baseURL}/Beta/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
         }
         else
         {
-            RestClient.Put(baseURL + "/testPartTwo/GameAnalytic/" +  sessionId.ToString() + '_' + playID + '_' + levelName + "/.json", json);
+            RestClient.Put($"{baseURL}/preBetaTesting/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
+        }
+    }
+    
+    private void StoreData(string json, string location, int id)
+    {
+        // Implements sending data when on WebGL Build
+        if (!Application.isEditor)
+        {
+            RestClient.Put($"{baseURL}/Beta/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
+        }
+        else
+        {
+            RestClient.Put($"{baseURL}/preBetaTesting/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
         }
     }
 }

@@ -49,9 +49,6 @@ public class CocoonController : TimeObject
         currentPhase_i = newPhase;
         cocoon.GetComponent<Transform>().localScale = getCocoonSize();
         cocoon.GetComponent<Transform>().localPosition = getCocoonPosition();
-        // currentPhase = Mathf.Clamp(newValue, 0, totalTimePhases);
-        // timeObjectSpriteRenderer.sprite=this.GetSprite(currentPhase);
-        // TryUpdateShapeToAttachedSprite();
     }
 
     public Vector3 getCocoonSize()

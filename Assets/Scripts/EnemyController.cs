@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour, Enemy
+public class EnemyController : MonoBehaviour
 {
     public float range;
     public float speed;

@@ -106,6 +106,12 @@ public class ShootMechanic : MonoBehaviour
                             // Shoot Analysis
                             analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "AgeSelf", hit.collider.gameObject.name);
                     }
+                    else if (hit.collider.gameObject.CompareTag("BossOneShield"))
+                    {
+                        playerTimeBank.AddTime(1);
+                        AlterColor(laserLine, Color.red); // Show laser only if it is a time object
+                        analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Take", hit.collider.gameObject.name);
+                    }
                 }
                 // If Collider hits for addition
                 else if (_give)

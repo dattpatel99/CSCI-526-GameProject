@@ -13,6 +13,7 @@ TagManager:
   - Damaging
   - FinishLine
   - Enemy
+  - BossOneShield
   layers:
   - Default
   - TransparentFX

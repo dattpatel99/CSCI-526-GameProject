@@ -45,15 +45,14 @@ public class TimeBank : MonoBehaviour
     public void AddTime(int addedTime)
     {
         _timeStored += addedTime;
-        UpdateTimeDisplay();
+        StartCoroutine(UpdateTimeAddedDisplay());
     }
 
     // Remove time from time bank
     public void SubtractTime(int subtractedTime)
     {
         _timeStored -= subtractedTime;
-        UpdateTimeDisplay();
-
+        StartCoroutine(UpdateTimeDecreasedDisplay());
     }
 
     public void AlterTimeStored(int deltaTime)
@@ -66,6 +65,24 @@ public class TimeBank : MonoBehaviour
     void UpdateTimeDisplay()
     {
         timeBankText.text = "Time Stored: " + _timeStored;
+    }
+
+    IEnumerator UpdateTimeAddedDisplay()
+    {
+        timeBankText.color = Color.white;
+        timeBankText.color = Color.green;
+        UpdateTimeDisplay();
+        yield return new WaitForSeconds(0.2f);
+        timeBankText.color = Color.white;
+    }
+
+    IEnumerator UpdateTimeDecreasedDisplay()
+    {
+        timeBankText.color = Color.white;
+        timeBankText.color = Color.red;
+        UpdateTimeDisplay();
+        yield return new WaitForSeconds(0.2f);
+        timeBankText.color = Color.white;
     }
 
     IEnumerator DisfunctionalFlash ()

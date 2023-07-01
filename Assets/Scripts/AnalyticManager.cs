@@ -74,7 +74,7 @@ public class AnalyticManager : MonoBehaviour
 
     public void SendSessionInfo(bool finished)
     {
-        session.DataUpdate(finished, levelName, this.rt, controller.getHP().GetHP(), bank.GetTimeStore());
+        session.DataUpdate(finished, levelName, this.rt, controller.getHP().GetHP(), bank.GetTimeStore(), controller.getNumberDeaths());
         StoreData(session.ToString(), "GameAnalytic");
     }
     

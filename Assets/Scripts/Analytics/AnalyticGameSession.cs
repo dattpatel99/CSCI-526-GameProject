@@ -17,6 +17,7 @@ namespace Analytics{
         public int endLives;
         public int startingTimeStored;
         public int endingTimeStored;
+        public int deaths;
 
         public AnalyticGameSession(long sesID, string uID)
         { 
@@ -29,8 +30,9 @@ namespace Analytics{
         /**
          * This updates any remaining data that depends on the user reach  status to post the data
          */
-        public void DataUpdate(bool fini, string level, float runTime, int livesRemain, int timeStored)
+        public void DataUpdate(bool fini, string level, float runTime, int livesRemain, int timeStored, int deaths)
         {
+            this.deaths = deaths;
             this.finished = fini;
             this.level = level;
             this.timeToFinish = runTime;

@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private int damageValAll;
     private string playerStatus; // normal, invincible
     public static bool canCtrl; // will be set to true by CameraController
+    private int numberDeaths;
 
     // 3. Gun
     // =================================================================
@@ -87,6 +88,8 @@ public class PlayerController : MonoBehaviour
 
         AdjustSpeedAndJump();
         SetSprite();
+
+        numberDeaths = 0;
     }
 
     void Update()
@@ -217,11 +220,17 @@ public class PlayerController : MonoBehaviour
         return this.HP;
     }
 
+    public int getNumberDeaths()
+    {
+        return this.numberDeaths;
+    }
+
     private bool DeathCheck()
     {
         if (transform.position.y < -1000 || HP.GetCurr() == 0)
         {
             transform.position = this._respawnPosition;
+            numberDeaths ++;
             HP.Reset();
             rb2d.velocity = new Vector2(0f, 0f);
             return true;

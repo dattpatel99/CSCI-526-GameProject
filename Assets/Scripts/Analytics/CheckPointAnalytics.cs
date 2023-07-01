@@ -9,8 +9,10 @@ namespace Analytics {
         public int curHeart;
         public int curTimeBank;
         public int curPlayerAge;
-        public CheckPointAnalytics(string checkPointName, PlayerController playerController, TimeBank bank)
+        public bool repeat;
+        public CheckPointAnalytics(string checkPointName, PlayerController playerController, TimeBank bank, bool repeated)
         {
+            this.repeat = repeated;
             this.checkpointID = checkPointName;
             this.curHeart = playerController.getHP().GetHP();
             this.curPlayerAge = playerController.getAge();

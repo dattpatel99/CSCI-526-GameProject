@@ -8,9 +8,11 @@ public class CheckPoint : MonoBehaviour
     private SpriteRenderer signRender;
     private CheckPointAnalytics checkpointData;
     private CheckPointManager manager;
+    private static bool crossed;
 
     void Start()
     {
+        crossed = false;
         signRender = Sign.GetComponent<SpriteRenderer>();
         manager = gameObject.transform.parent.gameObject.GetComponent<CheckPointManager>();
     }
@@ -19,8 +21,9 @@ public class CheckPoint : MonoBehaviour
         if (other.GameObject().name == "Player")
         {
             other.GameObject().GetComponent<PlayerController>().setRespwan(this);
-            var info = new CheckPointAnalytics(gameObject.name, other.GameObject().GetComponent<PlayerController>(), other.GameObject().GetComponent<TimeBank>());
+            var info = new CheckPointAnalytics(gameObject.name, other.GameObject().GetComponent<PlayerController>(), other.GameObject().GetComponent<TimeBank>(), crossed);
             manager.SendData(info);
+            crossed = true;
         }
     }
 

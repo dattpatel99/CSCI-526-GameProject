@@ -54,9 +54,6 @@ public class TimeCaseController : TimeObject
         int newPhase = Mathf.Clamp(base.currentPhase_i + addedTime, 0, base.maxTimePhase_i);
         currentPhase_i = newPhase;
         StartCoroutine(flashGreenText());
-        // currentPhase = Mathf.Clamp(newValue, 0, totalTimePhases);
-        // timeObjectSpriteRenderer.sprite=this.GetSprite(currentPhase);
-        // TryUpdateShapeToAttachedSprite();
     }
 
     public override void SubtractTime(int subtractedTime)
@@ -64,9 +61,6 @@ public class TimeCaseController : TimeObject
         int newPhase = Mathf.Clamp(base.currentPhase_i - subtractedTime, 0, base.maxTimePhase_i);
         currentPhase_i = newPhase;
         StartCoroutine(flashRedText());
-        // currentPhase = Mathf.Clamp(newValue, 0, totalTimePhases);
-        // timeObjectSpriteRenderer.sprite=this.GetSprite(currentPhase);
-        // TryUpdateShapeToAttachedSprite();
     }
 
 

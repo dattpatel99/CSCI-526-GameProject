@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D boxCollider;
     private SpriteRenderer objectSpriteRenderer;
     private Color playerColor;
+    private int butterfliesCollected = 0;
 
     void Start()
     {
@@ -385,6 +386,19 @@ public class PlayerController : MonoBehaviour
             heartsObj.SetActive(true);
         }
     }
-    
-    
+
+    public int getButterfliesCollected()
+    {
+        return butterfliesCollected;
+    }
+
+    public void addButterfly()
+    {
+        butterfliesCollected += 1;
+    }
+
+    public void spendButterfly()
+    {
+        butterfliesCollected -= 1;
+    }
 }

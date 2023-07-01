@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Green Outline Cocoon
+  m_Name: Cocoon Green Outline
   m_Shader: {fileID: 4800000, guid: 62505ee61d20098489c6f861ed25cce1, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -88,13 +88,13 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Thickness: 5
+    - _Thickness: 20
     - _TileMode: 0
     - _UVSec: 0
     - _Weight: 0.5
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8962264, g: 0.29169634, b: 0.29169634, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GradientOutline1: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
     - _GradientOutline2: {r: 1, g: 1, b: 1, a: 1}

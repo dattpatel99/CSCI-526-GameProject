@@ -12,6 +12,9 @@ public class HintViewController : MonoBehaviour
     private Material greenOutline;
     private Material yellowOutline;
     private Material defaultMaterial;
+    private Material cocoonMaterial;
+    private Material cocoonGreenOutline;
+
     private bool held;
     
     private bool switchOutlines = false;
@@ -26,6 +29,10 @@ public class HintViewController : MonoBehaviour
         // Grab green outline mat
         greenOutline = Resources.Load<Material>("Green Outline");
         yellowOutline = Resources.Load<Material>("Yellow Outline");
+        cocoonMaterial = Resources.Load<Material>("Cocoon Outline");
+        cocoonGreenOutline = Resources.Load<Material>("Cocoon Green Outline");
+
+
         objects = GameObject.FindGameObjectsWithTag("TimeObject");
         reminderHintText.SetActive(false);
 
@@ -38,7 +45,7 @@ public class HintViewController : MonoBehaviour
                 {
                     if (renderer.GetType().Name == "SpriteRenderer")
                     {
-                        defaultMaterial = renderer.material;
+                       defaultMaterial = renderer.material;
                     }
                 }
             }
@@ -93,8 +100,15 @@ public class HintViewController : MonoBehaviour
                 foreach (var renderer in timeObject.GetComponents<Renderer>())
                 {
                     if (renderer.GetType().Name == "SpriteRenderer")
-                    { 
-                        renderer.material = enabled ? outline : defaultMaterial;
+                    {
+                        if (timeObject.name == "Cocoon")
+                        {
+                            renderer.material = enabled ? cocoonGreenOutline : cocoonMaterial;
+                        }
+                        else
+                        {
+                            renderer.material = enabled ? outline : defaultMaterial;
+                        }
                         //Switch between help enabled and not enabled
                     }
                 }

@@ -882,6 +882,7 @@ GameObject:
   - component: {fileID: 472389884}
   - component: {fileID: 472389885}
   - component: {fileID: 472389886}
+  - component: {fileID: 472389887}
   m_Layer: 0
   m_Name: Butterfly
   m_TagString: Untagged
@@ -1054,6 +1055,20 @@ PolygonCollider2D:
       - {x: -2.34, y: -2.82}
       - {x: -2.1299999, y: -2.59}
       - {x: -1.52, y: -2.3899999}
+--- !u!114 &472389887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472389883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d0dc4643b0c2a44ad1278c9a623db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1432233113}
+  butterfly: {fileID: 472389883}
 --- !u!1001 &476738603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3724,6 +3739,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2847372575785183047, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
   m_PrefabInstance: {fileID: 476738603}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1432233113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2847372575785183051, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}
+  m_PrefabInstance: {fileID: 476738603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432233105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6d317b031299ff4d95d2d893d5009ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1432928528 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2847372577066176168, guid: fae045a48ebf48a4d93d49f304b25b71, type: 3}

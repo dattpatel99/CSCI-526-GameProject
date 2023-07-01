@@ -68,7 +68,7 @@ public class TimeBank : MonoBehaviour
         timeBankText.color = Color.white;
         timeBankText.color = Color.green;
         UpdateTimeDisplay();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         timeBankText.color = Color.white;
     }
 
@@ -77,7 +77,7 @@ public class TimeBank : MonoBehaviour
         timeBankText.color = Color.white;
         timeBankText.color = Color.red;
         UpdateTimeDisplay();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         timeBankText.color = Color.white;
     }
 

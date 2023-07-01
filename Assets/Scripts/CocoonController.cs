@@ -76,14 +76,11 @@ public class CocoonController : TimeObject
         switch (base.currentPhase_i)
         {
             case 1:
-                newYPosition = newYPosition + 0.2f;
+                newYPosition = newYPosition + 0.05f;
                 break;
             case 2:
-                newYPosition = newYPosition + 0.3f;
+                newYPosition = newYPosition + 0.01f;
                 break;
-            default:
-                // shouldn't be possible
-                return new Vector3(0, 0, 0);
         }
 
         return new Vector3(initXPosition, newYPosition, initZPosition);

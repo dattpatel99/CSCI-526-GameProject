@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class ShootMechanic : MonoBehaviour
@@ -76,7 +77,23 @@ public class ShootMechanic : MonoBehaviour
                 // Track last time player hit a collider 
                 timestampOfLastGunHit = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
 
-                // If Collider hits for subtraction
+                if (hit.collider.gameObject.CompareTag("TimeObject"))
+                {
+                    HandleTimeObject(_take, x, y, timeStored, playerAge, currentHealth,hit.collider.gameObject);
+                }
+                else if (hit.collider.gameObject.CompareTag("Mirror"))
+                {
+                    HandleMirrorHit(_take, x, y, timeStored, playerAge, currentHealth,hit.collider.gameObject.name);
+                }
+                else if (hit.collider.gameObject.CompareTag("BossOneShield"))
+                {
+                    HandleBossOne(_take, x, y, timeStored, playerAge, currentHealth,hit.collider.gameObject);
+                }
+                else if (hit.collider.gameObject.CompareTag("Enemy"))
+                {
+                    HandleEnemy(_take, x, y, timeStored, playerAge, currentHealth,hit.collider.gameObject);
+                }
+                /*// If Collider hits for subtraction
                 if (_take)
                 {
                     if (hit.collider.gameObject.CompareTag("TimeObject") && hit.collider.gameObject.GetComponent<TimeObject>().CheckSubtraction() && hit.collider.gameObject.GetComponent<TimeObject>().isActiveAndEnabled)
@@ -148,8 +165,7 @@ public class ShootMechanic : MonoBehaviour
                         AlterColor(laserLine, Color.green);
                         analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "AgeEnemy", hit.collider.gameObject.name);
                     }
-                }
-
+                }*/
                 if (PlayerStatus.rewindUnlocked)
                 {
                     
@@ -197,6 +213,96 @@ public class ShootMechanic : MonoBehaviour
                 _ShowLaser(nozzlePosition, nozzlePosition + nozzle.transform.right * laserLength);
                 analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType,"Missed", "Nothing");
             }
+        }
+    }
+
+    public void HandleBossOne(bool take, int xLoc, int yLoc, int storedTime, int agePlayer, int healthPlayer, GameObject hitItem)
+    {
+        if (take)
+        {
+            // TODO: IF WE ADD AGE BOSSES TURN THIS INTO A SIMILAR STRUCTURE AS MIRROR AND TIME OBJECT
+            playerTimeBank.AddTime(1);
+            AlterColor(laserLine, Color.red); // Show laser only if it is a time object
+            analyticManager.SendShootInfo(xLoc,yLoc, 0, storedTime, agePlayer, healthPlayer, "Take", "Take", hitItem.name);
+        }
+    }
+
+    private void HandleEnemy(bool take, int xLoc, int yLoc, int storedTime, int agePlayer, int healthPlayer, GameObject hitItem)
+    {
+        if (!take && playerTimeBank.CheckSubtract())
+        {
+            // TODO: IF WE ADD DEAGEING ENEMIES TURN THIS INTO A SIMILAR STRUCTURE AS MIRROR AND TIME OBJECT
+            hitItem.GetComponent<EnemyController>().Die();
+            playerTimeBank.SubtractTime(1);
+            AlterColor(laserLine, Color.green);
+            analyticManager.SendShootInfo(xLoc,yLoc, 0, storedTime, agePlayer, healthPlayer, "Give", "AgeEnemy", hitItem.name);
+        }
+    }
+
+    /*
+     * Handling Time Objects
+     */
+    private void HandleTimeObject(bool take, int xLoc, int yLoc, int storedTime, int agePlayer, int healthPlayer, GameObject hitItem)
+    {
+        if (hitItem.GetComponent<CocoonController>() != null)
+        {
+            if (hitItem.GetComponent<CocoonController>().isOpening())
+            {
+                // Don't allow player to shoot case that is opening
+                return;
+            } 
+        }
+        // Shoot Analysis
+        TimeObject hitTimeObj = hitItem.GetComponent<TimeObject>();
+        string clickType = "Give";
+        string interactionType = "Give";
+        int deltaTimeStored = -1;
+        Color mirrorLaserColor = Color.green;
+        bool passedCriteria = this.playerTimeBank.CheckSubtract() && hitTimeObj.CheckAddition() && hitTimeObj.isActiveAndEnabled;
+
+        if (take)
+        {
+            clickType = "Take";
+            interactionType = "Take";
+            deltaTimeStored = 1;
+            mirrorLaserColor = Color.red;
+            passedCriteria = hitTimeObj.CheckSubtraction() && hitTimeObj.isActiveAndEnabled;
+        }
+        if (passedCriteria)
+        {
+            hitTimeObj.AlterTime(-deltaTimeStored);
+            this.playerTimeBank.AlterTimeStored(deltaTimeStored);
+            AlterColor(laserLine, mirrorLaserColor);
+            analyticManager.SendShootInfo(xLoc,yLoc, 0, storedTime, agePlayer, healthPlayer, clickType, interactionType, hitItem.name);
+        }
+    }
+
+    /*
+     * If take is false then it has to be give since that is the only option
+     */
+    private void HandleMirrorHit(bool take, int xLoc, int yLoc, int storedTime, int agePlayer, int healthPlayer, string hitName)
+    {
+        // Shoot Analysis
+        string clickType = "Give";
+        int ageChange = 1;
+        int deltaTimeStored = -1;
+        Color mirrorLaserColor = Color.green;
+        bool passedCriteria = (this.playerControllerComp.getAge() > 0);
+        if (take)
+        {
+            clickType = "Take";
+            ageChange = -1;
+            deltaTimeStored = 1;
+            mirrorLaserColor = Color.red;
+            passedCriteria = (playerTimeBank.CheckSubtract()) && (playerControllerComp.getAge() < 2);
+        }
+        if (passedCriteria)
+        {
+            playerControllerComp.AlterAge(ageChange);
+            playerTimeBank.AlterTimeStored(deltaTimeStored);
+            AlterColor(laserLine, mirrorLaserColor);
+            playerTransform.localScale = playerControllerComp.getPlayerSize();
+            analyticManager.SendShootInfo(xLoc,yLoc, 0,storedTime, agePlayer, healthPlayer, clickType, "AgeSelf", hitName);
         }
     }
 

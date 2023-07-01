@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class RotatingRewindObject : MonoBehaviour
 {
     public float rotationSpeed;
-    private bool objectRewinding;
     private SpriteRenderer sr;
     public Text counterText;
+    private bool objectRewinding;
 
     // Start is called before the first frame update
     void Start()

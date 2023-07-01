@@ -8,15 +8,15 @@ public class SlidingRewindObject : MonoBehaviour
 {
     // -ve to move left and +ve to move right
     // Unit is current - start
+    private Vector3 startingPoint;
+    private Vector3 endPoint;
     public float numberUnitMove;
     public float movementDirection;
     public float slideSpeed;
-    public Text counterText;
-    private Vector3 startingPoint;
-    private Vector3 endPoint;
     private SpriteRenderer sr;
-
+    public Text counterText;
     private bool objectRewinding;
+
 
     // Start is called before the first frame update
     void Start()

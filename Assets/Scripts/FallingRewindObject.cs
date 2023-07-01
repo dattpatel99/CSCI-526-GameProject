@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class FallingRewindObject : MonoBehaviour
 {
     private Vector3 startPosition;
-    private bool objectRewinding;
     private Rigidbody2D rb2d;
     private SpriteRenderer sr;
     public Text counterText;
+    private bool objectRewinding;
 
     // Start is called before the first frame update
     void Start()

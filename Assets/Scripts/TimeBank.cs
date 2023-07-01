@@ -57,6 +57,12 @@ public class TimeBank : MonoBehaviour
         UpdateTimeDisplay();
 
     }
+
+    public void AlterTimeStored(int deltaTime)
+    {
+        _timeStored += deltaTime;
+        UpdateTimeDisplay();
+    }
     
     // Update the time
     void UpdateTimeDisplay()

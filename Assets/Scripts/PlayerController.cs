@@ -247,6 +247,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void AlterAge(int change)
+    {
+        playerAge += change;
+        AdjustSpeedAndJump();
+        SetSprite();
+    }
 
     public void increaseAge()
     {
@@ -385,6 +391,5 @@ public class PlayerController : MonoBehaviour
             heartsObj.SetActive(true);
         }
     }
-    
     
 }

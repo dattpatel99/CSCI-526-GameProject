@@ -73,6 +73,13 @@ public class TimeObject : MonoBehaviour
         // TryUpdateShapeToAttachedSprite();
     }
 
+    public virtual void AlterTime(int deltaTime)
+    {
+        int newPhase = Mathf.Clamp(currentPhase_i +deltaTime, 0, maxTimePhase_i);
+        Update_SpriteNCollider(currentPhase_i, newPhase);
+        currentPhase_i = newPhase;
+    }
+
     private void Update_SpriteNCollider(int currentPhase, int newPhase)
     {
         timeObjectSpriteRenderer.sprite = phaseSprites[newPhase];
@@ -98,37 +105,4 @@ public class TimeObject : MonoBehaviour
     {
         return this.phaseSprites[currentTime];
     }
-
-    /*
-
-    // These two functions are used to update the collider based on png of sprite
-    
-    // Unity Reference: https://answers.unity.com/questions/722748/refreshing-the-polygon-collider-2d-upon-sprite-cha.html
-    public void TryUpdateShapeToAttachedSprite ()
-    {
-        PolygonCollider2D thisObjectsCollider = this.GetComponent<PolygonCollider2D>();
-        this.UpdateShapeToSprite(thisObjectsCollider, thisObjectsCollider.GetComponent<SpriteRenderer>().sprite);
-
-        // The collider is set to be a trigger if we want the player to be able to walk past it
-        thisObjectsCollider.isTrigger = !colliderOn[currentPhase];
-    }
-    private void UpdateShapeToSprite (PolygonCollider2D colliderObject, Sprite sprite) { 
-        // ensure both valid
-        if (colliderObject != null && sprite != null) {
-            // update count
-            colliderObject.pathCount = sprite.GetPhysicsShapeCount();
-            // new paths variable
-            List<Vector2> path = new List<Vector2>();
-            // loop path count
-            for (int i = 0; i < colliderObject.pathCount; i++) {
-                // clear
-                path.Clear();
-                // get shape
-                sprite.GetPhysicsShape(i, path);
-                // set path
-                colliderObject.SetPath(i, path.ToArray());
-            }
-        }
-    }
-    */
 }

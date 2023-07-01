@@ -26,9 +26,7 @@ public class TimeBank : MonoBehaviour
     // Ensure that there is enough time to subtract
     public bool CheckSubtract()
     {
-        bool eval = _timeStored > this._minimumTimeStored;
-
-        Debug.Log(eval);
+        bool eval = _timeStored - 1 >= this._minimumTimeStored;
 
         if (!eval)
         {

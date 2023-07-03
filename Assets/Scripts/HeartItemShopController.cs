@@ -5,6 +5,8 @@ using UnityEngine;
 public class HeartItemShopController : MonoBehaviour
 {
     // Start is called before the first frame update
+    public PlayerController player;
+
     void Start()
     {
         
@@ -14,5 +16,15 @@ public class HeartItemShopController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void BuyHeart()
+    {
+        // Player adds health
+        if ( player.getButterfliesCollected() >= 1 )
+        {
+            player.spendButterfly();
+            player.getHP().AddMax();
+        }
     }
 }

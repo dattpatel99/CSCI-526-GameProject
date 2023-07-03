@@ -9,6 +9,7 @@ public class ShopNpcController : MonoBehaviour
     public Canvas gameUI;
     public PlayerController player;
     public Button closeButton;
+    public GameObject warningText;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class ShopNpcController : MonoBehaviour
         Debug.Log("Opening shop");
         gameUI.gameObject.SetActive(false);
         shop.gameObject.SetActive(true);
+        warningText.SetActive(false);
     }
 
     public void CloseShop()
@@ -55,5 +57,26 @@ public class ShopNpcController : MonoBehaviour
         {
             CloseShop();
         }
+    }
+
+    public void BuyHeart()
+    {
+        // Player adds health
+        if (player.getButterfliesCollected() >= 1)
+        {
+            player.spendButterfly();
+            player.getHP().AddMax();
+        } 
+        else
+        {
+            StartCoroutine(FlashWarningText());
+        }
+    }
+
+    IEnumerator FlashWarningText()
+    {
+        warningText.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        warningText.SetActive(false);
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ShopNpcController : MonoBehaviour
 {
-    public Canvas shop;
-    public Canvas gameUI;
+    public GameObject shop;
+    public GameObject timeStoredText;
     public PlayerController player;
     public Button closeButton;
     public GameObject warningText;
@@ -26,7 +26,7 @@ public class ShopNpcController : MonoBehaviour
     public void OpenShop()
     {
         Debug.Log("Opening shop");
-        gameUI.gameObject.SetActive(false);
+        timeStoredText.SetActive(false);
         shop.gameObject.SetActive(true);
         warningText.SetActive(false);
     }
@@ -34,7 +34,7 @@ public class ShopNpcController : MonoBehaviour
     public void CloseShop()
     {
         Debug.Log("Closing shop");
-        gameUI.gameObject.SetActive(true);
+        timeStoredText.SetActive(true);
         shop.gameObject.SetActive(false);
     }
 

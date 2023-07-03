@@ -145,12 +145,14 @@ public class ShootMechanic : MonoBehaviour
 
     public void HandleBossOne(bool take, int xLoc, int yLoc, int storedTime, int agePlayer, int healthPlayer, GameObject hitItem)
     {
+        ShieldController shield = hitItem.GetComponent<ShieldController>();
         if (take)
         {
             // TODO: IF WE ADD AGE BOSSES TURN THIS INTO A SIMILAR STRUCTURE AS MIRROR AND TIME OBJECT
             playerTimeBank.AddTime(1);
             AlterColor(laserLine, Color.red); // Show laser only if it is a time object
             analyticManager.SendShootInfo(xLoc,yLoc, 0, storedTime, agePlayer, healthPlayer, "Take", "Take", hitItem.name);
+            shield.HitDestroy();
         }
     }
 

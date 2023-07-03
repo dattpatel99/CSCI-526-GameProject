@@ -28,6 +28,7 @@ public class AnalyticManager : MonoBehaviour
     // Analytics
     private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
     private static int shotID;
+    private static int damageID;
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class AnalyticManager : MonoBehaviour
         session = new AnalyticGameSession(sessionId, userId);
         playID = System.Guid.NewGuid().ToString();
         shotID = 0;
+        damageID = 0;
     }
  
     public string GetPlayID()
@@ -70,6 +72,13 @@ public class AnalyticManager : MonoBehaviour
         shotID++;
         var info = new ShootMapping(x, y, z,timeStored, age, health, clickType, interactionType, objectInteracted, rt);
         StoreData(JsonConvert.SerializeObject(info), "GunDetail", shotID);
+    }
+
+    public void SendDamageInfo(bool died,string damagingObject,int prevHearts,int afterHears,int x,int y)
+    {
+        damageID++;
+        var damageMap = new Damaged(died, damagingObject, prevHearts, afterHears, x, y);
+        StoreData(JsonConvert.SerializeObject(damageMap), "DamageDetails", damageID);
     }
 
     public void SendSessionInfo(bool finished)

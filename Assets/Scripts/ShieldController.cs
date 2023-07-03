@@ -7,6 +7,6 @@ public class ShieldController : MonoBehaviour
 {
     public void HitDestroy()
     {
-        Destroy(this);
+        gameObject.SetActive(false);
     }
 }

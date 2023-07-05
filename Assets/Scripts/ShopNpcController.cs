@@ -27,7 +27,7 @@ public class ShopNpcController : MonoBehaviour
     {
         Debug.Log("Opening shop");
         timeStoredText.SetActive(false);
-        shop.gameObject.SetActive(true);
+        shop.SetActive(true);
         warningText.SetActive(false);
     }
 
@@ -35,7 +35,7 @@ public class ShopNpcController : MonoBehaviour
     {
         Debug.Log("Closing shop");
         timeStoredText.SetActive(true);
-        shop.gameObject.SetActive(false);
+        shop.SetActive(false);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

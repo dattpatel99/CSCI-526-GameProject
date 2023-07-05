@@ -51,6 +51,14 @@ public class CocoonController : TimeObject
         cocoon.GetComponent<Transform>().localPosition = getCocoonPosition();
     }
 
+    public override void AlterTime(int deltaTime)
+    {
+        int newPhase = Mathf.Clamp(currentPhase_i + deltaTime, 0, maxTimePhase_i);
+        currentPhase_i = newPhase;
+        cocoon.GetComponent<Transform>().localScale = getCocoonSize();
+        cocoon.GetComponent<Transform>().localPosition = getCocoonPosition();
+    }
+
     public Vector3 getCocoonSize()
     {
         switch (base.currentPhase_i)

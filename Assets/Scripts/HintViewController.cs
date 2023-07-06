@@ -43,13 +43,13 @@ public class HintViewController : MonoBehaviour
         {
             if (timeObject.GetComponent<Renderer>() != null)
             {
-                foreach (var objRenderer in timeObject.GetComponents<Renderer>())
+                foreach (var renderer in timeObject.GetComponents<Renderer>())
                 {
-                    if (objRenderer.GetType().Name == "SpriteRenderer")
+                    if (renderer.GetType().Name == "SpriteRenderer")
                     {
                         if (timeObject.name != "Cocoon")
                         {
-                            defaultMaterial = objRenderer.material;
+                            defaultMaterial = renderer.material;
                         }
                     }
                 }
@@ -105,17 +105,17 @@ public class HintViewController : MonoBehaviour
         {
             if (timeObject.GetComponent<Renderer>() != null)
             {
-                foreach (var objRenderer in timeObject.GetComponents<Renderer>())
+                foreach (var renderer in timeObject.GetComponents<Renderer>())
                 {
-                    if (objRenderer.GetType().Name == "SpriteRenderer")
+                    if (renderer.GetType().Name == "SpriteRenderer")
                     {
                         if (timeObject.name == "Cocoon")
                         {
-                            objRenderer.material = outlineEnabled ? cocoonGreenOutline : cocoonMaterial;
+                            renderer.material = outlineEnabled ? cocoonGreenOutline : cocoonMaterial;
                         }
                         else
                         {
-                            objRenderer.material = outlineEnabled ? outline : defaultMaterial;
+                            renderer.material = outlineEnabled ? outline : defaultMaterial;
                         }
                         //Switch between help enabled and not enabled
                     }

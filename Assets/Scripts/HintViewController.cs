@@ -43,11 +43,11 @@ public class HintViewController : MonoBehaviour
         {
             if (timeObject.GetComponent<Renderer>() != null)
             {
-                foreach (var renderer in timeObject.GetComponents<Renderer>())
+                foreach (var objRenderer in timeObject.GetComponents<Renderer>())
                 {
-                    if (renderer.GetType().Name == "SpriteRenderer")
+                    if (objRenderer.GetType().Name == "SpriteRenderer")
                     {
-                       defaultMaterial = renderer.material;
+                       defaultMaterial = objRenderer.material;
                     }
                 }
             }
@@ -94,7 +94,7 @@ public class HintViewController : MonoBehaviour
         }
     }
 
-    private void addOutlineToTimeObjects(Material outline, string tagName, bool enabled)
+    private void addOutlineToTimeObjects(Material outline, string tagName, bool outlineEnabled)
     {
         //Do on update so we don't grab destroyed objects 
         objects = GameObject.FindGameObjectsWithTag(tagName);
@@ -102,17 +102,17 @@ public class HintViewController : MonoBehaviour
         {
             if (timeObject.GetComponent<Renderer>() != null)
             {
-                foreach (var renderer in timeObject.GetComponents<Renderer>())
+                foreach (var objRenderer in timeObject.GetComponents<Renderer>())
                 {
-                    if (renderer.GetType().Name == "SpriteRenderer")
+                    if (objRenderer.GetType().Name == "SpriteRenderer")
                     {
                         if (timeObject.name == "Cocoon")
                         {
-                            renderer.material = enabled ? cocoonGreenOutline : cocoonMaterial;
+                            objRenderer.material = outlineEnabled ? cocoonGreenOutline : cocoonMaterial;
                         }
                         else
                         {
-                            renderer.material = enabled ? outline : defaultMaterial;
+                            objRenderer.material = outlineEnabled ? outline : defaultMaterial;
                         }
                         //Switch between help enabled and not enabled
                     }

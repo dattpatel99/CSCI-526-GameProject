@@ -53,11 +53,11 @@ public class CheckPointManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put($"{baseURL}/Beta/CheckPointGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossedCheckPoints}/.json", json);
+            RestClient.Put($"{baseURL}/BetaV1/CheckPointGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossedCheckPoints}/.json", json);
         }
         else
         {
-            RestClient.Put($"{baseURL}/preBetaTesting/CheckPointGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossedCheckPoints}/.json", json);
+            RestClient.Put($"{baseURL}/editorBeta/CheckPointGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossedCheckPoints}/.json", json);
         }
     }
     

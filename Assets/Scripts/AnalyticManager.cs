@@ -92,11 +92,11 @@ public class AnalyticManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put($"{baseURL}/Beta/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
+            RestClient.Put($"{baseURL}/BetaV1/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
         }
         else
         {
-            RestClient.Put($"{baseURL}/preBetaTesting/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
+            RestClient.Put($"{baseURL}/editorBeta/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
         }
     }
     
@@ -105,11 +105,11 @@ public class AnalyticManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put($"{baseURL}/Beta/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
+            RestClient.Put($"{baseURL}/BetaV1/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
         }
         else
         {
-            RestClient.Put($"{baseURL}/preBetaTesting/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
+            RestClient.Put($"{baseURL}/editorBeta/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
         }
     }
 }

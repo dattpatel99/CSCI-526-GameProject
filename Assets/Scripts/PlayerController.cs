@@ -164,7 +164,6 @@ public class PlayerController : MonoBehaviour
                 isBeanstalk = true;
             }
         }
-        // Debug.Log(string.Format("contact layer {0}, water layer {1}", other.gameObject.layer, LayerMask.GetMask("Water")));
         if (other.gameObject.layer == LayerMask.NameToLayer("Water") && playerStatus == "normal")
         {
             HP.Damage(damageValAll);

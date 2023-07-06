@@ -44,11 +44,11 @@ public class SectionManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put($"{baseURL}/Beta/SectionGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossSections}/.json", json);
+            RestClient.Put($"{baseURL}/BetaV1/SectionGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossSections}/.json", json);
         }
         else
         {
-            RestClient.Put($"{baseURL}/preBetaTesting/SectionGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossSections}/.json", json);
+            RestClient.Put($"{baseURL}/editorBeta/SectionGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossSections}/.json", json);
         }
     }
 }

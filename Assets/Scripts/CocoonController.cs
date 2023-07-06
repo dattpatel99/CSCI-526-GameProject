@@ -20,8 +20,6 @@ public class CocoonController : TimeObject
         initZPosition = cocoon.GetComponent<Transform>().localPosition.z;
         initYPosition = cocoon.GetComponent<Transform>().localPosition.y;
         butterfly.SetActive(false);
-
-        Debug.Log(initYPosition);
     }
 
     // Update is called once per frame

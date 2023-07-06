@@ -47,7 +47,10 @@ public class HintViewController : MonoBehaviour
                 {
                     if (objRenderer.GetType().Name == "SpriteRenderer")
                     {
-                       defaultMaterial = objRenderer.material;
+                        if (timeObject.name != "Cocoon")
+                        {
+                            defaultMaterial = objRenderer.material;
+                        }
                     }
                 }
             }

@@ -17,16 +17,14 @@ namespace Analytics{
         public int leaveHearts;
         public int startTimeBank;
         public int leaveTimeBank;
-        public int numberPuzzles;
         public float timeSpent;
-        
-        public SectionAnalytics(string sectionName, float timeEnter, PlayerController control, TimeBank bank, int puzzleNum)
+
+        public SectionAnalytics(string sectionName, float timeEnter, PlayerController control, TimeBank bank)
         {
             this.sectionID = sectionName;
             this.enterHearts = control.getHP().GetHP();
             this.enterTime = timeEnter;
             this.startTimeBank = bank.GetTimeStore();
-            this.numberPuzzles = puzzleNum;
         }
 
         public void UpdateLeaving(float timeLeave,PlayerController control, TimeBank bank)

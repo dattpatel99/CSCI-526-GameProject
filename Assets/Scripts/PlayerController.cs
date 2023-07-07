@@ -107,8 +107,8 @@ public class PlayerController : MonoBehaviour
         xSpeed = Input.GetAxis("Horizontal") * currentSpeed;
         jumpInput = Input.GetButtonDown("Jump");
         feetPos = feet.position;
-        grounded = Physics2D.OverlapCircle(feetPos, .2f, groundLayer);
-        onObject = Physics2D.OverlapCircle(feetPos, .2f, objectLayer);
+        grounded = Physics2D.OverlapCircle(feetPos, .4f, groundLayer);
+        onObject = Physics2D.OverlapCircle(feetPos, .4f, objectLayer);
         
         if (!grounded && !lastGroundedPosRecorded)
         {

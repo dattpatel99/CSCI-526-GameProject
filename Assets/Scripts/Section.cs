@@ -11,8 +11,7 @@ public class Section : MonoBehaviour
     private SectionManager manager;
     private float runtime;
     public int puzzleNum;
-    private static bool firstEntryDone;
-
+    private bool firstEntryDone;
     private int startDeaths;
     // Start is called before the first frame update
     void Start()

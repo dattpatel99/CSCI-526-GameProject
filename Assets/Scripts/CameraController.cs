@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera playerCam;
     public CinemachineVirtualCamera goalCam;
     private float initOrthoSize;
+    private bool cameraSizeSmall = true;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,12 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            cameraSizeSmall = !cameraSizeSmall;
+        }
+
+        if (!cameraSizeSmall)
         {
             playerCam.m_Lens.OrthographicSize = 15;
         }

@@ -13,7 +13,6 @@ public class CheckPointManager : MonoBehaviour
     public GameObject analytics;
     private AnalyticManager _analyticManager;
     private static List<Transform> _checkpoints = new List<Transform>();
-    private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
     private string levelName;
     private float rt;
 
@@ -53,11 +52,11 @@ public class CheckPointManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put($"{baseURL}/BetaV1/CheckPointGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossedCheckPoints}/.json", json);
+            RestClient.Put($"{_analyticManager.getDeployLink()}/CheckPointGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossedCheckPoints}/.json", json);
         }
         else
         {
-            RestClient.Put($"{baseURL}/editorBeta/CheckPointGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossedCheckPoints}/.json", json);
+            RestClient.Put($"{_analyticManager.getEditLink()}/CheckPointGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossedCheckPoints}/.json", json);
         }
     }
     

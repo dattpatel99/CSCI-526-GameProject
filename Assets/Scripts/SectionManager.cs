@@ -12,7 +12,6 @@ public class SectionManager : MonoBehaviour
     private static int crossSections = 0;
     public GameObject analytics;
     private AnalyticManager _analyticManager;
-    private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
     private string levelName;
     private List<Transform> _sections = new List<Transform>();
 
@@ -24,6 +23,11 @@ public class SectionManager : MonoBehaviour
         {
             _sections.Add(parentTransform.GetChild(i).gameObject.transform);
         }
+    }
+
+    public int GetNumberDeaths()
+    {
+        return _analyticManager.GetNumberDeaths();
     }
     
     public void SendData(SectionAnalytics sectionPoint)
@@ -44,11 +48,11 @@ public class SectionManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put($"{baseURL}/BetaV1/SectionGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossSections}/.json", json);
+            RestClient.Put($"{_analyticManager.getDeployLink()}/SectionGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossSections}/.json", json);
         }
         else
         {
-            RestClient.Put($"{baseURL}/editorBeta/SectionGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossSections}/.json", json);
+            RestClient.Put($"{_analyticManager.getEditLink()}/SectionGraph/{_analyticManager.GetSessionID().ToString()}_{_analyticManager.GetPlayID()}_{levelName}/{crossSections}/.json", json);
         }
     }
 }

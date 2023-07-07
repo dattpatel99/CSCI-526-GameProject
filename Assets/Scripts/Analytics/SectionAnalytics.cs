@@ -18,6 +18,7 @@ namespace Analytics{
         public int startTimeBank;
         public int leaveTimeBank;
         public float timeSpent;
+        public int numDeaths;
 
         public SectionAnalytics(string sectionName, float timeEnter, PlayerController control, TimeBank bank)
         {
@@ -27,8 +28,9 @@ namespace Analytics{
             this.startTimeBank = bank.GetTimeStore();
         }
 
-        public void UpdateLeaving(float timeLeave,PlayerController control, TimeBank bank)
+        public void UpdateLeaving(float timeLeave,PlayerController control, TimeBank bank, int deaths)
         {
+            this.numDeaths = deaths;
             this.leaveHearts = control.getHP().GetHP();
             this.leaveTime = timeLeave;
             this.leaveTimeBank = bank.GetTimeStore();

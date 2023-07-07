@@ -23,7 +23,7 @@ public class TextBoxController : MonoBehaviour
     private string assistantText;
     private string basicText;
     private int index;
-    private float textSpeed = 10f;
+    private float textSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()

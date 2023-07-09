@@ -58,7 +58,14 @@ public class TimeBank : MonoBehaviour
     public void AlterTimeStored(int deltaTime)
     {
         _timeStored += deltaTime;
-        UpdateTimeDisplay();
+        if (deltaTime < 0 )
+        {
+            StartCoroutine(UpdateTimeDecreasedDisplay());
+        }
+        else
+        {
+            StartCoroutine(UpdateTimeAddedDisplay());
+        }
     }
     
     // Update the time

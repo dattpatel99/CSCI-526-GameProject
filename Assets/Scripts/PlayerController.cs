@@ -39,12 +39,14 @@ public class PlayerController : MonoBehaviour
     // 2. Health & Damage
     // =================================================================
     public GameObject heartsObj;
+    public GameObject gameOverScreen;
     public float afterDmgForce;
     private PlayerHealth HP;
     private int damageValAll;
     private string playerStatus; // normal, invincible
     public static bool canCtrl; // will be set to true by CameraController
     private int numberDeaths;
+    
 
     // 3. Gun
     // =================================================================
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        gameOverScreen.SetActive(false);
         _manger = analyticManager.GetComponent<AnalyticManager>();
         objectSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerColor = objectSpriteRenderer.color;
@@ -231,14 +234,23 @@ public class PlayerController : MonoBehaviour
         return this.numberDeaths;
     }
 
+    public void Respawn()
+    {
+        Time.timeScale = 1f;
+        transform.position = this._respawnPosition;
+        numberDeaths++;
+        HP.Reset();
+        rb2d.velocity = new Vector2(0f, 0f);
+        gameOverScreen.SetActive(false);
+    }
+
     private bool DeathCheck()
     {
         if (transform.position.y < -1000 || HP.GetCurr() == 0)
         {
-            transform.position = this._respawnPosition;
-            numberDeaths ++;
-            HP.Reset();
-            rb2d.velocity = new Vector2(0f, 0f);
+            gameOverScreen.SetActive(true);
+            Time.timeScale = 0f;
+            //Add game over screen here
             return true;
         }
         return false;

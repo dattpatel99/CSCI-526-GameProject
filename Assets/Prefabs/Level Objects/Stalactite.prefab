@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8168294875912417635}
   - component: {fileID: 4585765351724188958}
   - component: {fileID: 6259958423479011482}
+  - component: {fileID: 6162073980189284673}
   m_Layer: 6
   m_Name: Stalactite
   m_TagString: RewindObject
@@ -170,6 +171,22 @@ PolygonCollider2D:
       - {x: 0.14516273, y: 0.10797164}
       - {x: 0.13126783, y: 0.11961931}
       - {x: 0.21681209, y: 0.5002866}
+--- !u!58 &6162073980189284673
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814061633915484288}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.05, y: -0.4}
+  serializedVersion: 2
+  m_Radius: 0.1
 --- !u!1 &3104999749834580494
 GameObject:
   m_ObjectHideFlags: 0

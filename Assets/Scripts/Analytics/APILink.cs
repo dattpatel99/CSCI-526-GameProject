@@ -4,7 +4,7 @@
     {
         private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
         private string editorApi = "editorBetav2";
-        private string deploymentAPI = "Betav2";
+        private string deploymentAPI = "friendsBetav1";
         
         public APILink(){}
 

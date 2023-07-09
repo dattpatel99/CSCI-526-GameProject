@@ -6,38 +6,75 @@ using UnityEngine;
 
 public class BossOne : MonoBehaviour
 {
-    public float speed;
+    // Enemy Movement 
+    public float speed = -2.0f;
+    private float center;
+    private float leftPoint;
+    private float rightPoint;
+    public float range;
+    private Rigidbody2D rb2d;
+    private bool turned;
+
+    // Enemy Shields
     private List<Transform> ShieldGroups;
     private List<Transform> Shields;
     public bool group1Active;
     private float timer;
     public float SwapTime;
     private int numActiveShields;
+
+
     void Start()
     {
+        // Movement
         this.timer = 0f;
+        center = transform.position.x;
+        leftPoint = center - range;
+        rightPoint = center + range;
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
+
+        // Shields
         ShieldGroups = new List<Transform>();
         Shields = new List<Transform>();
-        ShieldGroups.Add(getChildren(gameObject, "Group1")); 
-        ShieldGroups.Add(getChildren(gameObject, "Group2")); 
+        ShieldGroups.Add(getChildrenByName(gameObject, "Group1")); 
+        ShieldGroups.Add(getChildrenByName(gameObject, "Group2")); 
         ShieldGroups[1].gameObject.SetActive(false); 
         group1Active = true;
-        foreach (var group in ShieldGroups) 
-        { 
-            Shields = getAllChildren(group.transform, Shields); 
-        } 
-        numActiveShields = Shields.Count;
+        UpdateShields();
     }
 
     void Update()
     {
-        foreach (var group in ShieldGroups)
-        {
-            Shields = getAllChildren(group.transform, Shields);
-        }
-        numActiveShields = Shields.Count;
+        UpdateShields();
+        EnemyLevelUp();
+        ShieldSwap();
+        BossMovement();
+    }
 
-        
+    public void BossMovement()
+    {
+        // Movement Scripts
+        // If at edge of left point and haven't turned turn
+        if (transform.position.x < leftPoint && !turned)
+        {
+            speed = -speed;
+            turned = true;
+        }
+        // If at edge of right point and haven't turned turn
+        else if (transform.position.x > rightPoint && !turned)
+        {
+            speed = -speed;
+            turned = true;
+        }
+        else if(transform.position.x > leftPoint && transform.position.x < rightPoint && turned)
+        {
+            turned = false;
+        }
+        rb2d.velocity = new Vector2(speed, 0);
+    }
+
+    private void ShieldSwap()
+    {
         // Swappin Script
         if (timer >= SwapTime)
         {
@@ -48,16 +85,25 @@ public class BossOne : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        
-        
     }
 
-    private void SpeedUp()
+    private void EnemyLevelUp()
     {
+        // Making it harder
         if (this.numActiveShields == 3)
         {
             this.speed = 3 * this.speed;
         }
+    }
+
+    private void UpdateShields()
+    {
+        // Update Shields
+        foreach (var group in ShieldGroups)
+        {
+            Shields = getAllChildren(group.transform, Shields);
+        }
+        numActiveShields = Shields.Count;
     }
 
     private List<Transform> getAllChildren(Transform parentTrans, List<Transform> shields)
@@ -73,7 +119,7 @@ public class BossOne : MonoBehaviour
         return shields;
     } 
 
-    private Transform getChildren(GameObject parent, string childName)
+    private Transform getChildrenByName(GameObject parent, string childName)
     {
         Transform child = parent.transform.Find(childName);
         if (child != null)

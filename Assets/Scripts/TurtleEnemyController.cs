@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TurtleEnemyController : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = -2.0f;
     public float range;
     private float center;
     private float leftPoint;
@@ -30,7 +30,6 @@ public class TurtleEnemyController : MonoBehaviour
         // If at edge of left point and haven't turned turn
         if (transform.position.x < leftPoint && !turned)
         {
-            Debug.Log("Turn Right");
             speed = -speed;
             curRotation = 180;
             turned = true;
@@ -38,7 +37,6 @@ public class TurtleEnemyController : MonoBehaviour
         // If at edge of right point and haven't turned turn
         else if (transform.position.x > rightPoint && !turned)
         {
-            Debug.Log("Turn Left");
             speed = -speed;
             curRotation = 0;
             turned = true;

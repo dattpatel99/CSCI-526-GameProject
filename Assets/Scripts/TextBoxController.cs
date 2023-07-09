@@ -7,9 +7,11 @@ public class TextBoxController : MonoBehaviour
 {
     public GameObject basicTextBox;
     public GameObject assistantTextBox;
+    public GameObject merchantTextBox;
 
     private Text basicTextComponent;
     private Text assistantTextComponent;
+    private Text merchantTextComponent;
 
     private Image basicArrow;
     private Image assistantArrow;
@@ -21,11 +23,14 @@ public class TextBoxController : MonoBehaviour
     private string assistantText;
     private string basicText;
     private int index;
-    private float textSpeed = 25f;
+    private float textSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()
     {
+        merchantTextBox.SetActive(false);
+        merchantTextComponent = merchantTextBox.transform.GetChild(0).GetComponent<Text>();
+            
         assistantTextBox.SetActive(false);
         assistantTextComponent = assistantTextBox.transform.GetChild(0).GetComponent<Text>();
         assistantArrow = assistantTextBox.transform.GetChild(1).GetComponent<Image>();
@@ -94,6 +99,18 @@ public class TextBoxController : MonoBehaviour
                 StopText(false);
             }
         }
+    }
+
+    public void ShowMerchantText(string text)
+    {
+        merchantTextComponent.text = text;
+        merchantTextBox.SetActive(true);
+    }
+    
+    public void StopMerchantText()
+    {
+        merchantTextComponent.text = "";
+        merchantTextBox.SetActive(false);
     }
 
     public void ShowText(string text, bool isAssistant)

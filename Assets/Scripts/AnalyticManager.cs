@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Analytics;
 using Newtonsoft.Json;
 using Proyecto26;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
-
 
 /**
  * This is the main analysis manager from which all analysis objects can be accessed
@@ -26,8 +24,13 @@ public class AnalyticManager : MonoBehaviour
     private string userId;
     
     // Analytics
-    private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
     private static int shotID;
+    private static int damageID;
+
+    // URI Link 
+    private APILink _linkHandler;
+    private string editorLink;
+    private string deploymentLink;
 
     private void Awake()
     {
@@ -38,6 +41,11 @@ public class AnalyticManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Link Handles
+        _linkHandler = new APILink();
+        editorLink = _linkHandler.getEditorAPI();
+        deploymentLink = _linkHandler.getDeploymentAPI();
+        
         levelName = SceneManager.GetActiveScene().name;
         
         // avoid too many get Components
@@ -48,8 +56,24 @@ public class AnalyticManager : MonoBehaviour
         session = new AnalyticGameSession(sessionId, userId);
         playID = System.Guid.NewGuid().ToString();
         shotID = 0;
+        damageID = 0;
     }
- 
+
+    public string getEditLink()
+    {
+        return editorLink;
+    }
+    
+    public string getDeployLink()
+    {
+        return deploymentLink;
+    }
+    
+    public int GetNumberDeaths()
+    {
+        return controller.getNumberDeaths();
+    }
+    
     public string GetPlayID()
     {
         return playID;
@@ -72,6 +96,13 @@ public class AnalyticManager : MonoBehaviour
         StoreData(JsonConvert.SerializeObject(info), "GunDetail", shotID);
     }
 
+    public void SendDamageInfo(bool died,string damagingObject,int prevHearts,int afterHears,int x,int y)
+    {
+        damageID++;
+        var damageMap = new Damaged(died, damagingObject, prevHearts, afterHears, x, y);
+        StoreData(JsonConvert.SerializeObject(damageMap), "DamageDetails", damageID);
+    }
+
     public void SendSessionInfo(bool finished)
     {
         session.DataUpdate(finished, levelName, this.rt, controller.getHP().GetHP(), bank.GetTimeStore(), controller.getNumberDeaths());
@@ -83,11 +114,11 @@ public class AnalyticManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put($"{baseURL}/Beta/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
+            RestClient.Put($"{deploymentLink}/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
         }
         else
         {
-            RestClient.Put($"{baseURL}/preBetaTesting/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
+            RestClient.Put($"{editorLink}/{location}/{sessionId.ToString()}_{playID}_{levelName}/.json", json);
         }
     }
     
@@ -96,11 +127,11 @@ public class AnalyticManager : MonoBehaviour
         // Implements sending data when on WebGL Build
         if (!Application.isEditor)
         {
-            RestClient.Put($"{baseURL}/Beta/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
+            RestClient.Put($"{deploymentLink}/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
         }
         else
         {
-            RestClient.Put($"{baseURL}/preBetaTesting/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
+            RestClient.Put($"{editorLink}/{location}/{sessionId.ToString()}_{playID}_{levelName}/{id}/.json", json);
         }
     }
 }

@@ -66,9 +66,15 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer objectSpriteRenderer;
     private Color playerColor;
     private int butterfliesCollected = 0;
+    
+    // Analytics
+    //========================================================================
+    public GameObject analyticManager;
+    private AnalyticManager _manger;
 
     void Start()
     {
+        _manger = analyticManager.GetComponent<AnalyticManager>();
         objectSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         playerColor = objectSpriteRenderer.color;
         rb2d = this.GetComponent<Rigidbody2D>();
@@ -101,8 +107,8 @@ public class PlayerController : MonoBehaviour
         xSpeed = Input.GetAxis("Horizontal") * currentSpeed;
         jumpInput = Input.GetButtonDown("Jump");
         feetPos = feet.position;
-        grounded = Physics2D.OverlapCircle(feetPos, .2f, groundLayer);
-        onObject = Physics2D.OverlapCircle(feetPos, .2f, objectLayer);
+        grounded = Physics2D.OverlapCircle(feetPos, .4f, groundLayer);
+        onObject = Physics2D.OverlapCircle(feetPos, .4f, objectLayer);
         
         if (!grounded && !lastGroundedPosRecorded)
         {
@@ -158,7 +164,6 @@ public class PlayerController : MonoBehaviour
                 isBeanstalk = true;
             }
         }
-        // Debug.Log(string.Format("contact layer {0}, water layer {1}", other.gameObject.layer, LayerMask.GetMask("Water")));
         if (other.gameObject.layer == LayerMask.NameToLayer("Water") && playerStatus == "normal")
         {
             HP.Damage(damageValAll);
@@ -353,7 +358,9 @@ public class PlayerController : MonoBehaviour
         canCtrl = false;
         StartCoroutine(AfterDmgProcess()); // reset status to normal, re-enable control
         StartCoroutine(AfterDmgVisual());
+        var preHealth = HP.GetHP();
         HP.Damage(damageValAll);
+        _manger.SendDamageInfo(HP.GetHP()>preHealth,target.name, preHealth,HP.GetHP(), Mathf.RoundToInt(transform.position.x),Mathf.RoundToInt(transform.position.y));
         rb2d.velocity = new Vector2(0, 0);
         int bounceDir = (transform.position.x - target.transform.position.x < 0) ? -1 : 1;
         rb2d.AddForce(new Vector2(afterDmgForce * bounceDir, afterDmgForce));

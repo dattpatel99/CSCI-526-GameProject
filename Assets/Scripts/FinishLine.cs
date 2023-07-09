@@ -45,6 +45,5 @@ public class FinishLine : MonoBehaviour
         // Paul: the message below will never be displayed
         //      if timescale has been set to 0 before entering this coroutine
         // yield return new WaitForSeconds(seconds);
-        // Debug.Log("You won't see this");
     }
 }

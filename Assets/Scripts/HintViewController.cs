@@ -97,7 +97,7 @@ public class HintViewController : MonoBehaviour
         }
     }
 
-    private void addOutlineToTimeObjects(Material outline, string tagName, bool enabled)
+    private void addOutlineToTimeObjects(Material outline, string tagName, bool outlineEnabled)
     {
         //Do on update so we don't grab destroyed objects 
         objects = GameObject.FindGameObjectsWithTag(tagName);
@@ -111,11 +111,11 @@ public class HintViewController : MonoBehaviour
                     {
                         if (timeObject.name == "Cocoon")
                         {
-                            renderer.material = enabled ? cocoonGreenOutline : cocoonMaterial;
+                            renderer.material = outlineEnabled ? cocoonGreenOutline : cocoonMaterial;
                         }
                         else
                         {
-                            renderer.material = enabled ? outline : defaultMaterial;
+                            renderer.material = outlineEnabled ? outline : defaultMaterial;
                         }
                         //Switch between help enabled and not enabled
                     }

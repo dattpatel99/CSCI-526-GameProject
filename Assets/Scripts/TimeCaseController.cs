@@ -29,7 +29,6 @@ public class TimeCaseController : TimeObject
             {
                 float rotateZ = rotationSpeed * Time.deltaTime;
                 timeCasePivotPoint.transform.Rotate(new Vector3(0f, 0f, rotateZ));
-                //Debug.Log(timeCasePivotPoint.transform.localEulerAngles.z);
                 if (timeCasePivotPoint.transform.localEulerAngles.z > 90.0f)
                 {
                     timeCasePivotPoint.SetActive(false);
@@ -39,7 +38,6 @@ public class TimeCaseController : TimeObject
             {
                 float rotateZ = rotationSpeed * Time.deltaTime;
                 timeCasePivotPoint.transform.Rotate(new Vector3(0f, 0f, -rotateZ));
-                //Debug.Log(timeCasePivotPoint.transform.localEulerAngles.z);
                 if (timeCasePivotPoint.transform.localEulerAngles.z < 270 && timeCasePivotPoint.transform.localEulerAngles.z > 0)
                 {
                     timeCasePivotPoint.SetActive(false);

@@ -128,9 +128,9 @@ public class HintViewController : MonoBehaviour
 
     IEnumerator displayReminderText()
     {
-        string textOutput = "Hold 'H' for Hint";
-        canvasTextController.ShowText(textOutput, false);
-        yield return new WaitForSeconds(5.0f);
+        string textOutput = "If you are stuck, hold 'H' to view interactable objects";
+        canvasTextController.ShowText(textOutput, true);
+        yield return new WaitForSeconds(20.0f);
         canvasTextController.StopText(true);
     }
 }

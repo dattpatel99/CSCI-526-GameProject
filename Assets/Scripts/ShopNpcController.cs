@@ -6,49 +6,33 @@ using UnityEngine.UI;
 
 public class ShopNpcController : MonoBehaviour
 {
-    public GameObject shop;
-    public GameObject timeStoredText;
-    public PlayerController player;
-    public Button closeButton;
-    public GameObject warningText;
+    public Canvas mainCanvas;
+    public GameObject merchantTextBox;
+
     private bool shopOpen = false;
     private bool shopAble = false;
-    
-    // Target to canvas
-    public GameObject canvas;
-    private TextBoxController canvasTextController;
 
-    // Start is called before the first frame update
-    void Start()
+    //private TextBoxController canvasTextController;
+    private ShopPanelController canvasShopController;
+
+    private void Start()
     {
-        shop.gameObject.SetActive(false);
-        // Grab the text controller
-        this.canvasTextController = canvas.GetComponent<TextBoxController>();
+        canvasShopController = mainCanvas.GetComponent<ShopPanelController>();
+        //canvasTextController = mainCanvas.GetComponent<TextBoxController>();
+        merchantTextBox.SetActive(false);
     }
 
     private void Update()
     {
         if (shopAble && Input.GetKeyDown(KeyCode.B) && !shopOpen)
         {
-            canvasTextController.StopMerchantText();
-            OpenShop();
+            //canvasTextController.StopMerchantText();
+            canvasShopController.OpenShop();
+            shopOpen = true;
         }
     }
 
-    public void OpenShop()
-    {
-        shopOpen = true;
-        timeStoredText.SetActive(false);
-        shop.SetActive(true);
-        warningText.SetActive(false);
-    }
 
-    public void CloseShop()
-    {
-        shopOpen = false;
-        timeStoredText.SetActive(true);
-        shop.SetActive(false);
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -64,45 +48,33 @@ public class ShopNpcController : MonoBehaviour
             StartCoroutine(displayLeaveText());
             if (shopOpen)
             {
-                CloseShop();
+                canvasShopController.CloseShop();
+                shopOpen = false;
             }
         }
     }
 
-    public void BuyHeart()
-    {
-        // Player adds health
-        if (player.getButterfliesCollected() >= 1)
-        {
-            player.spendButterfly();
-            player.getHP().AddMax();
-        } 
-        else
-        {
-            StartCoroutine(FlashWarningText());
-        }
-    }
-
-    IEnumerator FlashWarningText()
-    {
-        warningText.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        warningText.SetActive(false);
-    }
-    
     IEnumerator displayEnterText()
     {
-        string textOutput = "Want to buy anything? (Press 'B')";
-        canvasTextController.ShowMerchantText(textOutput);
+        string textOutput = "Want to exchange butterflies for upgrades? (Press 'B')";
+        merchantTextBox.SetActive(true);
+        merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
+        //canvasTextController.ShowMerchantText(textOutput);
         yield return new WaitForSeconds(6.0f);
-        canvasTextController.StopMerchantText();
+        //merchantTextBox.SetActive(false);
+        //canvasTextController.StopMerchantText();
     }
-    
+
     IEnumerator displayLeaveText()
     {
         string textOutput = "Come again!";
-        canvasTextController.ShowMerchantText(textOutput);
-        yield return new WaitForSeconds(0.5f);
-        canvasTextController.StopMerchantText();
+        merchantTextBox.SetActive(true);
+        merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
+        //canvasTextController.ShowMerchantText(textOutput);
+        yield return new WaitForSeconds(1.0f);
+        merchantTextBox.SetActive(false);
+        //canvasTextController.StopMerchantText();
     }
+
+
 }

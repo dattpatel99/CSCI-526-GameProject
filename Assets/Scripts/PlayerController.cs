@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer objectSpriteRenderer;
     private Color playerColor;
     private int butterfliesCollected = 0;
+    public GameObject backShield;
     
     // Analytics
     //========================================================================
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
         HP = heartsObj.GetComponent<PlayerHealth>();
         damageValAll = 1;
         lastGroundedPosRecorded = false;
+        backShield.SetActive(false);
 
         playerAge = 1;
 
@@ -182,11 +184,17 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Damaging") && (playerStatus == "normal")) // player not in after-damage protection
         {
-            ReceiveDamage(other.gameObject);
+            if (other.otherCollider.gameObject != backShield)
+            {
+                ReceiveDamage(other.gameObject);
+            }
         }
         else if (other.gameObject.CompareTag("Enemy") && (playerStatus == "normal")) // player not in after-damage protection
         {
-            ReceiveDamage(other.gameObject);
+            if (other.otherCollider.gameObject != backShield)
+            {
+                ReceiveDamage(other.gameObject);
+            }
         }
         else if (other.gameObject.name.Contains("TimeCaseParent"))
         {
@@ -422,8 +430,13 @@ public class PlayerController : MonoBehaviour
         butterfliesCollected += 1;
     }
 
-    public void spendButterfly()
+    public void spendButterfly(int num)
     {
-        butterfliesCollected -= 1;
+        butterfliesCollected -= num;
+    }
+
+    public void ActivateShield()
+    {
+        backShield.SetActive(true);
     }
 }

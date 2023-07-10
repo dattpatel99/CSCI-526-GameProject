@@ -178,6 +178,17 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(AfterDmgVisual());
             }
         }
+        if (other.gameObject.name.Contains("Stalactite"))
+        {
+            if ( other.GetType() == typeof(CircleCollider2D)) // If user gets hit by the tip of the stalactite
+            {
+                HP.Damage(damageValAll);
+                if (!DeathCheck())
+                {
+                    StartCoroutine(AfterDmgVisual());
+                }
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)

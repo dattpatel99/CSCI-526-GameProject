@@ -7,10 +7,12 @@ using UnityEngine.UI;
 /// </summary>
 public class FallingRewindObject : MonoBehaviour
 {
+    public Text counterText;
+    public int rewindedDuration = 5;
+
     private Vector3 startPosition;
     private Rigidbody2D rb2d;
     private SpriteRenderer sr;
-    public Text counterText;
     private bool objectRewinding;
 
     // Start is called before the first frame update
@@ -62,8 +64,12 @@ public class FallingRewindObject : MonoBehaviour
     IEnumerator RewindDuration()
     {
         counterText.enabled = true;
-        counterText.text = "5";
-        yield return new WaitForSeconds(1);
+        for ( int i = rewindedDuration; i >= 1; i-- )
+        {
+            counterText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
+/*        counterText.text = "5";
         counterText.text = "4";
         yield return new WaitForSeconds(1);
         counterText.text = "3";
@@ -71,7 +77,7 @@ public class FallingRewindObject : MonoBehaviour
         counterText.text = "2";
         yield return new WaitForSeconds(1);
         counterText.text = "1";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1);*/
 
         PlayerStatus.isRewinding = false;
 

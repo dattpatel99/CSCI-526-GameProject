@@ -33,7 +33,6 @@ public class TurtleEnemyController : MonoBehaviour
         // If at edge of left point and haven't turned turn
         if (transform.position.x < leftPoint && !turned || (head.isColliding() && goingLeft))
         {
-            Debug.Log("Left edge");
             speed = -speed;
             curRotation = 180;
             turned = true;
@@ -43,7 +42,6 @@ public class TurtleEnemyController : MonoBehaviour
         // If at edge of right point and haven't turned turn
         else if (transform.position.x > rightPoint && !turned || (head.isColliding() && !goingLeft))
         {
-            Debug.Log("Right edge");
             speed = -speed;
             curRotation = 0;
             turned = true;

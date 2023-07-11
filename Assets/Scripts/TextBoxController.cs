@@ -14,6 +14,10 @@ public class TextBoxController : MonoBehaviour
     private Image basicArrow;
     private Image assistantArrow;
 
+    private Image button1;
+    private Image button2;
+    private Image button3;
+
     private bool assistantPrinting;
     private bool basicPrinting;
     private float timer;
@@ -30,6 +34,13 @@ public class TextBoxController : MonoBehaviour
         assistantTextComponent = assistantTextBox.transform.GetChild(0).GetComponent<Text>();
         assistantArrow = assistantTextBox.transform.GetChild(1).GetComponent<Image>();
         assistantArrow.enabled = false;
+        
+        button1 = assistantTextBox.transform.GetChild(2).GetComponent<Image>();
+        button1.enabled = false;
+        button2 = assistantTextBox.transform.GetChild(3).GetComponent<Image>();
+        button2.enabled = false;
+        button3 = assistantTextBox.transform.GetChild(4).GetComponent<Image>();
+        button3.enabled = false;
 
         basicTextBox.SetActive(false);
         basicTextComponent = basicTextBox.transform.GetChild(0).GetComponent<Text>();
@@ -96,11 +107,14 @@ public class TextBoxController : MonoBehaviour
         }
     }
 
-    public void ShowText(string text, bool isAssistant)
+    public void ShowText(string text, bool isAssistant, bool showB1, bool showB2, bool showB3)
     {
 
         if (isAssistant)
         {
+            button1.enabled = showB1;
+            button2.enabled = showB2;
+            button3.enabled = showB3;
             assistantTextComponent.text = "";
             assistantText = text;
             assistantTextBox.SetActive(true);
@@ -132,5 +146,21 @@ public class TextBoxController : MonoBehaviour
             assistantTextBox.SetActive(false);
             assistantArrow.enabled = false;
         }
+
+        index = 0;
+    }
+
+    public void SetButton1(Sprite img)
+    {
+        button1.sprite = img;
+    }
+
+    public void SetButton2(Sprite img)
+    {
+        button2.sprite = img;
+    }
+    public void SetButton3(Sprite img)
+    {
+        button3.sprite = img;
     }
 }

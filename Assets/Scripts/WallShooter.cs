@@ -11,7 +11,7 @@ public class WallShooter : MonoBehaviour
     private float timer = 0;
     
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (timer > shootingRate)
         {

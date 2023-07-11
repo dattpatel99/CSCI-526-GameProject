@@ -15,7 +15,6 @@ public class TimeBank : MonoBehaviour
     void Start()
     {
         _timeStored = this._minimumTimeStored;
-        timeBankText.color = Color.white;
     }
 
     public int GetTimeStore()

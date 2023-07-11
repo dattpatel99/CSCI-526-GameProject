@@ -23,6 +23,8 @@ public class BossOne : MonoBehaviour
     public float SwapTime;
     private int numActiveShields;
 
+    private float health; 
+
 
     void Start()
     {
@@ -41,6 +43,9 @@ public class BossOne : MonoBehaviour
         ShieldGroups[1].gameObject.SetActive(false); 
         group1Active = true;
         UpdateShields();
+        
+        // Health Update
+        health = 10;
     }
 
     void Update()
@@ -49,6 +54,10 @@ public class BossOne : MonoBehaviour
         EnemyLevelUp();
         ShieldSwap();
         BossMovement();
+        if (checkDeath())
+        {
+            Dead();
+        }
     }
 
     public void BossMovement()
@@ -90,7 +99,7 @@ public class BossOne : MonoBehaviour
     private void EnemyLevelUp()
     {
         // Making it harder
-        if (this.numActiveShields == 3)
+        if (this.getHealth() == 3)
         {
             this.speed = 3 * this.speed;
         }
@@ -147,4 +156,25 @@ public class BossOne : MonoBehaviour
             group1Active = true;
         }
     }
+
+    public void Damage(int damageValue)
+    {
+        health -= damageValue;
+    }
+
+    public float getHealth()
+    {
+        return health;
+    }
+
+    private void Dead()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private bool checkDeath()
+    {
+        return health <= 0;
+    }
+    
 }

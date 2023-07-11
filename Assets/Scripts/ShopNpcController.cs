@@ -8,32 +8,33 @@ public class ShopNpcController : MonoBehaviour
 {
     public Canvas mainCanvas;
     public GameObject merchantTextBox;
+    public GameObject noButterFlyTextBox;
 
     private bool shopOpen = false;
     private bool shopAble = false;
-
-    //private TextBoxController canvasTextController;
+    
     private ShopPanelController canvasShopController;
+
+    public GameObject player;
+    private PlayerController pController;
 
     private void Start()
     {
         canvasShopController = mainCanvas.GetComponent<ShopPanelController>();
-        //canvasTextController = mainCanvas.GetComponent<TextBoxController>();
         merchantTextBox.SetActive(false);
+        noButterFlyTextBox.SetActive(false);
+        pController = player.GetComponent<PlayerController>();
     }
 
     private void Update()
     {
         if (shopAble && Input.GetKeyDown(KeyCode.B) && !shopOpen)
         {
-            //canvasTextController.StopMerchantText();
             canvasShopController.OpenShop();
             shopOpen = true;
         }
     }
-
-
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         StartCoroutine(displayEnterText());
@@ -56,25 +57,32 @@ public class ShopNpcController : MonoBehaviour
 
     IEnumerator displayEnterText()
     {
-        string textOutput = "Want to exchange butterflies for upgrades? (Press 'B')";
-        merchantTextBox.SetActive(true);
-        merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
-        //canvasTextController.ShowMerchantText(textOutput);
-        yield return new WaitForSeconds(6.0f);
-        //merchantTextBox.SetActive(false);
-        //canvasTextController.StopMerchantText();
+        if (pController.getButterfliesCollected() == 0)
+        {
+            noButterFlyTextBox.SetActive(true);
+        }
+        else
+        {
+            string textOutput = "Want to exchange butterflies for upgrades? (Press 'B')";
+            merchantTextBox.SetActive(true);
+            merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
+            yield return new WaitForSeconds(6.0f);   
+        }
     }
 
     IEnumerator displayLeaveText()
     {
-        string textOutput = "Come again!";
-        merchantTextBox.SetActive(true);
-        merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
-        //canvasTextController.ShowMerchantText(textOutput);
-        yield return new WaitForSeconds(1.0f);
-        merchantTextBox.SetActive(false);
-        //canvasTextController.StopMerchantText();
+        if (pController.getButterfliesCollected() == 0)
+        {
+            noButterFlyTextBox.SetActive(false);
+        }
+        else
+        {
+            string textOutput = "Come again!";
+            merchantTextBox.SetActive(true);
+            merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
+            yield return new WaitForSeconds(1.0f);
+            merchantTextBox.SetActive(false);
+        }
     }
-
-
 }

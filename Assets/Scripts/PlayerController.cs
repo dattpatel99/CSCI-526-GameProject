@@ -28,7 +28,11 @@ public class PlayerController : MonoBehaviour
     public Transform feet;
     private bool jumpInput;
     private Vector2 feetPos;
+    private float overlapR;
+    private bool grounded_L;
+    private bool grounded_R;
     private bool grounded;
+    private bool canSetRespawn;
     private bool onObject;
     private bool shouldJump;
     private float verticalInput;
@@ -90,6 +94,7 @@ public class PlayerController : MonoBehaviour
         afterDmgForce = 3000.0f;
         HP = heartsObj.GetComponent<PlayerHealth>();
         damageValAll = 1;
+        overlapR = 0.2f;
         lastGroundedPosRecorded = false;
         backShield.SetActive(false);
 
@@ -112,15 +117,18 @@ public class PlayerController : MonoBehaviour
         xSpeed = Input.GetAxis("Horizontal") * currentSpeed;
         jumpInput = Input.GetButtonDown("Jump");
         feetPos = feet.position;
-        grounded = Physics2D.OverlapCircle(feetPos, .4f, groundLayer);
-        onObject = Physics2D.OverlapCircle(feetPos, .4f, objectLayer);
+        grounded_L = Physics2D.OverlapCircle(feetPos - new Vector2(overlapR, 0), overlapR, groundLayer);
+        grounded_R = Physics2D.OverlapCircle(feetPos + new Vector2(overlapR, 0), overlapR, groundLayer);
+        grounded = grounded_L || grounded_R;
+        canSetRespawn = grounded_L && grounded_R;
+        onObject = Physics2D.OverlapCircle(feetPos, overlapR, objectLayer);
         
-        if (!grounded && !lastGroundedPosRecorded)
+        if (!canSetRespawn && !lastGroundedPosRecorded)
         {
             _b4DrownedPosition = transform.position;
             lastGroundedPosRecorded = true;
         }
-        else if (grounded && lastGroundedPosRecorded)
+        else if (canSetRespawn && lastGroundedPosRecorded)
         {
             lastGroundedPosRecorded = false;
         }
@@ -326,25 +334,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetSprite()
+    void SetSprite() // Paul: might want to change hardcoded values, not consistent with getPlayerSize
     {
         if (playerAge >= 2)
         {
             sr.sprite = bigSprite;
             boxCollider.size = new Vector2(1f, 2f);
-            feet.position = transform.position + new Vector3(0f, -1f, 0f);
+            feet.position = transform.position + new Vector3(0f, -0.8f, 0f);
         }
         else if (playerAge == 1)
         {
             sr.sprite = normalSprite;
             boxCollider.size = new Vector2(1f, 2f);
-            feet.position = transform.position + new Vector3(0f, -1f, 0f);
+            feet.position = transform.position + new Vector3(0f, -0.8f, 0f);
         }
         else
         {
             sr.sprite = smallSprite;
             boxCollider.size = new Vector2(1f, 1f);
-            feet.position = transform.position + new Vector3(0f, -0.5f, 0f);
+            feet.position = transform.position + new Vector3(0f, -0.3f, 0f);
         }
     }
 
@@ -353,7 +361,7 @@ public class PlayerController : MonoBehaviour
         return playerAge;
     }
 
-    public Vector3 getPlayerSize()
+    public Vector3 getPlayerSize() // Paul: might want to change hardcoded values...
     {
         switch (this.playerAge) {
             case 0:
@@ -449,5 +457,13 @@ public class PlayerController : MonoBehaviour
     public void ActivateShield()
     {
         backShield.SetActive(true);
+    }
+
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(feetPos - new Vector2(overlapR, 0), overlapR);
+        Gizmos.DrawWireSphere(feetPos + new Vector2(overlapR, 0), overlapR);
     }
 }

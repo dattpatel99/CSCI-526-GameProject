@@ -1352,6 +1352,7 @@ GameObject:
   - component: {fileID: 6646975921826033608}
   - component: {fileID: 6646975921826033609}
   - component: {fileID: 6646975921826033610}
+  - component: {fileID: 6548931525443756488}
   m_Layer: 0
   m_Name: Shell
   m_TagString: Untagged
@@ -1472,6 +1473,19 @@ PolygonCollider2D:
       - {x: 0.40234375, y: 0.29296875}
       - {x: 0.29296875, y: 0.40234375}
       - {x: 0.15234375, y: 0.47265625}
+--- !u!114 &6548931525443756488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6646975921826033615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e22964193f42d4ab4a8a6837190d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turtle: {fileID: 6646975921053418517}
 --- !u!1 &6646975922154273097
 GameObject:
   m_ObjectHideFlags: 0

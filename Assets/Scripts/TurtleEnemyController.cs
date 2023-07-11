@@ -7,7 +7,6 @@ public class TurtleEnemyController : MonoBehaviour
 {
     public float speed = -2.0f;
     public float range;
-    public GameObject shell;
     private float center;
     private float leftPoint;
     private float rightPoint;

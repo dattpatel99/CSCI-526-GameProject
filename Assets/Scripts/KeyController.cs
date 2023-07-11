@@ -5,12 +5,12 @@ using UnityEngine;
 public class KeyController : MonoBehaviour
 {
     public PlayerController player;
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.name == "Player")
+        if (other.CompareTag("Player"))
         {
             player.addKey();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

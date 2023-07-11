@@ -24,7 +24,7 @@ public class TurtleEnemyController : MonoBehaviour
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         rb2d.velocity = new Vector2(speed, 0);
         turned = false;
-        goingLeft = false;
+        goingLeft = true;
         curRotation = 0;
     }
 

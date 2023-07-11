@@ -27,6 +27,8 @@ public class HintViewController : MonoBehaviour
     public GameObject canvas;
     private TextBoxController canvasTextController;
 
+    public Sprite button3; 
+
     void Start()
     {
         // Grab green outline mat
@@ -129,7 +131,8 @@ public class HintViewController : MonoBehaviour
     IEnumerator displayReminderText()
     {
         string textOutput = "If you are stuck, hold 'H' to view interactable objects";
-        canvasTextController.ShowText(textOutput, true);
+        canvasTextController.SetButton3(button3);
+        canvasTextController.ShowText(textOutput, true,false, false, true);
         yield return new WaitForSeconds(20.0f);
         canvasTextController.StopText(true);
     }

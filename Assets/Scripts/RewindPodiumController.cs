@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RewindPodiumController : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject rewindIcon;
-    public Canvas targetCanvas;
-
+    public GameObject textBox;
     public List<GameObject> enemiesRequired;
 
     private bool isActivated;
 
     private void Start()
     {
+        textBox.SetActive(false);
         rewindIcon.SetActive(false);
         isActivated = false;
     }
@@ -49,7 +50,14 @@ public class RewindPodiumController : MonoBehaviour
         {
             rewindIcon.SetActive(false);
             PlayerStatus.rewindUnlocked = true;
-            targetCanvas.GetComponent<TextBoxController>().ShowText("You can now rewind non- living objects for 5 sec with your time gun.", true);
+            textBox.SetActive(true);
+            StartCoroutine(CloseRewindText());
         }
+    }
+    
+    private IEnumerator CloseRewindText()
+    {
+        yield return new WaitForSeconds(5.0f);
+        textBox.SetActive(false);
     }
 }

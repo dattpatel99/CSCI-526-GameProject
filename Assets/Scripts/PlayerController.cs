@@ -1,5 +1,5 @@
-using Newtonsoft.Json.Bson;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
 
 /// <summary>
@@ -72,13 +72,21 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer objectSpriteRenderer;
     private Color playerColor;
     private int butterfliesCollected = 0;
+    private int keysCollected = 0;
     public GameObject backShield;
+    public GameObject midbeard;
+    public GameObject oldBeard;
+    
+    // Canvas Collectable Text
+    //========================================================================
+    public Text butterflyText;
+    public Text keyText;
     
     // Analytics
     //========================================================================
     public GameObject analyticManager;
     private AnalyticManager _manger;
-
+ 
     void Start()
     {
         gameOverScreen.SetActive(false);
@@ -107,6 +115,8 @@ public class PlayerController : MonoBehaviour
         SetSprite();
 
         numberDeaths = 0;
+        butterflyText.text = "0";
+        keyText.text = "0";
     }
 
     void Update()
@@ -341,18 +351,24 @@ public class PlayerController : MonoBehaviour
             sr.sprite = bigSprite;
             boxCollider.size = new Vector2(1f, 2f);
             feet.position = transform.position + new Vector3(0f, -0.8f, 0f);
+            oldBeard.SetActive(true);
+            midbeard.SetActive(false);
         }
         else if (playerAge == 1)
         {
             sr.sprite = normalSprite;
             boxCollider.size = new Vector2(1f, 2f);
             feet.position = transform.position + new Vector3(0f, -0.8f, 0f);
+            oldBeard.SetActive(false);
+            midbeard.SetActive(true);
         }
         else
         {
             sr.sprite = smallSprite;
             boxCollider.size = new Vector2(1f, 1f);
             feet.position = transform.position + new Vector3(0f, -0.3f, 0f);
+            midbeard.SetActive(false);
+            oldBeard.SetActive(false);
         }
     }
 
@@ -447,11 +463,30 @@ public class PlayerController : MonoBehaviour
     public void addButterfly()
     {
         butterfliesCollected += 1;
+        UpdateButterFly();
+    }
+    
+    public int getKeyCollected()
+    {
+        return keysCollected;
+    }
+
+    public void addKey()
+    {
+        keysCollected += 1;
+        UpdateKeyValue();
     }
 
     public void spendButterfly(int num)
     {
         butterfliesCollected -= num;
+        UpdateKeyValue();
+    }
+    
+    public void spendKey(int num)
+    {
+        keysCollected -= num;
+        UpdateKeyValue();
     }
 
     public void ActivateShield()
@@ -459,7 +494,16 @@ public class PlayerController : MonoBehaviour
         backShield.SetActive(true);
     }
 
-
+    private void UpdateButterFly()
+    {
+        butterflyText.text = butterfliesCollected.ToString();
+    }
+    
+    private void UpdateKeyValue()
+    {
+        keyText.text = keysCollected.ToString();
+    }
+    
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

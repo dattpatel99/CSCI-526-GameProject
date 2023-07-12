@@ -10,14 +10,13 @@ public class Section : MonoBehaviour
     private SectionAnalytics sectionData;
     private SectionManager manager;
     private float runtime;
-    public int puzzleNum;
+    public bool canDie;
     private bool firstEntryDone;
     private int startDeaths;
     // Start is called before the first frame update
     void Start()
     {
         firstEntryDone = false;
-        puzzleNum = 0;
         runtime = 0f;
         manager = gameObject.transform.parent.gameObject.GetComponent<SectionManager>();
     }
@@ -33,7 +32,7 @@ public class Section : MonoBehaviour
         if (other.GameObject().name == "Player" && !firstEntryDone)
         {
             startDeaths = manager.GetNumberDeaths();
-            sectionData = new SectionAnalytics(gameObject.name, runtime, other.gameObject.GetComponent<PlayerController>(), other.gameObject.GetComponent<TimeBank>());
+            sectionData = new SectionAnalytics(gameObject.name, runtime, other.gameObject.GetComponent<PlayerController>(), other.gameObject.GetComponent<TimeBank>(), canDie);
         }
     }
 

@@ -19,13 +19,15 @@ namespace Analytics{
         public int leaveTimeBank;
         public float timeSpent;
         public int numDeaths;
+        public bool canDie;
 
-        public SectionAnalytics(string sectionName, float timeEnter, PlayerController control, TimeBank bank)
+        public SectionAnalytics(string sectionName, float timeEnter, PlayerController control, TimeBank bank, bool canDie)
         {
             this.sectionID = sectionName;
             this.enterHearts = control.getHP().GetHP();
             this.enterTime = timeEnter;
             this.startTimeBank = bank.GetTimeStore();
+            this.canDie = canDie;
         }
 
         public void UpdateLeaving(float timeLeave,PlayerController control, TimeBank bank, int deaths)

@@ -935,7 +935,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.7184162, y: 2.3469136}
+  m_Offset: {x: 0.2547269, y: 5.178567}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -946,7 +946,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.19891, y: 7.057463}
+  m_Size: {x: 12.076001, y: 12.72077}
   m_EdgeRadius: 0
 --- !u!114 &4213068613061811957
 MonoBehaviour:
@@ -960,13 +960,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa031c5ffcf80b43aed2dd8004f6d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCanvas: {fileID: 0}
   intialTextBox: {fileID: 4213068612926706913}
   instructionTextBox: {fileID: 4213068612779416412}
   instructionText: Shoot with this to take time
   spriteButton1: {fileID: 21300000, guid: 624bd4d4d1c3a2240af33145946f8b8a, type: 3}
   spriteButton2: {fileID: 0}
-  isFirst: 0
   instructionTypeSingleButton: 1
 --- !u!1 &4213068613243076375
 GameObject:

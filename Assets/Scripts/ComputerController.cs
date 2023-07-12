@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ComputerController : MonoBehaviour
 {   
-    public Canvas mainCanvas;
     public GameObject intialTextBox;
     private Text initialText;
     
@@ -15,8 +14,6 @@ public class ComputerController : MonoBehaviour
     public string instructionText;
     public Sprite spriteButton1;
     public Sprite spriteButton2;
-    private bool giveHelp = false;
-    public bool isFirst = false;
 
     public bool instructionTypeSingleButton = false;
     private void Start()
@@ -44,23 +41,6 @@ public class ComputerController : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B) && giveHelp)
-        {
-            if (instructionTextBox.activeInHierarchy)
-            {
-                intialTextBox.SetActive(true);
-                instructionTextBox.SetActive(false);
-            }
-            else
-            {
-                intialTextBox.SetActive(false);
-                instructionTextBox.SetActive(true);
-            }
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
@@ -79,24 +59,11 @@ public class ComputerController : MonoBehaviour
 
     private void displayEnterText()
     {
-        string textOutput = "";
-        if (isFirst)
-        {
-            textOutput = "Need Help? (Press 'B')";
-        }
-        else
-        {
-            textOutput = "?";
-        }
-        intialTextBox.SetActive(true);
-        initialText.text = textOutput;   
-        giveHelp = true;
+        instructionTextBox.SetActive(true);
     }
 
     private void StopAll()
     {
-        intialTextBox.SetActive(false);
         instructionTextBox.SetActive(false);
-        giveHelp = false;
     }
 }

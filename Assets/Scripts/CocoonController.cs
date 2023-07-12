@@ -12,6 +12,9 @@ public class CocoonController : TimeObject
     float initYPosition;
     float initZPosition;
 
+    private Material cocoonMaterial;
+    private Material cocoonGreenOutline;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,7 @@ public class CocoonController : TimeObject
         initZPosition = cocoon.GetComponent<Transform>().localPosition.z;
         initYPosition = cocoon.GetComponent<Transform>().localPosition.y;
         butterfly.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -92,5 +96,15 @@ public class CocoonController : TimeObject
     public bool isOpening()
     {
         return opening;
+    }
+
+    private void OnMouseEnter()
+    {
+        timeObjectSpriteRenderer.material = cocoonGreenOutline;
+    }
+
+    private void OnMouseExit()
+    {
+        timeObjectSpriteRenderer.material = cocoonMaterial;
     }
 }

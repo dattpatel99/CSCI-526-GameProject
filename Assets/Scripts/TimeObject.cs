@@ -17,9 +17,12 @@ public class TimeObject : MonoBehaviour
     protected Collider2D[] phaseColliders;
     protected SpriteRenderer timeObjectSpriteRenderer;
 
+    private Material greenOutline;
+    private Material defaultMaterial;
+
     // [SerializeField]
     // private bool[] colliderOn;
-    
+
     /*
      * Start does:
      * Store entered time value. Get the sprite based on current time. Update Sprite after choosing
@@ -37,6 +40,9 @@ public class TimeObject : MonoBehaviour
             phaseColliders[i].enabled = (i==initTimePhase_i) ? true : false;
         }
         currentPhase_i = initTimePhase_i;
+
+        greenOutline = Resources.Load<Material>("Green Outline");
+        defaultMaterial = timeObjectSpriteRenderer.material;
         // TryUpdateShapeToAttachedSprite();
     }
 
@@ -104,5 +110,15 @@ public class TimeObject : MonoBehaviour
     private Sprite GetSprite(int currentTime)
     {
         return this.phaseSprites[currentTime];
+    }
+
+    private void OnMouseEnter()
+    {
+        timeObjectSpriteRenderer.material = greenOutline;
+    }
+
+    private void OnMouseExit()
+    {
+        timeObjectSpriteRenderer.material = defaultMaterial;
     }
 }

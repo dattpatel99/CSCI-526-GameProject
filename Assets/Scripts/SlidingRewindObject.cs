@@ -17,6 +17,8 @@ public class SlidingRewindObject : MonoBehaviour
     public Text counterText;
     private bool objectRewinding;
 
+    private Material yellowOutline;
+    private Material defaultMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,9 @@ public class SlidingRewindObject : MonoBehaviour
         endPoint = new Vector3(startingPoint.x + movementDirection * numberUnitMove, startingPoint.y, startingPoint.z);
         sr = GetComponent<SpriteRenderer>();
         sr.color = Color.white;
+
+        yellowOutline = Resources.Load<Material>("Yellow Outline");
+        defaultMaterial = sr.material;
 
         counterText.enabled = false;
     }
@@ -94,5 +99,15 @@ public class SlidingRewindObject : MonoBehaviour
         {
             collision.transform.parent = null;
         }
+    }
+
+    private void OnMouseEnter()
+    {
+        sr.material = yellowOutline;
+    }
+
+    private void OnMouseExit()
+    {
+        sr.material = defaultMaterial;
     }
 }

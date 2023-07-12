@@ -64,6 +64,7 @@ public class HintViewController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         timestampOfLastGunHit  = shootMechanicScript.getLastTimePlayerHitObjectWithGun();
         // KEY CODE H for viewing the hint
         if (Input.GetKeyUp(KeyCode.H))
@@ -96,7 +97,7 @@ public class HintViewController : MonoBehaviour
         {
             StartCoroutine(displayReminderText());
             shootMechanicScript.setLastTimePlayerHitObjectWithGun(currentTime);
-        }
+        }*/
     }
 
     private void addOutlineToTimeObjects(Material outline, string tagName, bool outlineEnabled)

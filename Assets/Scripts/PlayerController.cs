@@ -480,7 +480,7 @@ public class PlayerController : MonoBehaviour
     public void spendButterfly(int num)
     {
         butterfliesCollected -= num;
-        UpdateKeyValue();
+        UpdateButterFly();
     }
     
     public void spendKey(int num)

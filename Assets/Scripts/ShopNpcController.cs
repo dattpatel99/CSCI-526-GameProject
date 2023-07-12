@@ -80,17 +80,14 @@ public class ShopNpcController : MonoBehaviour
 
     IEnumerator displayLeaveText()
     {
-        if (pController.getButterfliesCollected() == 0)
-        {
-            noButterFlyTextBox.SetActive(false);
-        }
-        else
+        if (pController.getButterfliesCollected() != 0)
         {
             string textOutput = "Come again!";
             merchantTextBox.SetActive(true);
             merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
             yield return new WaitForSeconds(1.0f);
-            merchantTextBox.SetActive(false);
         }
+        noButterFlyTextBox.SetActive(false);
+        merchantTextBox.SetActive(false);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GateController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GateController : MonoBehaviour
     public GameObject opened;
     public GameObject closed;
     public int required;
+    public Text keyReq;
+
     private bool isOpen;
 
     private void Start()
@@ -15,6 +18,7 @@ public class GateController : MonoBehaviour
         isOpen = false;
         closed.SetActive(true);
         opened.SetActive(false);
+        keyReq.text = "x" + required.ToString();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

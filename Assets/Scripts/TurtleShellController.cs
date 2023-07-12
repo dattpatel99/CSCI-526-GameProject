@@ -22,7 +22,7 @@ public class TurtleShellController : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("Stalactite"))
         {
-            turtle.SetActive(false); // Turtle dead
+            Destroy(turtle); // Turtle dead
         }
     }
 }

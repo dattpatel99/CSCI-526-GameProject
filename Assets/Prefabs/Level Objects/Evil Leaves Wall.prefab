@@ -5117,7 +5117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3183847843981230534, guid: 2d6b043ca3652f54d85654c369575b57, type: 3}
-  spawnLocation: {fileID: 4842487241112368040}
+  spawnLocation: {fileID: 4279554725819758889}
   shootingRate: 4
   bulletSpeed: 3
 --- !u!1 &4842487241112368040

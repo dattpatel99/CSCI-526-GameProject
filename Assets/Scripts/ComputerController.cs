@@ -46,10 +46,18 @@ public class ComputerController : MonoBehaviour
 
     private void Update()
     {
-        if (giveHelp && Input.GetKeyDown(KeyCode.B))
-        { 
-            intialTextBox.SetActive(false);
-            instructionTextBox.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.B) && giveHelp)
+        {
+            if (instructionTextBox.activeInHierarchy)
+            {
+                intialTextBox.SetActive(true);
+                instructionTextBox.SetActive(false);
+            }
+            else
+            {
+                intialTextBox.SetActive(false);
+                instructionTextBox.SetActive(true);
+            }
         }
     }
 

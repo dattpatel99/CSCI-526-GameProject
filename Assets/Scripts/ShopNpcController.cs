@@ -28,10 +28,18 @@ public class ShopNpcController : MonoBehaviour
 
     private void Update()
     {
-        if (shopAble && Input.GetKeyDown(KeyCode.B) && !shopOpen)
+        if (shopAble && Input.GetKeyDown(KeyCode.B))
         {
-            canvasShopController.OpenShop();
-            shopOpen = true;
+            if (shopOpen)
+            {
+                canvasShopController.CloseShop();
+                shopOpen = false;
+            }
+            else
+            {
+                canvasShopController.OpenShop();
+                shopOpen = true;
+            }
         }
     }
     

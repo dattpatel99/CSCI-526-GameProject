@@ -1,13 +1,14 @@
 
+using System;
 using UnityEngine;
 
 public class WallShooter : MonoBehaviour
 {
 
     public GameObject bullet;
-    public GameObject spawnLocation;
+    public Transform spawnLocation;
     public float shootingRate;
-    public float bulletSpeed = 50;
+    public float bulletSpeed = 4;
     private float timer = 0;
     
     // Update is called once per frame
@@ -26,5 +27,6 @@ public class WallShooter : MonoBehaviour
     {
         GameObject bulletObj = Instantiate(bullet, spawnLocation.transform.position, Quaternion.identity);
         bulletObj.GetComponent<Rigidbody2D>().velocity = spawnLocation.transform.right * -bulletSpeed;
-    }
+        bulletObj.GetComponent<BulletScript>().rewindPhase = BulletScript.MotionPhase.Steady;
+     }
 }

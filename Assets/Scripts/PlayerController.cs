@@ -256,7 +256,8 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = (Input.mousePosition);
         Vector3 playerPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 gunRotation = mousePos - playerPos;
-        float angle = Mathf.Atan2(gunRotation.y, gunRotation.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(gunRotation.y, gunRotation.x) * Mathf.Rad2Deg; // -180 ~ 180
+        gun.gameObject.transform.localScale = (angle >= 90.0 || angle <= -90.0) ? new Vector3(1, -1, 1) : new Vector3(1, 1, 1);
         /*angle = Mathf.Clamp(angle, -45f, 45f);*/ // Gun Rotation 
         gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0,  angle));
     }

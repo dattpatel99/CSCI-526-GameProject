@@ -7,6 +7,7 @@ public class CocoonController : TimeObject
     public GameObject cocoon;
     public GameObject butterfly;
     bool opening;
+    private SpriteRenderer cocconSprite;
 
     float initXPosition;
     float initYPosition;
@@ -23,6 +24,10 @@ public class CocoonController : TimeObject
         initZPosition = cocoon.GetComponent<Transform>().localPosition.z;
         initYPosition = cocoon.GetComponent<Transform>().localPosition.y;
         butterfly.SetActive(false);
+
+        cocconSprite = gameObject.GetComponent<SpriteRenderer>();
+        cocoonGreenOutline = Resources.Load<Material>("Cocoon Green Outline");;
+        cocoonMaterial =  cocconSprite.material;
 
     }
 
@@ -100,11 +105,11 @@ public class CocoonController : TimeObject
 
     private void OnMouseEnter()
     {
-        timeObjectSpriteRenderer.material = cocoonGreenOutline;
+        cocconSprite.material = cocoonGreenOutline;
     }
 
     private void OnMouseExit()
     {
-        timeObjectSpriteRenderer.material = cocoonMaterial;
+        cocconSprite.material = cocoonMaterial;
     }
 }

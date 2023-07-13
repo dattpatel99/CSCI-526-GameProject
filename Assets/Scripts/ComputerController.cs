@@ -15,6 +15,7 @@ public class ComputerController : MonoBehaviour
     public Sprite spriteButton1;
     public Sprite spriteButton2;
 
+    public bool buttons = true;
     public bool instructionTypeSingleButton = false;
     private void Start()
     {
@@ -26,17 +27,23 @@ public class ComputerController : MonoBehaviour
         if (instructionTypeSingleButton)
         {
             text = instructionTextBox.transform.GetChild(0).GetComponent<Text>();
-            button1 = instructionTextBox.transform.GetChild(1).GetComponent<Image>();
-            button1.sprite = spriteButton1;
+            if (buttons)
+            {
+                button1 = instructionTextBox.transform.GetChild(1).GetComponent<Image>();
+                button1.sprite = spriteButton1;      
+            }
             text.text = instructionText;
         }
         else
         {
             text = instructionTextBox.transform.GetChild(0).GetComponent<Text>();
-            button1 = instructionTextBox.transform.GetChild(1).GetComponent<Image>();
-            button2 = instructionTextBox.transform.GetChild(2).GetComponent<Image>();
-            button1.sprite = spriteButton1;
-            button2.sprite = spriteButton2;
+            if (buttons)
+            {
+                button1 = instructionTextBox.transform.GetChild(1).GetComponent<Image>();
+                button2 = instructionTextBox.transform.GetChild(2).GetComponent<Image>();
+                button1.sprite = spriteButton1;
+                button2.sprite = spriteButton2;
+            }
             text.text = instructionText;
         }
     }

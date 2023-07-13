@@ -31,7 +31,7 @@ public class ShootMechanic : MonoBehaviour
     
     void Awake()
     {
-        interactableMasks = LayerMask.GetMask("Ground", "Object", "Bullet");
+        interactableMasks = LayerMask.GetMask("Ground", "Object", "Bullet", "Enemy");
         
         laserLine = GetComponent<LineRenderer>();
         timestampOfLastGunHit = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();

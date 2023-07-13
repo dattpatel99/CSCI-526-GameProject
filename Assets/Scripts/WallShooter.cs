@@ -25,7 +25,7 @@ public class WallShooter : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bulletObj = Instantiate(bullet, spawnLocation.transform.position, Quaternion.identity);
+        GameObject bulletObj = Instantiate(bullet, spawnLocation.transform.position, transform.rotation);
         bulletObj.GetComponent<Rigidbody2D>().velocity = spawnLocation.transform.right * -bulletSpeed;
         bulletObj.GetComponent<BulletScript>().rewindPhase = BulletScript.MotionPhase.Steady;
      }

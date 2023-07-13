@@ -16,9 +16,6 @@ public class RewindMissile : MonoBehaviour
     private Material yellowOutline;
     private Material defaultMaterial;
 
-    private bool isInitialized;
-    private float startRotation;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -37,18 +34,13 @@ public class RewindMissile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isInitialized)
+        if (objectRewinding)
         {
-            if (objectRewinding)
-            {
-                rb.velocity = startLocation.right * missileSpeed;
-                rb.rotation = startRotation + 180f;
-            }
-            else
-            {
-                rb.velocity = startLocation.right * -missileSpeed;
-                rb.rotation = startRotation;
-            }
+            rb.velocity = startLocation.right * missileSpeed;
+        }
+        else
+        {
+            rb.velocity = startLocation.right * -missileSpeed;
         }
     }
 
@@ -67,14 +59,6 @@ public class RewindMissile : MonoBehaviour
 
         gameObject.SetActive(false);
         Destroy(gameObject);
-    }
-
-    public void InitializeMissile(Transform spawn, Vector3 spd)
-    {
-        startLocation = spawn;
-        /*missileSpeed = spd;*/
-        startRotation = startLocation.rotation.z;
-        isInitialized = true;
     }
 
     public void Rewind()

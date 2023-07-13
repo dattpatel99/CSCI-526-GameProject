@@ -189,7 +189,9 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Water") && playerStatus == "normal")
         {
+            var preHealth = HP.GetHP();
             HP.Damage(damageValAll);
+            _manger.SendDamageInfo(HP.GetHP()>preHealth,"Water", preHealth,HP.GetHP(), Mathf.RoundToInt(transform.position.x),Mathf.RoundToInt(transform.position.y));
             if (!DeathCheck())
             {
                 StartCoroutine(DrownedProcess()); // reset status to normal, re-enable control

@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class WallShooter : MonoBehaviour
@@ -25,6 +26,7 @@ public class WallShooter : MonoBehaviour
     void Shoot()
     {
         GameObject bulletObj = Instantiate(bullet, spawnLocation.transform.position, Quaternion.identity);
-        bulletObj.GetComponent<RewindMissile>().InitializeMissile(spawnLocation, bulletSpeed);
-    }
+        bulletObj.GetComponent<Rigidbody2D>().velocity = spawnLocation.transform.right * -bulletSpeed;
+        bulletObj.GetComponent<BulletScript>().rewindPhase = BulletScript.MotionPhase.Steady;
+     }
 }

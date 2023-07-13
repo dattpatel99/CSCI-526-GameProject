@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Cinemachine;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ public class ShootMechanic : MonoBehaviour
     
     void Awake()
     {
-        interactableMasks = LayerMask.GetMask("Ground", "Object");
+        interactableMasks = LayerMask.GetMask("Ground", "Object", "Bullet");
         
         laserLine = GetComponent<LineRenderer>();
         timestampOfLastGunHit = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
@@ -94,8 +95,7 @@ public class ShootMechanic : MonoBehaviour
                     HandleEnemy(_take, x, y, timeStored, playerAge, currentHealth,hit.collider.gameObject);
                 }
                 if (PlayerStatus.rewindUnlocked && !PlayerStatus.isRewinding)
-                {
-                    
+                { 
                     // If raycast hits rewind object
                     if (hit.collider.gameObject.CompareTag("RewindObject"))
                     {
@@ -132,10 +132,9 @@ public class ShootMechanic : MonoBehaviour
                             }
                         }
                     }
-                    else if (hit.collider.gameObject.GetComponent<RewindMissile>() != null)
+                    else if (hit.collider.gameObject.GetComponent<BulletScript>() != null)
                     {
-                        RewindMissile rm = hit.collider.gameObject.GetComponent<RewindMissile>();
-
+                        BulletScript rm = hit.collider.gameObject.GetComponent<BulletScript>();
                         if (rm.isActiveAndEnabled)
                         {
                             rm.Rewind();

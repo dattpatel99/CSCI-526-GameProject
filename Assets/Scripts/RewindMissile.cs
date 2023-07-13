@@ -35,7 +35,7 @@ public class RewindMissile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (isInitialized)
         {
@@ -69,10 +69,10 @@ public class RewindMissile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void InitializeMissile(Transform spawn, float spd)
+    public void InitializeMissile(Transform spawn, Vector3 spd)
     {
         startLocation = spawn;
-        missileSpeed = spd;
+        /*missileSpeed = spd;*/
         startRotation = startLocation.rotation.z;
         isInitialized = true;
     }

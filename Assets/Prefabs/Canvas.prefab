@@ -755,8 +755,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -785,7 +785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1380595817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -808,7 +808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 386, y: -375}
+  m_AnchoredPosition: {x: 386, y: -316}
   m_SizeDelta: {x: 511.4049, y: 124.6906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1380595819
@@ -1174,7 +1174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1808126581
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1194,7 +1194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 94, y: 293}
+  m_AnchoredPosition: {x: 94, y: 213}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1808126583
@@ -1270,8 +1270,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 55.5458, y: -0.0849}
-  m_SizeDelta: {x: 348.9538, y: 119.511}
+  m_AnchoredPosition: {x: 55.7037, y: 0.4266}
+  m_SizeDelta: {x: 387.0673, y: 147.3512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1822777026
 CanvasRenderer:
@@ -1302,8 +1302,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2586,7 +2586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6677765521050841932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1913, y: 190.29, z: 0}
+  m_LocalPosition: {x: -1.1913, y: 154.9, z: 0}
   m_LocalScale: {x: 0.70833, y: 0.70833, z: 0.70833}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2916,7 +2916,6 @@ GameObject:
   - component: {fileID: 8880555994032965916}
   - component: {fileID: 8880555994032965917}
   - component: {fileID: 1705762124}
-  - component: {fileID: 1024183448}
   - component: {fileID: 2839809055611771654}
   m_Layer: 5
   m_Name: Canvas
@@ -3029,20 +3028,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   analytic: {fileID: 0}
   pauseMenuUI: {fileID: 398143306}
---- !u!114 &1024183448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8880555994032965914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a980dbef8ed4904491fc1f73bea6ca7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  basicTextBox: {fileID: 1808126580}
-  assistantTextBox: {fileID: 1380595816}
 --- !u!114 &2839809055611771654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3128,8 +3113,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
-    m_FontSize: 32
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -3511,7 +3496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5335435487350905106, guid: 0def4d144d093f6418a6504d90c7a233, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5335435487362933623, guid: 0def4d144d093f6418a6504d90c7a233, type: 3}
       propertyPath: m_SizeDelta.x

@@ -329,7 +329,6 @@ GameObject:
   - component: {fileID: 877969386355208584}
   - component: {fileID: 877969386355208585}
   - component: {fileID: 877969386355208582}
-  - component: {fileID: 4073591044961138328}
   - component: {fileID: 1228629716}
   - component: {fileID: 1005965316}
   m_Layer: 0
@@ -407,21 +406,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877969386355208583}
   m_Enabled: 1
---- !u!114 &4073591044961138328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877969386355208583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da77ecce556d3c409e4f9271f74f49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootMechanicScript: {fileID: 0}
-  reminderHintText: {fileID: 0}
-  timeToTriggerHint: 40
 --- !u!114 &1228629716
 MonoBehaviour:
   m_ObjectHideFlags: 0

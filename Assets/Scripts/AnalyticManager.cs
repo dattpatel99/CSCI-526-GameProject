@@ -26,6 +26,7 @@ public class AnalyticManager : MonoBehaviour
     // Analytics
     private static int shotID;
     private static int damageID;
+    private string currentSection;
 
     // URI Link 
     private APILink _linkHandler;
@@ -57,6 +58,16 @@ public class AnalyticManager : MonoBehaviour
         playID = System.Guid.NewGuid().ToString();
         shotID = 0;
         damageID = 0;
+    }
+    
+    public void setCurrentSection(string secName)
+    {
+        this.currentSection = secName;
+    }
+    
+    public string getCurrentSection()
+    {
+        return this.currentSection;
     }
 
     public string getEditLink()
@@ -99,7 +110,7 @@ public class AnalyticManager : MonoBehaviour
     public void SendDamageInfo(bool died,string damagingObject,int prevHearts,int afterHears,int x,int y)
     {
         damageID++;
-        var damageMap = new Damaged(died, damagingObject, prevHearts, afterHears, x, y);
+        var damageMap = new Damaged(died, damagingObject, prevHearts, afterHears, x, y, currentSection);
         StoreData(JsonConvert.SerializeObject(damageMap), "DamageDetails", damageID);
     }
 

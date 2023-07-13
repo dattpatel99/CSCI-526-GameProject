@@ -28,6 +28,7 @@ public class Section : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        manager.setCurrentSection(gameObject.name);
         // Set the player controller and bank
         if (other.GameObject().name == "Player" && !firstEntryDone)
         {

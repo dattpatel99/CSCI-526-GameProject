@@ -393,7 +393,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  butterfly: {fileID: 9223356861176060582}
 --- !u!1 &9223356862678654516
 GameObject:
   m_ObjectHideFlags: 0

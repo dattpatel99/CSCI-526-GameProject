@@ -11,9 +11,11 @@ namespace Analytics
         public int afterHears;
         public int x;
         public int y;
+        public string sectionName;
 
-        public Damaged(bool dead, string objName, int prev, int cur, int locX, int locY)
+        public Damaged(bool dead, string objName, int prev, int cur, int locX, int locY, string sectionName)
         {
+            this.sectionName = sectionName;
             this.died = dead;
             this.damagingObject = objName;
             this.prevHearts = prev;

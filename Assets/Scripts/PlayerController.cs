@@ -301,6 +301,10 @@ public class PlayerController : MonoBehaviour
         {
             isClimbing = true;
         }
+        else if (isBeanstalk)
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, -1.0f);
+        }
     }
 
     public void AlterAge(int change)

@@ -152,22 +152,23 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (!canCtrl) { return; } // after-damage protection
-        rb2d.velocity = new Vector2(xSpeed, rb2d.velocity.y); // horizontal movement
-        // rb2d.AddForce(new Vector2(xSpeed, 0f), ForceMode2D.Impulse);
-        if (shouldJump) // jump
+
+        if (isClimbing) // climb
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = Input.GetAxis("Vertical");
+            rb2d.velocity = new Vector2(horizontalInput * 5.0f, verticalInput * 5.0f);
+        }
+        else if (shouldJump) // jump
         {
             shouldJump = false;
             rb2d.velocity = new Vector2(rb2d.velocity.x, 0); // allows mid-air jump
             rb2d.AddForce(new Vector2(0, jumpForce));
         }
-        if (isClimbing) // climb
-        {
-            rb2d.gravityScale = 0f;
-            rb2d.velocity = new Vector2(rb2d.velocity.x, verticalInput * 5.0f);
-        }
         else
         {
-            rb2d.gravityScale = initGravityScale;
+            rb2d.velocity = new Vector2(xSpeed, rb2d.velocity.y); // horizontal movement
+                                                                  // rb2d.AddForce(new Vector2(xSpeed, 0f), ForceMode2D.Impulse);
         }
     }
 
@@ -184,7 +185,12 @@ public class PlayerController : MonoBehaviour
         {
             if (collidingObject.GetComponent<TimeObject>().GetCurrentTimeValue() == 1)
             {
-                isBeanstalk = true;
+                //isBeanstalk = true;
+                isClimbing = true;
+                collidingObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                rb2d.velocity = Vector2.zero;
+                rb2d.gravityScale = 0f;
+                Debug.Log("entered beanstalk");
             }
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Water") && playerStatus == "normal")
@@ -245,10 +251,14 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if ( collision.gameObject.name == "Bean")
+        GameObject collidingObject = collision.gameObject;
+        if (collidingObject.name == "Bean")
         {
-            isBeanstalk = false;
+            //isBeanstalk = false;
             isClimbing = false;
+            collidingObject.layer = LayerMask.NameToLayer("Object");
+            rb2d.gravityScale = initGravityScale;
+            Debug.Log("exited beanstalk");
         }
     }
 
@@ -298,7 +308,7 @@ public class PlayerController : MonoBehaviour
 
     private void ClimbCheck()
     {
-        verticalInput = Input.GetAxis("Vertical");
+        /*
         if (isBeanstalk && Mathf.Abs(verticalInput) > 0f)
         {
             isClimbing = true;
@@ -306,7 +316,7 @@ public class PlayerController : MonoBehaviour
         else if (isBeanstalk)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, -1.0f);
-        }
+        }*/
     }
 
     public void AlterAge(int change)

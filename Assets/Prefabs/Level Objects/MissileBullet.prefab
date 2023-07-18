@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 5048945671552689377}
   - component: {fileID: 8578434271581866032}
   - component: {fileID: 8595707820405786383}
+  - component: {fileID: 6441734308554164045}
   m_Layer: 10
   m_Name: MissileBullet
   m_TagString: Damaging
@@ -250,6 +251,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewindPhase: 0
   counterText: {fileID: 5720240168788323266}
+--- !u!61 &6441734308554164045
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183847843981230534}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &7200316293446928416
 GameObject:
   m_ObjectHideFlags: 0

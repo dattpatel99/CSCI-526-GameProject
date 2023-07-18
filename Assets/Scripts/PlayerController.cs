@@ -189,7 +189,9 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Water") && playerStatus == "normal")
         {
+            var preHealth = HP.GetHP();
             HP.Damage(damageValAll);
+            _manger.SendDamageInfo(HP.GetHP()>preHealth,"Water", preHealth,HP.GetHP(), Mathf.RoundToInt(transform.position.x),Mathf.RoundToInt(transform.position.y));
             if (!DeathCheck())
             {
                 StartCoroutine(DrownedProcess()); // reset status to normal, re-enable control
@@ -256,7 +258,8 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = (Input.mousePosition);
         Vector3 playerPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 gunRotation = mousePos - playerPos;
-        float angle = Mathf.Atan2(gunRotation.y, gunRotation.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(gunRotation.y, gunRotation.x) * Mathf.Rad2Deg; // -180 ~ 180
+        gun.gameObject.transform.localScale = (angle >= 90.0 || angle <= -90.0) ? new Vector3(1, -1, 1) : new Vector3(1, 1, 1);
         /*angle = Mathf.Clamp(angle, -45f, 45f);*/ // Gun Rotation 
         gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0,  angle));
     }
@@ -299,6 +302,10 @@ public class PlayerController : MonoBehaviour
         if (isBeanstalk && Mathf.Abs(verticalInput) > 0f)
         {
             isClimbing = true;
+        }
+        else if (isBeanstalk)
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, -1.0f);
         }
     }
 

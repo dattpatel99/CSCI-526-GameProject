@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Cinemachine;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ public class ShootMechanic : MonoBehaviour
     
     void Awake()
     {
-        interactableMasks = LayerMask.GetMask("Ground", "Object");
+        interactableMasks = LayerMask.GetMask("Ground", "Object", "Bullet", "Enemy");
         
         laserLine = GetComponent<LineRenderer>();
         timestampOfLastGunHit = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
@@ -93,11 +94,10 @@ public class ShootMechanic : MonoBehaviour
                 {
                     HandleEnemy(_take, x, y, timeStored, playerAge, currentHealth,hit.collider.gameObject);
                 }
-                if (PlayerStatus.rewindUnlocked)
-                {
-                    
+                if (PlayerStatus.rewindUnlocked && !PlayerStatus.isRewinding)
+                { 
                     // If raycast hits rewind object
-                    if (hit.collider.gameObject.CompareTag("RewindObject") && !PlayerStatus.isRewinding)
+                    if (hit.collider.gameObject.CompareTag("RewindObject"))
                     {
                         if (hit.collider.gameObject.GetComponent<FallingRewindObject>() != null)
                         {
@@ -130,6 +130,16 @@ public class ShootMechanic : MonoBehaviour
                                 AlterColor(laserLine, Color.yellow);
                                 analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType,"Rewind", hit.collider.gameObject.name);
                             }
+                        }
+                    }
+                    else if (hit.collider.gameObject.GetComponent<BulletScript>() != null)
+                    {
+                        BulletScript rm = hit.collider.gameObject.GetComponent<BulletScript>();
+                        if (rm.isActiveAndEnabled)
+                        {
+                            rm.Rewind();
+                            AlterColor(laserLine, Color.yellow);
+                            analyticManager.SendShootInfo(x, y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
                         }
                     }
                 }

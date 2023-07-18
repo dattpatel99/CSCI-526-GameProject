@@ -15,6 +15,9 @@ public class FallingRewindObject : MonoBehaviour
     private SpriteRenderer sr;
     private bool objectRewinding;
 
+    private Material yellowOutline;
+    private Material defaultMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,9 @@ public class FallingRewindObject : MonoBehaviour
         counterText.enabled = false;
 
         rb2d.gravityScale = 1f;
+
+        yellowOutline = Resources.Load<Material>("Yellow Outline");
+        defaultMaterial = sr.material;
     }
 
     // Update is called once per frame
@@ -87,5 +93,15 @@ public class FallingRewindObject : MonoBehaviour
         objectRewinding = false;
 
         counterText.enabled = false;
+    }
+
+    private void OnMouseEnter()
+    {
+        sr.material = yellowOutline;
+    }
+
+    private void OnMouseExit()
+    {
+        sr.material = defaultMaterial;
     }
 }

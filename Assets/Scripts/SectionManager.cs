@@ -25,6 +25,16 @@ public class SectionManager : MonoBehaviour
         }
     }
 
+    public void setCurrentSection(string secName)
+    {
+        _analyticManager.setCurrentSection(secName);
+    }
+    
+    public string getCurrentSection()
+    {
+        return _analyticManager.getCurrentSection();
+    }
+
     public int GetNumberDeaths()
     {
         return _analyticManager.GetNumberDeaths();

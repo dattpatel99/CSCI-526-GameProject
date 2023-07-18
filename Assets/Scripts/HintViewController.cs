@@ -1,3 +1,4 @@
+/*
 using UnityEngine;
 using System;
 using System.Collections;
@@ -64,6 +65,7 @@ public class HintViewController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         timestampOfLastGunHit  = shootMechanicScript.getLastTimePlayerHitObjectWithGun();
         // KEY CODE H for viewing the hint
         if (Input.GetKeyUp(KeyCode.H))
@@ -96,7 +98,7 @@ public class HintViewController : MonoBehaviour
         {
             StartCoroutine(displayReminderText());
             shootMechanicScript.setLastTimePlayerHitObjectWithGun(currentTime);
-        }
+        }#1#
     }
 
     private void addOutlineToTimeObjects(Material outline, string tagName, bool outlineEnabled)
@@ -128,12 +130,13 @@ public class HintViewController : MonoBehaviour
         switchOutlines = false;
     }
 
-    IEnumerator displayReminderText()
+    /*IEnumerator displayReminderText()
     {
         string textOutput = "If you are stuck, hold 'H' to view interactable objects";
         canvasTextController.SetButton3(button3);
         canvasTextController.ShowText(textOutput, true,false, false, true);
         yield return new WaitForSeconds(20.0f);
         canvasTextController.StopText(true);
-    }
+    }#1#
 }
+*/

@@ -12,6 +12,9 @@ public class RotatingRewindObject : MonoBehaviour
     public Text counterText;
     private bool objectRewinding;
 
+    private Material yellowOutline;
+    private Material defaultMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,9 @@ public class RotatingRewindObject : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         sr.color = Color.white;
         counterText.enabled = false;
+
+        yellowOutline = Resources.Load<Material>("Yellow Outline");
+        defaultMaterial = sr.material;
     }
 
     // Update is called once per frame
@@ -65,5 +71,15 @@ public class RotatingRewindObject : MonoBehaviour
         objectRewinding = false;
 
         counterText.enabled = false;
+    }
+
+    private void OnMouseEnter()
+    {
+        sr.material = yellowOutline;
+    }
+
+    private void OnMouseExit()
+    {
+        sr.material = defaultMaterial;
     }
 }

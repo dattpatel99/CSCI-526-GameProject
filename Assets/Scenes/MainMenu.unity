@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2401653769968189517, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2401653770368837432, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
       propertyPath: m_margin.w
       value: 57.357452
@@ -296,7 +300,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2401653771231684012, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.0000153
+      value: -1.0000305
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401653771338342150, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401653771338342150, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 9014164738135903087, guid: f5a2c63bcffc36a47a47079889e1e93d, type: 3}
       propertyPath: m_SizeDelta.x

@@ -22,7 +22,6 @@ public class ShopNpcController : MonoBehaviour
     {
         canvasShopController = mainCanvas.GetComponent<ShopPanelController>();
         merchantTextBox.SetActive(false);
-        noButterFlyTextBox.SetActive(false);
         pController = player.GetComponent<PlayerController>();
     }
 
@@ -45,7 +44,7 @@ public class ShopNpcController : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(displayEnterText());
+        displayEnterText();
         shopAble = true;
     }
 
@@ -54,7 +53,7 @@ public class ShopNpcController : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             shopAble = false;
-            StartCoroutine(displayLeaveText());
+            displayLeaveText();
             if (shopOpen)
             {
                 canvasShopController.CloseShop();
@@ -63,31 +62,15 @@ public class ShopNpcController : MonoBehaviour
         }
     }
 
-    IEnumerator displayEnterText()
+    private void displayEnterText()
     {
-        if (pController.getButterfliesCollected() == 0)
-        {
-            noButterFlyTextBox.SetActive(true);
-        }
-        else
-        {
-            string textOutput = "Want to exchange butterflies for upgrades? (Press 'B')";
-            merchantTextBox.SetActive(true);
-            merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
-            yield return new WaitForSeconds(6.0f);   
-        }
+        string textOutput = "Got any butterflies to shop with? (Press 'B')";
+        merchantTextBox.SetActive(true);
+        merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
     }
 
-    IEnumerator displayLeaveText()
+    private void displayLeaveText()
     {
-        if (pController.getButterfliesCollected() != 0)
-        {
-            string textOutput = "Come again!";
-            merchantTextBox.SetActive(true);
-            merchantTextBox.transform.GetChild(0).GetComponent<Text>().text = textOutput;
-            yield return new WaitForSeconds(1.0f);
-        }
-        noButterFlyTextBox.SetActive(false);
         merchantTextBox.SetActive(false);
     }
 }

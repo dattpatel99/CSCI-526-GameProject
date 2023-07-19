@@ -18,6 +18,7 @@ public class ShootMechanic : MonoBehaviour
     // Attributes for handling shoot
     private bool _take;
     private bool _give;
+    private bool isRewinding;
 
     private long timestampOfLastGunHit;
     // Storing GameComponents
@@ -94,8 +95,9 @@ public class ShootMechanic : MonoBehaviour
                 {
                     HandleEnemy(_take, x, y, timeStored, playerAge, currentHealth,hit.collider.gameObject);
                 }
-                if (PlayerStatus.rewindUnlocked && !PlayerStatus.isRewinding)
-                { 
+                if (PlayerStatus.rewindUnlocked && !isPlayerRewindingAnObject())
+                {
+                    // Debug.Log("Rewind:" + PlayerStatus.isRewinding);
                     // If raycast hits rewind object
                     if (hit.collider.gameObject.CompareTag("RewindObject"))
                     {
@@ -105,9 +107,11 @@ public class ShootMechanic : MonoBehaviour
 
                             if (fro.isActiveAndEnabled)
                             {
+                                setRewinding(true);
                                 fro.Rewind();
                                 AlterColor(laserLine, Color.yellow);
                                 analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
+                                StartCoroutine(WaitForObjectToFinishRewind(fro));
                             }
                         }
                         else if (hit.collider.gameObject.GetComponent<SlidingRewindObject>() != null)
@@ -293,5 +297,21 @@ public class ShootMechanic : MonoBehaviour
         laserLine.enabled = true;
         yield return new WaitForSeconds(laserDuration);
         laserLine.enabled = false;
+    }
+
+    IEnumerator WaitForObjectToFinishRewind(FallingRewindObject fallingRewindObject)
+    {
+        yield return new WaitForSeconds(fallingRewindObject.getRewindDuration());
+        setRewinding(false);
+    }
+
+    public bool isPlayerRewindingAnObject()
+    {
+        return this.isRewinding;
+    }
+
+    public void setRewinding(bool val)
+    {
+        this.isRewinding = val;
     }
 }

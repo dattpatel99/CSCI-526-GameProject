@@ -77,21 +77,13 @@ public class FallingRewindObject : MonoBehaviour
             counterText.text = i.ToString();
             yield return new WaitForSeconds(1);
         }
-        /*        counterText.text = "5";
-                counterText.text = "4";
-                yield return new WaitForSeconds(1);
-                counterText.text = "3";
-                yield return new WaitForSeconds(1);
-                counterText.text = "2";
-                yield return new WaitForSeconds(1);
-                counterText.text = "1";
-                yield return new WaitForSeconds(1);*/
 
-        //Debug.Log("Set is rewinding back to false: " + PlayerStatus.isRewinding);
         PlayerStatus.isRewinding = false;
 
         rb2d.gravityScale = 1f;
         sr.color = Color.white;
+
+        objectRewinding = false;
 
         counterText.enabled = false;
     }

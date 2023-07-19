@@ -2,7 +2,7 @@ using System.Collections;using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BulletScript : MonoBehaviour
+public class BulletScript : RewindObject
 {
     public enum MotionPhase
     {
@@ -14,26 +14,12 @@ public class BulletScript : MonoBehaviour
 
     private Rigidbody2D rb2d;
     public MotionPhase rewindPhase;
-    
-    private SpriteRenderer sr;
-    public Text counterText;
-    private Material yellowOutline;
-    private Material defaultMaterial;
 
-    private void Start()
+    public override void ChildStart()
     {
-        rewindPhase = MotionPhase.Steady;
-
-        // For color 
-        sr = GetComponent<SpriteRenderer>();
-        sr.color = Color.white;
-        counterText.enabled = false;
-        
+        rewindPhase = MotionPhase.Steady;       
         // Get component on start
         rb2d = GetComponent<Rigidbody2D>();
-        
-        yellowOutline = Resources.Load<Material>("Yellow Outline");
-        defaultMaterial = sr.material;
         
     }
 
@@ -68,7 +54,7 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Rewind()
+    public override void Rewind()
     {
         if (rewindPhase == MotionPhase.Steady)
         {
@@ -79,19 +65,14 @@ public class BulletScript : MonoBehaviour
         }
     }
 
-    IEnumerator RewindDuration()
+    protected override IEnumerator RewindDuration()
     {
         counterText.enabled = true;
-        counterText.text = "5";
-        yield return new WaitForSeconds(1);
-        counterText.text = "4";
-        yield return new WaitForSeconds(1);
-        counterText.text = "3";
-        yield return new WaitForSeconds(1);
-        counterText.text = "2";
-        yield return new WaitForSeconds(1);
-        counterText.text = "1";
-        yield return new WaitForSeconds(1);
+        for (int i = rewindedDuration; i >= 1; i--)
+        {
+            counterText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
 
         PlayerStatus.isRewinding = false;
         sr.color = Color.white;
@@ -104,15 +85,5 @@ public class BulletScript : MonoBehaviour
     {
         rb2d.velocity = -rb2d.velocity;
         rb2d.rotation = -rb2d.rotation;
-    }
-    
-    private void OnMouseEnter()
-    {
-        sr.material = yellowOutline;
-    }
-
-    private void OnMouseExit()
-    {
-        sr.material = defaultMaterial;
     }
 }

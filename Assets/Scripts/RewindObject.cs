@@ -35,7 +35,21 @@ public abstract class RewindObject : MonoBehaviour
     public abstract void Rewind();
 
     // How long should the rewind last
-    protected abstract IEnumerator RewindDuration();
+    protected virtual IEnumerator RewindDuration()
+    {
+        counterText.enabled = true;
+        for (int i = rewindedDuration; i >= 1; i--)
+        {
+            counterText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
+
+        PlayerStatus.isRewinding = false;
+        sr.color = Color.white;
+        objectRewinding = false;
+
+        counterText.enabled = false;
+    }
     
 
     private void OnMouseEnter()

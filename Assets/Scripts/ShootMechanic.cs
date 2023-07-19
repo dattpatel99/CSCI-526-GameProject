@@ -145,9 +145,11 @@ public class ShootMechanic : MonoBehaviour
                         BulletScript rm = hit.collider.gameObject.GetComponent<BulletScript>();
                         if (rm.isActiveAndEnabled)
                         {
+                            setRewinding(true);
                             rm.Rewind();
                             AlterColor(laserLine, Color.yellow);
                             analyticManager.SendShootInfo(x, y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
+                            StartCoroutine(WaitForRewindObjectToFinishRewind(rm));
                         }
                     }
                 }
@@ -305,7 +307,19 @@ public class ShootMechanic : MonoBehaviour
 
     IEnumerator WaitForRewindObjectToFinishRewind(RewindObject rewindObject)
     {
-        yield return new WaitForSeconds(rewindObject.getRewindDuration());
+        for (int i = 0; i < rewindObject.getRewindDuration(); i++ )
+        {
+            if (rewindObject.GetType() == typeof(BulletScript))
+            {
+                // If bullet has been destroyed, no longer lock rewind feature;
+                if ( rewindObject == null )
+                {
+                    break;
+                }
+            }
+            yield return new WaitForSeconds(1.0f);
+            
+        }
         setRewinding(false);
     }
 

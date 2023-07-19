@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
         playerStatus = "normal";
         canCtrl = false;
-        afterDmgForce = 3000.0f;
+        afterDmgForce = 4000.0f;
         HP = heartsObj.GetComponent<PlayerHealth>();
         damageValAll = 1;
         overlapR = 0.2f;
@@ -190,7 +190,6 @@ public class PlayerController : MonoBehaviour
                 collidingObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                 rb2d.velocity = Vector2.zero;
                 rb2d.gravityScale = 0f;
-                Debug.Log("entered beanstalk");
             }
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Water") && playerStatus == "normal")
@@ -270,7 +269,6 @@ public class PlayerController : MonoBehaviour
             isClimbing = false;
             collidingObject.layer = LayerMask.NameToLayer("Object");
             rb2d.gravityScale = initGravityScale;
-            Debug.Log("exited beanstalk");
         }
     }
 

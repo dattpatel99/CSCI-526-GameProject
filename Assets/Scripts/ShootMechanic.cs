@@ -119,9 +119,11 @@ public class ShootMechanic : MonoBehaviour
                             SlidingRewindObject sro = hit.collider.gameObject.GetComponent<SlidingRewindObject>();
                             if (sro.isActiveAndEnabled)
                             {
+                                setRewinding(true);
                                 sro.Rewind();
                                 AlterColor(laserLine, Color.yellow);
                                 analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
+                                StartCoroutine(WaitForRewindObjectToFinishRewind(sro));
                             }
                         }
                         else if (hit.collider.gameObject.GetComponent<RotatingRewindObject>() != null)

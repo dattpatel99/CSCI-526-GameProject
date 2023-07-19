@@ -8,7 +8,6 @@ public abstract class RewindObject : MonoBehaviour
     public Text counterText;
     public int rewindedDuration = 5;
 
-
     protected SpriteRenderer sr;
     protected bool objectRewinding;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 
-public class SlidingRewindObject : MonoBehaviour
+public class SlidingRewindObject : RewindObject
 {
     // -ve to move left and +ve to move right
     // Unit is current - start
@@ -13,25 +13,12 @@ public class SlidingRewindObject : MonoBehaviour
     public float numberUnitMove;
     public float movementDirection;
     public float slideSpeed;
-    private SpriteRenderer sr;
-    public Text counterText;
-    private bool objectRewinding;
-
-    private Material yellowOutline;
-    private Material defaultMaterial;
 
     // Start is called before the first frame update
-    void Start()
+    public override void ChildStart()
     {
         startingPoint = this.transform.position;
         endPoint = new Vector3(startingPoint.x + movementDirection * numberUnitMove, startingPoint.y, startingPoint.z);
-        sr = GetComponent<SpriteRenderer>();
-        sr.color = Color.white;
-
-        yellowOutline = Resources.Load<Material>("Yellow Outline");
-        defaultMaterial = sr.material;
-
-        counterText.enabled = false;
     }
 
     void Update()
@@ -56,32 +43,28 @@ public class SlidingRewindObject : MonoBehaviour
     /// The coroutine to maket he log slide pause and slide again.
     /// </summary>
     /// <returns></returns>
-    private IEnumerator SlideRewind()
+    protected override IEnumerator RewindDuration()
     {
         counterText.enabled = true;
-        counterText.text = "5";
-        yield return new WaitForSeconds(1);
-        counterText.text = "4";
-        yield return new WaitForSeconds(1);
-        counterText.text = "3";
-        yield return new WaitForSeconds(1);
-        counterText.text = "2";
-        yield return new WaitForSeconds(1);
-        counterText.text = "1";
-        yield return new WaitForSeconds(1);
+        for (int i = rewindedDuration; i >= 1; i--)
+        {
+            counterText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
 
         PlayerStatus.isRewinding = false;
         sr.color = Color.white;
         objectRewinding = false;
+
         counterText.enabled = false;
     }
-    
-    public void Rewind()
+
+    public override void Rewind()
     {
         PlayerStatus.isRewinding = true;
         objectRewinding = true;
         sr.color= Color.yellow;
-        StartCoroutine(SlideRewind());
+        StartCoroutine(RewindDuration());
     }
 
 
@@ -99,15 +82,5 @@ public class SlidingRewindObject : MonoBehaviour
         {
             collision.transform.parent = null;
         }
-    }
-
-    private void OnMouseEnter()
-    {
-        sr.material = yellowOutline;
-    }
-
-    private void OnMouseExit()
-    {
-        sr.material = defaultMaterial;
     }
 }

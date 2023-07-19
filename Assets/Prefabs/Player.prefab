@@ -222,7 +222,7 @@ Rigidbody2D:
   m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -268,9 +268,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSpeed: 8
   fastSpeed: 10
-  mediumJumpForce: 3500
-  bigJumpForce: 4500
-  bounceForce: 5000
+  mediumJumpForce: 5000
+  bigJumpForce: 6000
+  bounceForce: 7000
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -280,7 +280,7 @@ MonoBehaviour:
   feet: {fileID: 4485915037519610963}
   heartsObj: {fileID: 0}
   gameOverScreen: {fileID: 0}
-  afterDmgForce: 2000
+  afterDmgForce: 2500
   gun: {fileID: 2847372577066176175}
   sensitivity: 1
   normalSprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}

@@ -3,8 +3,8 @@
     public class APILink
     {
         private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
-        private string editorApi = "EditorBetaV3";
-        private string deploymentAPI = "BetaV3";
+        private string editorApi = "EditorGoldV1";
+        private string deploymentAPI = "GoldV1";
         
         public APILink(){}
 

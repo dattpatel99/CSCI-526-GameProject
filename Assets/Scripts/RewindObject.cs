@@ -8,8 +8,7 @@ public abstract class RewindObject : MonoBehaviour
     public Text counterText;
     public int rewindedDuration = 5;
 
-    protected Vector3 startPosition;
-    protected Rigidbody2D rb2d;
+
     protected SpriteRenderer sr;
     protected bool objectRewinding;
 
@@ -19,7 +18,7 @@ public abstract class RewindObject : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        objectRewinding = false;
         sr = GetComponent<SpriteRenderer>();
         sr.color = Color.white;
         counterText.enabled = false;

@@ -111,7 +111,7 @@ public class ShootMechanic : MonoBehaviour
                                 fro.Rewind();
                                 AlterColor(laserLine, Color.yellow);
                                 analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
-                                StartCoroutine(WaitForObjectToFinishRewind(fro));
+                                StartCoroutine(WaitForRewindObjectToFinishRewind(fro));
                             }
                         }
                         else if (hit.collider.gameObject.GetComponent<SlidingRewindObject>() != null)
@@ -130,9 +130,11 @@ public class ShootMechanic : MonoBehaviour
 
                             if (rro.isActiveAndEnabled)
                             {
+                                setRewinding(true);
                                 rro.Rewind();
                                 AlterColor(laserLine, Color.yellow);
                                 analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType,"Rewind", hit.collider.gameObject.name);
+                                StartCoroutine(WaitForRewindObjectToFinishRewind(rro));
                             }
                         }
                     }
@@ -299,9 +301,9 @@ public class ShootMechanic : MonoBehaviour
         laserLine.enabled = false;
     }
 
-    IEnumerator WaitForObjectToFinishRewind(FallingRewindObject fallingRewindObject)
+    IEnumerator WaitForRewindObjectToFinishRewind(RewindObject rewindObject)
     {
-        yield return new WaitForSeconds(fallingRewindObject.getRewindDuration());
+        yield return new WaitForSeconds(rewindObject.getRewindDuration());
         setRewinding(false);
     }
 

@@ -5,29 +5,12 @@ using UnityEngine.UI;
 /// <summary>
 /// This class handles rewind objects that rotate on rewing
 /// </summary>
-public class RotatingRewindObject : MonoBehaviour
+public class RotatingRewindObject : RewindObject
 {
     public float rotationSpeed;
-    private SpriteRenderer sr;
-    public Text counterText;
-    private bool objectRewinding;
 
-    private Material yellowOutline;
-    private Material defaultMaterial;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        objectRewinding = false;
-        sr = GetComponent<SpriteRenderer>();
-        sr.color = Color.white;
-        counterText.enabled = false;
-
-        yellowOutline = Resources.Load<Material>("Yellow Outline");
-        defaultMaterial = sr.material;
-    }
-
-    // Update is called once per frame
+    public override void ChildStart(){}
+        // Update is called once per frame
     void Update()
     {
         if (objectRewinding)
@@ -41,7 +24,7 @@ public class RotatingRewindObject : MonoBehaviour
     }
     
     // Implement rewind
-    public void Rewind()
+    public override void Rewind()
     {
         PlayerStatus.isRewinding = true;
 
@@ -52,34 +35,19 @@ public class RotatingRewindObject : MonoBehaviour
     }
 
     // Coroutine to handle rewind duration
-    IEnumerator RewindDuration()
+    protected override IEnumerator RewindDuration()
     {
         counterText.enabled = true;
-        counterText.text = "5";
-        yield return new WaitForSeconds(1);
-        counterText.text = "4";
-        yield return new WaitForSeconds(1);
-        counterText.text = "3";
-        yield return new WaitForSeconds(1);
-        counterText.text = "2";
-        yield return new WaitForSeconds(1);
-        counterText.text = "1";
-        yield return new WaitForSeconds(1);
+        for (int i = rewindedDuration; i >= 1; i--)
+        {
+            counterText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
 
         PlayerStatus.isRewinding = false;
         sr.color = Color.white;
         objectRewinding = false;
 
         counterText.enabled = false;
-    }
-
-    private void OnMouseEnter()
-    {
-        sr.material = yellowOutline;
-    }
-
-    private void OnMouseExit()
-    {
-        sr.material = defaultMaterial;
     }
 }

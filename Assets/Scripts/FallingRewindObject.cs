@@ -7,12 +7,14 @@ using UnityEngine.UI;
 /// </summary>
 public class FallingRewindObject : RewindObject
 {
+    private Vector3 startPosition;
+    private Rigidbody2D rb2d;
+
     public override void ChildStart()
     {
         startPosition = this.transform.position;
-        objectRewinding = false;
+        rb2d = GetComponent<Rigidbody2D>();
         rb2d.gravityScale = 1f;
-
     }
 
     // Update is called once per frame

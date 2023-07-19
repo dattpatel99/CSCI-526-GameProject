@@ -217,6 +217,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        GameObject collidingObject = collision.gameObject;
+        if (collidingObject.name == "Bean")
+        {
+            if (collidingObject.GetComponent<TimeObject>().GetCurrentTimeValue() == 1)
+            {
+                isClimbing = true;
+            }
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.CompareTag("Damaging") && (playerStatus == "normal")) // player not in after-damage protection

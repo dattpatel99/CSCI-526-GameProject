@@ -107,11 +107,7 @@ public class ShootMechanic : MonoBehaviour
 
                             if (fro.isActiveAndEnabled)
                             {
-                                setRewinding(true);
-                                fro.Rewind();
-                                AlterColor(laserLine, Color.yellow);
-                                analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
-                                StartCoroutine(WaitForRewindObjectToFinishRewind(fro));
+                                HandleRewind(fro, x, y, timeStored, playerAge, currentHealth, clickType, hit.collider.gameObject.name);
                             }
                         }
                         else if (hit.collider.gameObject.GetComponent<SlidingRewindObject>() != null)
@@ -119,11 +115,7 @@ public class ShootMechanic : MonoBehaviour
                             SlidingRewindObject sro = hit.collider.gameObject.GetComponent<SlidingRewindObject>();
                             if (sro.isActiveAndEnabled)
                             {
-                                setRewinding(true);
-                                sro.Rewind();
-                                AlterColor(laserLine, Color.yellow);
-                                analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
-                                StartCoroutine(WaitForRewindObjectToFinishRewind(sro));
+                                HandleRewind(sro, x, y, timeStored, playerAge, currentHealth, clickType, hit.collider.gameObject.name);
                             }
                         }
                         else if (hit.collider.gameObject.GetComponent<RotatingRewindObject>() != null)
@@ -132,11 +124,7 @@ public class ShootMechanic : MonoBehaviour
 
                             if (rro.isActiveAndEnabled)
                             {
-                                setRewinding(true);
-                                rro.Rewind();
-                                AlterColor(laserLine, Color.yellow);
-                                analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType,"Rewind", hit.collider.gameObject.name);
-                                StartCoroutine(WaitForRewindObjectToFinishRewind(rro));
+                                HandleRewind(rro, x, y, timeStored, playerAge, currentHealth, clickType, hit.collider.gameObject.name);
                             }
                         }
                     }
@@ -145,11 +133,7 @@ public class ShootMechanic : MonoBehaviour
                         BulletScript rm = hit.collider.gameObject.GetComponent<BulletScript>();
                         if (rm.isActiveAndEnabled)
                         {
-                            setRewinding(true);
-                            rm.Rewind();
-                            AlterColor(laserLine, Color.yellow);
-                            analyticManager.SendShootInfo(x, y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", hit.collider.gameObject.name);
-                            StartCoroutine(WaitForRewindObjectToFinishRewind(rm));
+                            HandleRewind(rm, x, y, timeStored, playerAge, currentHealth, clickType, hit.collider.gameObject.name);
                         }
                     }
                 }
@@ -161,6 +145,15 @@ public class ShootMechanic : MonoBehaviour
                 analyticManager.SendShootInfo(x,y, 0, timeStored, playerAge, currentHealth, clickType,"Missed", "Nothing");
             }
         }
+    }
+
+    private void HandleRewind(RewindObject rewindObject, int x, int y, int timeStored, int playerAge, int currentHealth, string clickType, string objectName)
+    {
+        setRewinding(true);
+        rewindObject.Rewind();
+        AlterColor(laserLine, Color.yellow);
+        analyticManager.SendShootInfo(x, y, 0, timeStored, playerAge, currentHealth, clickType, "Rewind", objectName);
+        StartCoroutine(WaitForRewindObjectToFinishRewind(rewindObject));
     }
 
     public void HandleBossOne(bool take, int xLoc, int yLoc, int storedTime, int agePlayer, int healthPlayer, GameObject hitItem)

@@ -2,9 +2,9 @@
 {
     public class APILink
     {
-        private string baseURL = "https://naturemorph-default-rtdb.firebaseio.com";
-        private string editorApi = "EditorGoldV1";
-        private string deploymentAPI = "GoldV1";
+        private string baseURL = "https://nature-morph-v2-default-rtdb.firebaseio.com/";
+        private string editorApi = "EditorGoldV2";
+        private string deploymentAPI = "GoldV2";
         
         public APILink(){}
 

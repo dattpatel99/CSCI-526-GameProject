@@ -50,9 +50,9 @@ public class ShopPanelController : MonoBehaviour
 
     public void BuyShield()
     {
-        if (player.getButterfliesCollected() >= 3)
+        if (player.getButterfliesCollected() >= 1)
         {
-            player.spendButterfly(3);
+            player.spendButterfly(1);
             player.ActivateShield();
             shieldRow.SetActive(false);
         }

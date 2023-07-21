@@ -397,7 +397,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             sr.sprite = smallSprite;
-            boxCollider.size = new Vector2(1f, 1f);
+            boxCollider.size = new Vector2(0.95f, 0.95f);
             feet.position = transform.position + new Vector3(0f, -0.3f, 0f);
             midbeard.SetActive(false);
             oldBeard.SetActive(false);

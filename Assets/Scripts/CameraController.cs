@@ -46,6 +46,8 @@ public class CameraController : MonoBehaviour
                 PlayerController.showMapIcon = true;
                 ShopNpcController.shopMapIcon = true;
                 FinishLine.finishMapIcon = true;
+                KeyController.keyMapIcon = true;
+                KeyPodiumController.keyMapIcon = true;
                 legenCanvas.enabled = true;
             }
             else
@@ -56,6 +58,8 @@ public class CameraController : MonoBehaviour
                 PlayerController.showMapIcon = false;
                 ShopNpcController.shopMapIcon = false;
                 FinishLine.finishMapIcon = false;
+                KeyController.keyMapIcon = false;
+                KeyPodiumController.keyMapIcon = false;
                 legenCanvas.enabled = false;
             }
         }

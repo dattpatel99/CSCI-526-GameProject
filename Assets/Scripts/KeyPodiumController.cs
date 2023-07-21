@@ -8,19 +8,37 @@ public class KeyPodiumController : MonoBehaviour
     public GameObject podiumKey;
     public GameObject enemyTurtle;
 
+    public GameObject mapIcon;
+    public static bool keyMapIcon = false;
+
     private bool activated = false;
     void Start()
     {
         podiumKey.SetActive(false);
+        mapIcon.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        alterIcon(keyMapIcon);
+
         if (enemyTurtle == null && !activated)
         {
             podiumKey.SetActive(true);
             activated = true;
         }
+    }
+
+    private void alterIcon(bool show)
+    {
+        if (podiumKey == null)
+        {
+            mapIcon.SetActive(false);
+        }
+        else
+        {
+            mapIcon.SetActive(show);
+        }
+        
     }
 }

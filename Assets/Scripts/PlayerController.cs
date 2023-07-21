@@ -50,7 +50,10 @@ public class PlayerController : MonoBehaviour
     private string playerStatus; // normal, invincible
     public static bool canCtrl; // will be set to true by CameraController
     private int numberDeaths;
-    
+
+    private Vector3 savedVelocity;
+    private float savedAngularVelocity;
+    public static bool justChanged;
 
     // 3. Gun
     // =================================================================
@@ -119,6 +122,8 @@ public class PlayerController : MonoBehaviour
         numberDeaths = 0;
         butterflyText.text = "0";
         keyText.text = "0";
+
+        justChanged = false;
         
         mapIcon.SetActive(false);
     }
@@ -156,25 +161,39 @@ public class PlayerController : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (!canCtrl) { return; } // after-damage protection
 
-        if (isClimbing) // climb
+        if (canCtrl)
         {
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
-            rb2d.velocity = new Vector2(horizontalInput * 5.0f, verticalInput * 5.0f);
+            if (justChanged)
+            {
+                ResumeRigidbody();
+                justChanged = false;
+            }
+
+            if (isClimbing) // climb
+            {
+                horizontalInput = Input.GetAxis("Horizontal");
+                verticalInput = Input.GetAxis("Vertical");
+                rb2d.velocity = new Vector2(horizontalInput * 5.0f, verticalInput * 5.0f);
+            }
+            else if (shouldJump) // jump
+            {
+                shouldJump = false;
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0); // allows mid-air jump
+                rb2d.AddForce(new Vector2(0, jumpForce));
+            }
+            else
+            {
+                rb2d.velocity = new Vector2(xSpeed, rb2d.velocity.y); // horizontal movement
+                                                                      // rb2d.AddForce(new Vector2(xSpeed, 0f), ForceMode2D.Impulse);
+            }
         }
-        else if (shouldJump) // jump
+        else if (justChanged)
         {
-            shouldJump = false;
-            rb2d.velocity = new Vector2(rb2d.velocity.x, 0); // allows mid-air jump
-            rb2d.AddForce(new Vector2(0, jumpForce));
+            PauseRigidbody();
+            justChanged = false;
         }
-        else
-        {
-            rb2d.velocity = new Vector2(xSpeed, rb2d.velocity.y); // horizontal movement
-                                                                  // rb2d.AddForce(new Vector2(xSpeed, 0f), ForceMode2D.Impulse);
-        }
+
     }
 
     // Climb beanstalk logic
@@ -546,5 +565,35 @@ public class PlayerController : MonoBehaviour
     private void alterIcon(bool show)
     {
         mapIcon.SetActive(show);
+    }
+
+    private void PauseRigidbody()
+    {
+        Debug.Log("Paused Player");
+        savedVelocity = rb2d.velocity;
+        savedAngularVelocity = rb2d.angularVelocity;
+        rb2d.velocity = Vector3.zero;
+        rb2d.angularVelocity = 0f;
+        rb2d.isKinematic = true;
+    }
+
+    private void ResumeRigidbody()
+    {
+        Debug.Log("Resumed Player");
+        rb2d.isKinematic = false;
+        rb2d.AddForce(savedVelocity);
+        rb2d.AddTorque(savedAngularVelocity);
+    }
+
+    public static void PausePlayer()
+    {
+        canCtrl = false;
+        justChanged = true;
+    }
+
+    public static void ResumePlayer()
+    {
+        canCtrl = true;
+        justChanged = true;
     }
 }

@@ -17,9 +17,11 @@ public class ShopNpcController : MonoBehaviour
 
     public GameObject player;
     private PlayerController pController;
-
+    public GameObject mapIcon;
+    public static bool shopMapIcon = false;
     private void Start()
     {
+        mapIcon.SetActive(false);
         canvasShopController = mainCanvas.GetComponent<ShopPanelController>();
         merchantTextBox.SetActive(false);
         pController = player.GetComponent<PlayerController>();
@@ -27,6 +29,7 @@ public class ShopNpcController : MonoBehaviour
 
     private void Update()
     {
+        alterIcon(shopMapIcon);
         if (shopAble && Input.GetKeyDown(KeyCode.B))
         {
             if (shopOpen)
@@ -72,5 +75,10 @@ public class ShopNpcController : MonoBehaviour
     private void displayLeaveText()
     {
         merchantTextBox.SetActive(false);
+    }
+    
+    private void alterIcon(bool show)
+    {
+        mapIcon.SetActive(show);
     }
 }

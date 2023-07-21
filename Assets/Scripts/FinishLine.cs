@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,16 +14,23 @@ public class FinishLine : MonoBehaviour
     private AnalyticManager analyticManager;
     private CheckPointManager checkpointManager;
     private SectionManager sectionManager;
-
+    public GameObject mapIcon;
+    public static bool finishMapIcon = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        mapIcon.SetActive(false);
         Time.timeScale = 1.0f;
         finishText.text = "";
         analyticManager = analytics.GetComponent<AnalyticManager>();
         checkpointManager = checkParent.GetComponent<CheckPointManager>();
         sectionManager = sectionParent.GetComponent<SectionManager>();
+    }
+
+    private void Update()
+    {
+        alterIcon(finishMapIcon);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -45,5 +53,10 @@ public class FinishLine : MonoBehaviour
         // Paul: the message below will never be displayed
         //      if timescale has been set to 0 before entering this coroutine
         // yield return new WaitForSeconds(seconds);
+    }
+    
+    private void alterIcon(bool show)
+    {
+        mapIcon.SetActive(show);
     }
 }

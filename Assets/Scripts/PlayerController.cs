@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private bool isBeanstalk;
     private bool isClimbing;
     private float initGravityScale;
-    
+
     // 2. Health & Damage
     // =================================================================
     public GameObject heartsObj;
@@ -76,6 +76,8 @@ public class PlayerController : MonoBehaviour
     public GameObject backShield;
     public GameObject midbeard;
     public GameObject oldBeard;
+    public GameObject mapIcon;
+    public static bool showMapIcon = false;
     
     // Canvas Collectable Text
     //========================================================================
@@ -117,10 +119,13 @@ public class PlayerController : MonoBehaviour
         numberDeaths = 0;
         butterflyText.text = "0";
         keyText.text = "0";
+        
+        mapIcon.SetActive(false);
     }
 
     void Update()
     {
+        alterIcon(showMapIcon);
         DeathCheck();
         ClimbCheck(); //beanstalk logic
         GunRotation();
@@ -536,5 +541,10 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(feetPos - new Vector2(overlapR, 0), overlapR);
         Gizmos.DrawWireSphere(feetPos + new Vector2(overlapR, 0), overlapR);
+    }
+
+    private void alterIcon(bool show)
+    {
+        mapIcon.SetActive(show);
     }
 }

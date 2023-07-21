@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
             cameraSizeSmall = !cameraSizeSmall;
             if (!cameraSizeSmall)
             {
-                PlayerController.canCtrl = false;
+                PlayerController.PausePlayer();
                 mapCam.Priority = 10;
                 playerCam.Priority = 0;
                 PlayerController.showMapIcon = true;
@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
             {
                 mapCam.Priority = 0;
                 playerCam.Priority = 10;
-                PlayerController.canCtrl = true;
+                PlayerController.ResumePlayer();
                 PlayerController.showMapIcon = false;
                 ShopNpcController.shopMapIcon = false;
                 FinishLine.finishMapIcon = false;

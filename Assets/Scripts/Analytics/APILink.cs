@@ -4,7 +4,7 @@
     {
         private string baseURL = "https://nature-morph-v2-default-rtdb.firebaseio.com/";
         private string editorApi = "EditorGoldV5";
-        private string deploymentAPI = "GoldV5";
+        private string deploymentAPI = "Final";
         
         public APILink(){}
 
